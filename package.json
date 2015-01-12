@@ -1,0 +1,24 @@
+﻿{
+  "name": "toastr8",
+  "version": "1.0.#",
+  "author": "Samuel Ribeiro <your.name@domain.com>",
+  "description": "",
+  "contributors": [
+    {
+      "name": "Samuel Ribeiro",
+      "email": "your.name@domain.com"
+    }
+  ],
+  "main": null,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saribe"
+  },
+  "keywords": [],
+  "dependencies": { },
+  "devDependencies": {
+    "jQuery": "1.x.x"
+  },
+  "bundledDependencies": [],
+  "license": "MIT"
+}
