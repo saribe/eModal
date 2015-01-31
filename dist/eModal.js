@@ -107,6 +107,7 @@
                 message: params.message || params,
                 title: params.title || title,
                 onHide: click,
+                size: params.size,
                 buttons: [
                     { close: true, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
@@ -162,7 +163,7 @@
 
             params.message = $('<form role=form style="margin-bottom: 0;">' +
                     '<div  class=modal-body>' +
-                    '<label for=prompt-input class=control-label>' + params.message + '</label>' +
+                    '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
                     '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : "") + '">' +
                     '</div></form>')
                 .append(buttons)
