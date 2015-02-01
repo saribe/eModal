@@ -5,6 +5,35 @@
 ## Current Version
 1.0.0
 
+## Quick Start
 
-## Demo
-- Demo can be found at http://maispc.com/app/eBootstrap/eModal
+1. Link to eModal.js `<script src=".../eModal.js"></script>`
+2. use eModal to display a modal for alert, ajax, prompt or confirm
+
+		// Display an alert modal with default title (Attention)
+		eModal.alert('You shall not pass!');
+
+### Other Options
+	// Display a confirm modal, with custom title.
+	eModal.confirm('Do you really want to pass?', 'Gandalf question', function(answer){...});
+	
+	// Display a ajax modal, with a title
+	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply')
+	
+	// Display an prompt modal, with a title
+	eModal.prompt('What is the best song ever?', 'Fill the input')
+		
+	// eModal default settings with your custom html loading template
+	eModal.setEModalOptions({ 
+        loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><h4>Loading</h4>',
+        ...
+    });
+
+## Demo and documentation
+- Demo can be found at http://saribe.github.io/eModal
+
+## Copyright
+Copyright © 2014-2015 
+
+## License
+toastr is under MIT license - http://www.opensource.org/licenses/mit-license.php

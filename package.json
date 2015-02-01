@@ -1,8 +1,8 @@
 ﻿{
-  "name": "toastr8",
-  "version": "1.0.#",
+  "name": "eModal",
+  "version": "1.0.0",
   "author": "Samuel Ribeiro <your.name@domain.com>",
-  "description": "",
+  "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript.",
   "contributors": [
     {
       "name": "Samuel Ribeiro",
@@ -12,12 +12,13 @@
   "main": null,
   "repository": {
     "type": "git",
-    "url": "https://github.com/saribe"
+    "url": "https://github.com/saribe/eModal"
   },
-  "keywords": [],
+  "keywords": ["bootstrap", "modal", "dialog","javascript", "easy"],
   "dependencies": { },
   "devDependencies": {
-    "jQuery": "1.x.x"
+    "jQuery": "1.x.x",
+    "bootstrap": "3.x.x"
   },
   "bundledDependencies": [],
   "license": "MIT"
