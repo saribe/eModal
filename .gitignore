@@ -1,0 +1,6 @@
+/bin/
+/lib/
+[branch "gh-pages"]
+/lib/
+/dist/
+/README.md
