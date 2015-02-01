@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <title>Easy Modal | Bootstrap</title>
-
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="//maispc.com/altura.ico">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/united/bootstrap.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/tricolore.css" rel="stylesheet">
     <link href="//rawgit.com/saribe/toastr8/master/dist/css/toastr8.min.css" rel="stylesheet" />
@@ -46,8 +46,12 @@
     </header>
 
     <div id="main" data-spy="scroll" data-target="#navbar-collapsible">
-
+        <a class="row btn btn-sm github-button" target="_black" href="https://github.com/saribe/eModal">
+            <div class="col-xs-3"><i class="fa fa-fw fa-4x fa-github"></i></div>
+            <div class="col-xs-9 text-center"><small>View project on</small><br><span class="fa-2x"> GitHub </span></div>
+        </a>
         <section class="container-fluid" id="demo">
+
             <div class="container">
                 <h1 class="text-center v-center">What it can do?</h1>
                 <br />
@@ -231,7 +235,7 @@ eModal.ajax(options);</code></pre>
                 <p class="lead">eModal.alert(), this launch a non blocking alert, using a bootstrap modal!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content">   <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div>  <section class="tmp-modal-content"><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></section></div></div>
+                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content">   <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div>  <section><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></section></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -286,7 +290,7 @@ eModal.alert(options);</code></pre>
                 <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content"> <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div>  <section class="tmp-modal-content"><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></section></div></div>
+                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content"> <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div>  <section><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></section></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -341,7 +345,7 @@ eModal.prompt(options);</code></pre>
                 <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color:initial;"><div class="modal-content">   <div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div>  <section class="tmp-modal-content"><form role="form" style="margin-bottom: 0;"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required="" value=""></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></section></div> </div>
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><section><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></section></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -458,40 +462,27 @@ eModal.confirm(options);</code></pre>
         <footer id="footer" class="">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-3 column">
-                        <h4>Information</h4>
+                    <div class="col-xs-6 col-sm-6 col-md-3">
+                        <h4>Download</h4>
                         <ul class="nav">
-                            <li><a href="about-us.html">Products</a></li>
-                            <li><a href="about-us.html">Services</a></li>
-                            <li><a href="about-us.html">Benefits</a></li>
-                            <li><a href="elements.html">Developers</a></li>
+                            <li><a href="//github.com/saribe/emodal/zipball/master"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .zip file</a></li>
+                            <li><a href="//github.com/saribe/emodal/tarball/master"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .tar.gz file</a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-6 col-md-3 column">
+                    <div class="col-xs-6 col-md-3">
                         <h4>Follow Us</h4>
                         <ul class="nav">
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">Google+</a></li>
-                            <li><a href="#">Pinterest</a></li>
+                            <li><a href="//github.com/saribe/emodal/zipball/master"><i class="fa fa-lg fa-fw fa-github"></i> Github</a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-6 col-md-3 column">
-                        <h4>Contact Us</h4>
+                    <div class="col-xs-6 col-md-3">
+                        <h4></h4>
                         <ul class="nav">
-                            <li><a href="#">Email</a></li>
-                            <li><a href="#">Headquarters</a></li>
-                            <li><a href="#">Management</a></li>
-                            <li><a href="#">Support</a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-6 col-md-3 column">
-                        <h4>Customer Service</h4>
+                    <div class="col-xs-6 col-md-3">
+                        <h4></h4>
                         <ul class="nav">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
                         </ul>
                     </div>
                 </div><!--/row-->

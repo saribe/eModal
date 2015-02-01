@@ -1,4 +1,3 @@
-
 html, body {
     display: block;
     height: 100%;
@@ -9,26 +8,40 @@ html, body {
     position: relative;
 }
 
-.navbar-default .navbar-toggle{
-    border:0;
-
+.github-button {
+    position: absolute;
+    right: 30px;
+    border: 1px solid;
+    top: 15px;
 }
-.navbar-default .navbar-toggle:hover{
-    background-color:transparent;
 
+    .github-button > div:first-child {
+        padding-left: 0;
+    }
+
+    .github-button > div:last-child {
+        padding-right: 0;
+    }
+
+.navbar-default .navbar-toggle {
+    border: 0;
 }
+
+    .navbar-default .navbar-toggle:hover {
+        background-color: transparent;
+    }
 
 .icon-bar {
     background-color: #fff;
 }
 
 .glyphicon.pointer {
-    color:#dd4814;
+    color: #dd4814;
 }
 
-.glyphicon.pointer:hover {
-    color: #ae3910;
-}
+    .glyphicon.pointer:hover {
+        color: #ae3910;
+    }
 
 #main > section.container-fluid {
     padding-top: 50px;
@@ -115,4 +128,8 @@ footer {
 
 .text-white {
     color: white;
+}
+
+.x {
+    text-align: inherit;
 }
