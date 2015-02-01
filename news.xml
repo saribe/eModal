@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<tile>
+  <visual lang="en-US" version="2">
+    <binding template="TileSquare150x150Text01" branding="name">
+      <text id="1">Some text...</text>
+      <text id="2">Some text next!</text>
+    </binding>
+        
+    <binding template="TileWide310x150Text01" branding="name">
+      <text id="1">Ooi tudo legal?</text>
+      <text id="1">Ooi tudo legal depois?</text>
+    </binding>
+        
+    <binding template="TileSquare310x310BlockAndText01" branding="name">
+      <text id="1">IE10 and IE11 and Windows 8.1 and __doPostBack</text>
+      <text id="2">SCREENCASTS: What's New in Visual Studio 2013 - learn over lunch!</text>
+    </binding>
+  </visual>
+</tile>

@@ -1,0 +1,118 @@
+
+html, body {
+    display: block;
+    height: 100%;
+    background: center no-repeat fixed url('../images/bg_suburb.jpg');
+    background-size: cover;
+    min-height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.navbar-default .navbar-toggle{
+    border:0;
+
+}
+.navbar-default .navbar-toggle:hover{
+    background-color:transparent;
+
+}
+
+.icon-bar {
+    background-color: #fff;
+}
+
+.glyphicon.pointer {
+    color:#dd4814;
+}
+
+.glyphicon.pointer:hover {
+    color: #ae3910;
+}
+
+#main > section.container-fluid {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-height: calc(100% - 1px);
+}
+
+.v-center {
+    font-size: 70px;
+}
+
+#demo {
+    background-color: #511C39;
+    color: #ddd;
+}
+
+#ajax {
+    color: white;
+}
+
+#alert {
+    background-color: #168ccc;
+    color: #ddd;
+}
+
+#confirm {
+    background-color: #fff;
+    color: #444;
+}
+
+#prompt, #section7, #section7 a {
+    color: #f5f5f5;
+}
+
+#options {
+    background-color: white;
+    color: #ddd;
+}
+
+footer {
+    background-color: #494949;
+    color: #ddd;
+    min-height: 100px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+    footer .nav > li > a {
+        padding: 3px;
+        color: #ccc;
+    }
+
+        footer .nav > li > a:hover {
+            background-color: transparent;
+            color: #fff;
+        }
+
+#main::-webkit-scrollbar {
+    width: 0.5em;
+    background-color: #686868;
+}
+
+#main::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+}
+
+#main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 51px;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-base-color: #686868;
+    scrollbar-track-color: #dedeff;
+    scrollbar-arrow-color: #686868;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+
+.text-white {
+    color: white;
+}
