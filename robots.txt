@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /app/
+Disallow: /content/
+Disallow: /lib/
+
+# The sitemap must be an absolute URL
+sitemap: http://saribe.github.io/eModal/sitemap.xml
