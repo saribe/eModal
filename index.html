@@ -1,13 +1,14 @@
 ﻿<html lang="en">
 <head>
-    <meta name="application-name" content="bs eModal" />
-    <meta name="msapplication-config" content="/browserconfig.xml" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta name="description" content="eModal makes you code cleaner!" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+    <meta name="application-name" 		content="bs eModal" />
+    <meta name="msapplication-config" 	content="/browserconfig.xml" />
+    <meta name="description" 				content="Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript. This is not bootstrap, is an healper to use modals. Bootstrap and jQuery are dependencies to eModal.js." />
+    <meta name="viewport" 					content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Easy Modal | Bootstrap</title>
+    <title>Easy Modal for Bootstrap</title>
+	
     <link rel="icon" type="image/x-icon" href="//maispc.com/altura.ico">
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/united/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
+<body itemscope itemtype ="http://schema.org/SoftwareApplication">
 
     <header class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -29,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">bs eModal</a>
+                <a class="navbar-brand" href="#" itemprop="name">bs eModal</a>
             </div>
             <nav class="navbar-collapse collapse" id="navbar-collapsible">
                 <ul class="nav navbar-nav navbar-left">
@@ -46,13 +47,13 @@
     </header>
 
     <div id="main" data-spy="scroll" data-target="#navbar-collapsible">
-        <a class="row btn btn-sm github-button" target="_black" href="https://github.com/saribe/eModal">
+        <a class="row btn btn-sm github-button" target="_black" href="https://github.com/saribe/eModal" itemprop="url">
             <div class="col-xs-3"><i class="fa fa-fw fa-4x fa-github"></i></div>
             <div class="col-xs-9 text-center"><small>View project on</small><br><span class="fa-2x"> GitHub </span></div>
         </a>
         <section class="container-fluid" id="demo">
 
-            <div class="container">
+            <div class="container" itemprop="description">
                 <h1 class="text-center v-center">What it can do?</h1>
                 <br />
                 <div class="row">
@@ -95,7 +96,8 @@
                     </div>
                 </div>
             </div>
-        </section>
+        
+		</section>
 
         <section class="container-fluid" id="ajax">
             <div class="container">
@@ -465,14 +467,14 @@ eModal.confirm(options);</code></pre>
                     <div class="col-xs-6 col-sm-6 col-md-3">
                         <h4>Download</h4>
                         <ul class="nav">
-                            <li><a href="//github.com/saribe/emodal/zipball/master"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .zip file</a></li>
-                            <li><a href="//github.com/saribe/emodal/tarball/master"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .tar.gz file</a></li>
+                            <li><a href="//github.com/saribe/emodal/zipball/master" itemprop="downloadUrl"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .zip file</a></li>
+                            <li><a href="//github.com/saribe/emodal/tarball/master" itemprop="downloadUrl"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .tar.gz file</a></li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <h4>Follow Us</h4>
                         <ul class="nav">
-                            <li><a href="//github.com/saribe/emodal/zipball/master"><i class="fa fa-lg fa-fw fa-github"></i> Github</a></li>
+                            <li><a href="//github.com/saribe/emodal/zipball/master" itemprop="discussionUrl"><i class="fa fa-lg fa-fw fa-github"></i> Github</a></li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-md-3">
