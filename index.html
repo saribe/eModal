@@ -289,7 +289,7 @@ eModal.alert(options);</code></pre>
             <div class="container">
                 <h1>Confirm</h1>
                 <br>
-                <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
+                <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content"> <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div>  <section><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></section></div></div>
@@ -300,7 +300,7 @@ eModal.alert(options);</code></pre>
                         <h5>Simple way - Default title</h5>
                         <pre><code data-language="javascript">var message = "Wello World!";
                          
-eModal.alert(message, null, callback);
+eModal.confirm(message, null, callback);
                          
 </code></pre>
                     </div>
@@ -309,7 +309,7 @@ eModal.alert(message, null, callback);
                         <pre><code data-language="javascript">var url = "Wello World!";
 var title = "Alert Title";
                          
-eModal.ajax(message, title, callback);
+eModal.confirm(message, title, callback);
 </code></pre>
                     </div>
                 </div>
@@ -330,7 +330,7 @@ eModal.ajax(message, title, callback);
         ...
     };
                  
-eModal.prompt(options);</code></pre>
+eModal.confirm(options);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
@@ -344,7 +344,7 @@ eModal.prompt(options);</code></pre>
             <div class="container">
                 <h1>Prompt</h1>
                 <br>
-                <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
+                <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><section><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></section></div></div>
@@ -355,7 +355,7 @@ eModal.prompt(options);</code></pre>
                         <h5>Simple way - Default title</h5>
                         <pre><code data-language="javascript">var message = "Wello World!";
                          
-eModal.alert(message, null, callback);
+eModal.prompt(message, null, callback);
                          
 </code></pre>
                     </div>
@@ -364,7 +364,7 @@ eModal.alert(message, null, callback);
                         <pre><code data-language="javascript">var url = "Wello World!";
 var title = "Alert Title";
                          
-eModal.ajax(message, title, callback);
+eModal.prompt(message, title, callback);
 </code></pre>
                     </div>
                 </div>
@@ -384,7 +384,7 @@ eModal.ajax(message, title, callback);
         ...
     };
                  
-eModal.confirm(options);</code></pre>
+eModal.prompt(options);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
