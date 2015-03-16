@@ -7,7 +7,7 @@
 
 ## Quick Start
 
-1. Link to eModal.js `<script src=".../eModal.js"></script>`
+1. Link to eModal.js `<script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>`
 2. use eModal to display a modal for alert, ajax, prompt or confirm
 
 		// Display an alert modal with default title (Attention)
@@ -33,7 +33,7 @@
 - Demo can be found at http://saribe.github.io/eModal
 
 ## Copyright
-Copyright © 2014-2015 
+Copyright Â© 2014-2015 
 
 ## License
 toastr is under MIT license - http://www.opensource.org/licenses/mit-license.php
