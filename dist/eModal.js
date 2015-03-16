@@ -7,7 +7,7 @@
  * ======================================================================== */
 
 ; (function (define) {
-    define(['jQuery'], function ($) {
+    define(["jquery"], function ($) {
         /// <summary>
         /// @params allowed elements:
         ///     title    {string}:          The header title string.
@@ -29,10 +29,10 @@
         var options = {};
         var lastParams = {};
 
-        var tmpModalContent = 'tmp-modal-content';
-        var recModalContent = 'rec-modal-content';
-        var bin = 'recycle-bin';
-        var div = '<div>';
+        var tmpModalContent = "tmp-modal-content";
+        var recModalContent = "rec-modal-content";
+        var bin = "recycle-bin";
+        var div = "<div>";
 
         return {
             ajax: ajax,
@@ -41,7 +41,8 @@
             emptyBin: emptyBin,
             prompt: prompt,
             setEModalOptions: setEModalOptions,
-            setModalOptions: setModalOptions
+            setModalOptions: setModalOptions,
+            close: close
         };
 
         //#region Public Methods
@@ -63,13 +64,13 @@
             }
 
             return alert(params, title)
-                .find('.modal-body')
+                .find(".modal-body")
                 .load(params.url, error)
-                .closest('.modal-dialog');
+                .closest(".modal-dialog");
 
             function error(responseText, textStatus) {
-                if (textStatus == 'error') {
-                    alert('Url [ ' + params.url + ' ] load fail.', 'Loading: ' + (params.title || title));
+                if (textStatus === "error") {
+                    alert("Url [ " + params.url + " ] load fail.", "Loading: " + (params.title || title));
                 }
             }
         }
@@ -83,7 +84,7 @@
 
             setup(params, title);
 
-            var $message = $('<section>').append(getMessage(params), getFooter(params.buttons));
+            var $message = $("<section>").append(getMessage(params), getFooter(params.buttons));
 
             return build($message, params);
         }
@@ -97,11 +98,11 @@
             /// <returns type=""></returns>
 
             var label = {
-                OK: 'Cancel',
-                Yes: 'No',
-                True: 'False'
+                OK: "Cancel",
+                Yes: "No",
+                True: "False"
             };
-            var defaultLable = 'OK';
+            var defaultLable = "OK";
 
             return alert({
                 message: params.message || params,
@@ -109,7 +110,7 @@
                 onHide: click,
                 size: params.size,
                 buttons: [
-                    { close: true, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
+                    { close: true, text: label[params.label] ? label[params.label] : label[defaultLable], style: "danger" },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
                 ]
 
@@ -126,12 +127,12 @@
 
                 $modal.off("hide.bs.modal");
 
-                if (typeof fn === 'function') {
+                if (typeof fn === "function") {
                     var key = $(ev.currentTarget).html();
                     return fn(label[key] ? true : false);
                 }
 
-                throw new Error('No callback provided to execute confim modal action.');
+                throw new Error("No callback provided to execute confim modal action.");
             }
         }
         function emptyBin() {
@@ -139,12 +140,12 @@
             /// 
             /// </summary>
 
-            return $('#' + bin + ' > *').remove();
+            return $("#" + bin + " > *").remove();
         }
         function prompt(data, title, callback) {
 
             var params = {};
-            if (typeof data === 'object') {
+            if (typeof data === "object") {
                 $.extend(params, data);
             }
             else {
@@ -157,15 +158,15 @@
             params.onHide = submit;
 
             var buttons = getFooter([
-                { close: true, type: 'reset', text: 'Cancel', style: 'danger' },
-                { close: false, type: 'submit', text: 'OK' }
+                { close: true, type: "reset", text: "Cancel", style: "danger" },
+                { close: false, type: "submit", text: "OK" }
             ]);
 
-            params.message = $('<form role=form style="margin-bottom: 0;">' +
-                    '<div  class=modal-body>' +
-                    '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
-                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : "") + '">' +
-                    '</div></form>')
+            params.message = $("<form role=form style=\"margin-bottom: 0;\">" +
+                    "<div  class=modal-body>" +
+                    "<label for=prompt-input class=control-label>" + (params.message || "") + "</label>" +
+                    "<input type=text class=form-control id=prompt-input required autofocus value=\"" + (params.value || "") + (params.pattern ? "\" pattern=\"" + params.pattern : "") + "\">" +
+                    "</div></form>")
                 .append(buttons)
                 .on("submit", submit);
 
@@ -180,13 +181,13 @@
 
                 var fn = params.callback || callback;
 
-                $modal.off("hide.bs.modal").modal('hide');
+                close();
 
-                if (typeof fn === 'function') {
-                    return fn($(ev.currentTarget).html() === 'Cancel'? null: $modal.find('input').val());
+                if (typeof fn === "function") {
+                    return fn($(ev.currentTarget).html() === "Cancel" ? null : $modal.find("input").val());
                 }
-                
-                throw new Error('No callback provided to execute prompt modal action.');
+
+                throw new Error("No callback provided to execute prompt modal action.");
             }
 
         }
@@ -212,12 +213,15 @@
 
             return $.extend(options, overrideOptions);
         }
+        function close() {
+            return $modal.off("hide.bs.modal").modal("hide");
+        }
         //#endregion
 
         //#region Private Logic
         function build(message, params) {
 
-            $modal.find('.modal-content')
+            $modal.find(".modal-content")
                .append(message.addClass(params.useBin && !params.loading ? recModalContent : tmpModalContent));
 
             return $modal.modal(options);
@@ -225,9 +229,9 @@
         function getDefaultSettings() {
             return {
                 allowContentRecycle: true,
-                size: '',
-                loadingHtml: '<div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div>',
-                title: 'Attention'
+                size: "",
+                loadingHtml: "<div class=progress><div class=\"progress-bar progress-bar-striped active\" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style=\"width: 100%\"><span class=sr-only>100% Complete</span></div></div>",
+                title: "Attention"
             };
         }
         function getModalInstance() {
@@ -239,7 +243,7 @@
             if (!$modal) {
                 //add recycle bin container to document
                 if (!document.getElementById(bin)) {
-                    $('body').append($(div).prop('id', bin).hide());
+                    $("body").append($(div).prop("id", bin).hide());
                 }
 
                 defaultSettings = getDefaultSettings();
@@ -254,14 +258,31 @@
                 /// </summary>
                 /// <returns type="jQuery object"></returns>
 
-                return $('<div class="modal fade">'
-                + ' <div class=modal-dialog>'
-                + '  <div class=modal-content>'
-                + '   <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
-                + '  </div>'
-                + ' </div>'
-                + '</div>')
-                .on('hidden.bs.modal', recycleModal);
+                return $("<div class=\"modal fade\">"
+                + " <div class=modal-dialog>"
+                + "  <div class=modal-content>"
+                + "   <div class=modal-header><button type=button class=\"x close\" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>"
+                + "  </div>"
+                + " </div>"
+                + "</div>")
+                .on("hidden.bs.modal", recycleModal)
+                .on("click", "button.x", function (ev) {
+                    var btn = $(ev.currentTarget);
+
+                    if (btn.prop("type") !== "submit")
+                        return close();
+
+                    try {
+                        if (btn.closest("form")[0].checkValidity())
+                            return close();
+
+                    } catch (e) {
+                        return close();
+                    }
+
+                    return $modal;
+
+                });
             }
         }
         function getFooter(buttons) {
@@ -271,30 +292,30 @@
             /// <returns type=""></returns>
 
             if (buttons === false) {
-                return '';
+                return "";
             }
 
-            var messageFotter = $(div).addClass('modal-footer');
+            var messageFotter = $(div).addClass("modal-footer");
             if (buttons) {
                 for (var i = 0, k = buttons.length; i < k; i++) {
                     var btnOp = buttons[i];
-                    var btn = $('<button>').addClass('btn btn-' + (btnOp.style || 'info'));
+                    var btn = $("<button>").addClass("btn btn-" + (btnOp.style || "info"));
 
                     for (var index in btnOp) {
                         if (btnOp.hasOwnProperty(index)) {
                             switch (index) {
-                                case 'close':
+                                case "close":
                                     //add close event
                                     if (btnOp[index]) {
-                                        btn.attr('data-dismiss', 'modal')
-                                           .addClass('x');
+                                        btn.attr("data-dismiss", "modal")
+                                           .addClass("x");
                                     }
                                     break;
-                                case 'click':
+                                case "click":
                                     //click event
                                     btn.click(btnOp.click);
                                     break;
-                                case 'text':
+                                case "text":
                                     btn.html(btnOp[index]);
                                     break;
                                 default:
@@ -308,7 +329,7 @@
                 }
             } else {
                 //if no buttons defined by user, add a standard close button.
-                messageFotter.append('<button class="x btn btn-info" data-dismiss=modal type=button>Close</button>');
+                messageFotter.append("<button class=\"x btn btn-info\" data-dismiss=modal type=button>Close</button>");
             }
             return messageFotter;
         }
@@ -329,7 +350,7 @@
                     ? $(content).clone()
                     : $(content);
             else {
-                $message = $(div).addClass('modal-body')
+                $message = $(div).addClass("modal-body")
                     .html(content);
             }
 
@@ -346,12 +367,12 @@
 
             $modal//.removeAttr("style")
                 .off("hide.bs.modal")
-                .find('.' + tmpModalContent + (!defaultSettings.allowContentRecycle || lastParams.clone ? ', .' + recModalContent : ''))
+                .find("." + tmpModalContent + (!defaultSettings.allowContentRecycle || lastParams.clone ? ", ." + recModalContent : ""))
                 .remove();
 
             return $modal
-              .find('.' + recModalContent).removeClass(recModalContent)
-              .appendTo('#' + bin);
+              .find("." + recModalContent).removeClass(recModalContent)
+              .appendTo("#" + bin);
 
             // closeOpenPopover();
             // closeOpenTooltips);
@@ -364,7 +385,7 @@
             /// <param name='title'></param>
             /// <returns type=''></returns>
 
-            if (!params) throw new Error('Invalid parameters!');
+            if (!params) throw new Error("Invalid parameters!");
 
             recycleModal();
             lastParams = params;
@@ -373,15 +394,15 @@
             var $ref = getModalInstance();
 
             //#region change size
-            $ref.find('.modal-dialog')
-                .removeClass('modal-sm modal-lg')
-                .addClass(params.size ? 'modal-' + params.size : defaultSettings.size);
+            $ref.find(".modal-dialog")
+                .removeClass("modal-sm modal-lg")
+                .addClass(params.size ? "modal-" + params.size : defaultSettings.size);
             //#endregion
 
             //#region change title
-            $ref.find('.modal-title')
-                .html((params.title || title || defaultSettings.title) + ' ')
-                .append($('<small>').html(params.subtitle || ''));
+            $ref.find(".modal-title")
+                .html((params.title || title || defaultSettings.title) + " ")
+                .append($("<small>").html(params.subtitle || ""));
             //#endregion
 
             $ref.on("hide.bs.modal", params.onHide);
@@ -391,6 +412,6 @@
     });
 
     /// AMD Module legacy creation
-}(typeof define == 'function' && define.amd ? define : function (n, t) {
-    typeof module != 'undefined' && module.exports ? module.exports = t(require(n[0])) : window.eModal = t(window.jQuery);
+}(typeof define == "function" && define.amd ? define : function (n, t) {
+    typeof window.module != "undefined" && window.module.exports ? window.module.exports = t(require(n[0])) : window.eModal = t(window.jQuery);
 }));

@@ -1,7 +1,6 @@
 /altura.ico
 /bin/
 /lib/
-[branch "gh-pages"]
-/lib/
-/dist/
-/README.md
+/obj/
+*.csproj
+*.user
