@@ -110,7 +110,7 @@
                 onHide: click,
                 size: params.size,
                 buttons: [
-                    { close: true, text: label[params.label] ? label[params.label] : label[defaultLable], style: "danger" },
+                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: "danger" },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
                 ]
 
@@ -125,7 +125,7 @@
 
                 var fn = params.callback || callback;
 
-                $modal.off("hide.bs.modal");
+                close();
 
                 if (typeof fn === "function") {
                     var key = $(ev.currentTarget).html();
@@ -230,7 +230,7 @@
             return {
                 allowContentRecycle: true,
                 size: "",
-                loadingHtml: "<div class=progress><div class=\"progress-bar progress-bar-striped active\" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style=\"width: 100%\"><span class=sr-only>100% Complete</span></div></div>",
+                loadingHtml: "<h5>Loading...</h5><div class=progress><div class=\"progress-bar progress-bar-striped active\" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style=\"width: 100%\"><span class=sr-only>100% Complete</span></div></div>",
                 title: "Attention"
             };
         }
@@ -354,7 +354,7 @@
                     .html(content);
             }
 
-            return params.css && (params.css != $message.css && $message.css(params.css)), $message;
+            return params.css && (params.css !== $message.css && $message.css(params.css)), $message;
         }
         function recycleModal() {
             /// <summary>
@@ -411,7 +411,4 @@
         //#endregion
     });
 
-    /// AMD Module legacy creation
-}(typeof define == "function" && define.amd ? define : function (n, t) {
-    typeof window.module != "undefined" && window.module.exports ? window.module.exports = t(require(n[0])) : window.eModal = t(window.jQuery);
-}));
+}(typeof define == "function" && define.amd ? define : function (n, t) { typeof window.module != "undefined" && window.module.exports ? window.module.exports = t(window.require(n[0])) : window.eModal = t(window.jQuery); }));
