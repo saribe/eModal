@@ -49,7 +49,7 @@
     </header>
 
     <div id="main" data-spy="scroll" data-target="#navbar-collapsible">
-        <a class="row btn btn-sm github-button" target="_black" href="https://github.com/saribe/eModal" itemprop="url">
+        <a class="row btn btn-sm github-button" target="_blank" href="https://github.com/saribe/eModal" itemprop="url">
             <div class="col-xs-3"><i class="fa fa-fw fa-4x fa-github"></i></div>
             <div class="col-xs-9 text-center"><small>View project on</small><br><span class="fa-2x"> GitHub </span></div>
         </a>
@@ -160,7 +160,7 @@
                                     <h3 class="text-center">Change this Content. Change the world.</h3>
                                     <div class="row">
                                         <div class="col-sm-8 col-sm-offset-2">
-                                            <img src="content/images/bg_smartphones.jpg" class="img-responsive center-block ">
+                                            <img src="content/images/bg_smartphones.jpg" class="img-responsive center-block" alt="Phone image">
                                         </div>
                                     </div>
                                 </section>
@@ -217,7 +217,7 @@ eModal.ajax(options);</code></pre>
                 <strong>EXAMPLE USING FONT AWESOME</strong>
 
                 <pre><code data-language="javascript">eModal.setEModalOptions({ 
-        loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><h4>Loading</h4>',
+        loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
         ...
     });</code></pre>
 
@@ -244,7 +244,7 @@ eModal.ajax(options);</code></pre>
                 <p class="lead">eModal.alert(), this launch a non blocking alert, using a bootstrap modal!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content">   <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div>  <section><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></section></div></div>
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -299,7 +299,7 @@ eModal.alert(options);</code></pre>
                 <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color: initial;"><div class="modal-content"> <div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div>  <section><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></section></div></div>
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -354,7 +354,7 @@ eModal.confirm(options);</code></pre>
                 <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
                 <br>
 
-                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><section><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></section></div></div>
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></div></div>
 
                 <h2>How to use</h2>
                 <div class="row">
@@ -485,11 +485,11 @@ eModal.prompt(options);</code></pre>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <h4></h4>
+                        <!--<h4></h4>-->
                         <ul class="nav"></ul>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <h4></h4>
+                        <!--<h4></h4>-->
                         <ul class="nav"></ul>
                     </div>
                 </div><!--/row-->
