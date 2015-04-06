@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.0.0
+1.0.1
 
 ## Quick Start
 
@@ -36,4 +36,4 @@
 Copyright © 2014-2015 
 
 ## License
-toastr is under MIT license - http://www.opensource.org/licenses/mit-license.php
+Under MIT license - http://www.opensource.org/licenses/mit-license.php
