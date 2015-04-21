@@ -6,7 +6,7 @@
     <meta name="application-name" content="bs eModal">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="msapplication-config" content="/browserconfig.xml">
-    <meta name="description" content="Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript. This is not bootstrap, is an healper to use modals. Bootstrap and jQuery are dependencies to eModal.js.">
+    <meta name="description" content="Easy Modal for Bootstrap, a simple way to create modal dialogs in JavaScript. This is not Bootstrap, it is a helper that adds modals. Dependancies: Bootstrap and jQuery.">
 
     <title>Easy Modal for Bootstrap</title>
 
@@ -58,8 +58,8 @@
                 <h1 class="text-center v-center">What it can do?</h1>
                 <br />
                 <div class="row text-center">
-                    <p itemprop="description">Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript. This isn't bootstrap, is a healper to use modals.</p>
-                    <p itemprop="requirements">Bootstrap and jQuery are <strong>dependencies</strong> to eModal.js.</p>
+                    <p itemprop="description">Easy Modal for Bootstrap, a simple way to create modal dialogs in JavaScript. This is not Bootstrap, it is a helper that adds modals.</p>
+                    <p itemprop="requirements"><strong>dependencies</strong>: Bootstrap and jQuery.</p>
                 </div>
 
                 <div class="row" itemprop="about">
@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-sm-10 text-center">
                                 <h3>Ajax</h3>
-                                <p>You must get the message from a remote server? No problem!</p>
+                                <p>Need a response from the server? No problem!</p>
                                 <i class="glyphicon glyphicon-cloud fa-5x pointer" title="Try me!"></i>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col-sm-10 text-center">
                                 <h3>Alert</h3>
-                                <p>Traditional alert box. Using only text or a lot of magic!?</p>
+                                <p>Traditional alert box. Using only text or magic!?</p>
                                 <i class="glyphicon glyphicon-comment fa-5x pointer" title="Try me!"></i>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="col-sm-10 text-center">
                                 <h3>Confirm</h3>
-                                <p>Get an okay from user, has never been so simple and clean!</p>
+                                <p>Getting an okay from your users has never been so easy!</p>
                                 <i class="glyphicon glyphicon-ok fa-5x pointer" title="Try me!"></i>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-sm-10  text-center">
                                 <h3>Prompt</h3>
-                                <p>Do you have a question for the user? We take care of it...</p>
+                                <p>Do you have a question for the user? We'll take care of it...</p>
                                 <i class="glyphicon glyphicon-pencil fa-5x pointer" title="Try me!"></i>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
             <div class="container">
                 <h1>Ajax</h1>
                 <br>
-                <p class="lead">eModal.ajax(), allow's you to get remote views into your modal fast and easy!</p>
+                <p class="lead">eModal.ajax() allows you to get remote views into your modal, fast and easily!</p>
                 <br>
                 <div class="row" style="color: initial;">
 
@@ -156,7 +156,7 @@
                             </div>
                             <div class="modal-body">
                                 <section>
-                                    <h3 class="text-center">Change this Content. Change the world.</h3>
+                                    <h3 class="text-center">Change this content. Change the world.</h3>
                                     <div class="row">
                                         <div class="col-sm-8 col-sm-offset-2">
                                             <img src="content/images/bg_smartphones.jpg" class="img-responsive center-block" alt="Phone image">
@@ -184,7 +184,7 @@ eModal.ajax(url);
 </code></pre>
                     </div>
                     <div class="col-sm-6">
-                        <h5>Simple way  - Custom title</h5>
+                        <h5>Simple way - Custom title</h5>
                         <pre><code data-language="javascript">var url = "/views/portview.html";
 eModal.ajax(url, "XHR Title");
 </code></pre>
@@ -211,7 +211,7 @@ eModal.ajax(url, "XHR Title");
                  
 eModal.ajax(options);</code></pre>
 
-                <p class="alert alert-info">By default, the ajax modal <strong>has not</strong> buttons defined! The loading animation setup is a <code>'progress-bar-striped'</code> from bootstrap, however, you can custumize it by changing the eModal default settings with your custom html loading template.</p>
+                <p class="alert alert-info">By default, the ajax modal <strong>does not</strong> define buttons! The loading animation is a <code>progress-bar-striped</code> from Bootstrap, but you can customize it by changing the eModal default settings to your custom HTML.</p>
 
                 <strong>EXAMPLE USING FONT AWESOME</strong>
 
@@ -240,7 +240,7 @@ eModal.ajax(options);</code></pre>
             <div class="container">
                 <h1>Alert</h1>
                 <br>
-                <p class="lead">eModal.alert(), this launch a non blocking alert, using a bootstrap modal!</p>
+                <p class="lead">eModal.alert(), this creates a non-blocking alert using a Bootstrap modal!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></div></div>
@@ -283,9 +283,9 @@ eModal.ajax(message, title);
 eModal.alert(options);</code></pre>
 
                 <div class="alert alert-info">
-                    The element whit id 'my-element-id' will be moved to dialog body and according with parameter <code>'useBin'</code> it will be deleted or recycle.
-                    When <code>'useBin'</code> is <code>true</code>, after close the dialog, the element will be sent to a '#recycle-bin' container and all events will be preserved.
-                    If <code>false</code>, it will be deleted and it will not be possible to reuse de same element.
+                    The element with ID <code>my-element-id</code> will be moved into the dialog's body, you can set the parameter <code>useBin</code> if you want to preserve it for reuse.
+                    If <code>useBin</code> is set to <code>true</code>, after close the dialog the element will be sent to a <code>#recycle-bin</code> container and all events will be preserved.
+                    If you set it to <code>false</code>, it will be deleted from the DOM so it's not possible to reuse it.
                 </div>
             </div>
 
@@ -295,7 +295,7 @@ eModal.alert(options);</code></pre>
             <div class="container">
                 <h1>Confirm</h1>
                 <br>
-                <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
+                <p class="lead">eModal.confirm(), do you need user feedback? There is a nice way to do it!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></div></div>
@@ -339,8 +339,8 @@ eModal.confirm(message, title, callback);
 eModal.confirm(options);</code></pre>
 
                 <div class="alert alert-info">
-                    The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
-                    Callback event will retrive a boolean argument as the standard javascritp confirm.
+                    The <strong><code>callback</code> is a mandatory</strong> argument. If it is not provided the dialog will still open, but an exception will be thrown when it is hidden.
+                    The callback  will recieve a boolean argument, just like in the standard JavaScript confirm.
                 </div>
             </div>
 
@@ -350,7 +350,7 @@ eModal.confirm(options);</code></pre>
             <div class="container">
                 <h1>Prompt</h1>
                 <br>
-                <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
+                <p class="lead">eModal.prompt(), do you want to prompt for a response? Do it in a simple form!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></div></div>
@@ -377,7 +377,7 @@ eModal.prompt(message, title, callback);
 
                 <div class="alert alert-warning">
                     <span class="glyphicon glyphicon-star-empty pull-right"></span>
-                    <strong>Tip: </strong> You can use the title as the prompt question!
+                    <strong>Tip: </strong> You can use the title to write the prompt's question!
                 </div>
 
                 <h5>Message using alternative lable</h5>
@@ -393,8 +393,8 @@ eModal.prompt(message, title, callback);
 eModal.prompt(options);</code></pre>
 
                 <div class="alert alert-info">
-                    The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
-                    Callback event will retrive a boolean argument as the standard javascritp confirm.
+                    The <strong><code>callback</code> is a mandatory</strong> argument. If it is not provided the dialog will still open, but an exception will be thrown when it is hidden.
+                    The callback  will recieve a boolean argument, just like in the standard JavaScript confirm.
                 </div>
             </div>
         </section>
@@ -402,15 +402,15 @@ eModal.prompt(options);</code></pre>
         <section class="container-fluid" id="options">
             <div class="container">
                 <h2 class="text-center">Do you see what I mean?</h2>
-                <p class="text-center lead">Add some compelling information here</p>
+                <p class="text-center lead">Add some compelling information here.</p>
                 <h3>Options</h3>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>type</th>
-                            <th>default</th>
-                            <th>description</th>
+                            <th>Type</th>
+                            <th>Default</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -436,7 +436,7 @@ eModal.prompt(options);</code></pre>
                             <td>size</td>
                             <td>string</td>
                             <td></td>
-                            <td>Defines the size of modal [<code>'sm'</code> | <code>'lg'</code>]</td>
+                            <td>Defines the size of modal [<code>sm</code> | <code>lg</code>]</td>
                         </tr>
                         <tr>
                             <td>loading</td>
@@ -454,7 +454,7 @@ eModal.prompt(options);</code></pre>
                             <td>css</td>
                             <td>object</td>
                             <td></td>
-                            <td>css objext try apply into message body; only able if message == string</td>
+                            <td>CSs to apply to message body; only available if the message is a string</td>
                         </tr>
                         <tr>
                             <td>buttons</td>
@@ -497,7 +497,7 @@ eModal.prompt(options);</code></pre>
                         <span class="label label-info">alert</span>,
                         <span class="label label-info">html</span>,
                         <span class="label label-info">javascript</span>,
-                        <span class="label label-info">css</span>,
+                        <span class="label label-info">css</span>
                     </div>
                 </div><!--/row-->
             </div>
