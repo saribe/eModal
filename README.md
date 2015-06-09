@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.0.1
+1.0.2
 
 ## Quick Start
 
@@ -18,7 +18,7 @@
 	eModal.confirm('Do you really want to pass?', 'Gandalf question', function(answer){...});
 	
 	// Display a ajax modal, with a title
-	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply')
+	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply', function(DOMElement){...})
 	
 	// Display an prompt modal, with a title
 	eModal.prompt('What is the best song ever?', 'Fill the input')
