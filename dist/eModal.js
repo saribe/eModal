@@ -1,5 +1,5 @@
 ﻿/* ========================================================================
- * SaRibe: eModal.js v1.0.1
+ * SaRibe: eModal.js v1.0.2
  * http://maispc.com/app/eBootstrap/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -52,7 +52,7 @@
         };
 
         //#region Public Methods
-        function ajax(data, title) {
+        function ajax(data, title, calback) {
             /// <summary></summary>
             /// <param name="data"></param>
             /// <param name="title"></param>
@@ -75,6 +75,8 @@
             function error(responseText, textStatus) {
                 if (textStatus === 'error') {
                     alert('Url [ ' + params.url + ' ] load fail.', 'Loading: ' + (params.title || title));
+                } else {
+                    if (calback) calback($modal);
                 }
             }
         }
