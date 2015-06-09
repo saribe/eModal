@@ -52,7 +52,7 @@
         };
 
         //#region Public Methods
-        function ajax(data, title, calback) {
+        function ajax(data, title, callback) {
             /// <summary></summary>
             /// <param name="data"></param>
             /// <param name="title"></param>
@@ -60,7 +60,8 @@
 
             var params = {
                 loading: true,
-                url: data.url || data
+                url: data.url || data,
+                callback: data.callback || callback
             };
 
             if (data.url) {
@@ -76,7 +77,7 @@
                 if (textStatus === 'error') {
                     alert('Url [ ' + params.url + ' ] load fail.', 'Loading: ' + (params.title || title));
                 } else {
-                    if (calback) calback($modal);
+                    if (params.callback) params.callback($modal);
                 }
             }
         }
