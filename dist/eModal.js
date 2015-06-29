@@ -1,6 +1,6 @@
 ﻿/* ========================================================================
- * SaRibe: eModal.js v1.0.2
- * http://maispc.com/app/eBootstrap/eModal
+ * SaRibe: eModal.js v1.1.0
+ * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
  * Licensed under.
@@ -31,23 +31,23 @@
 
         var tmpModalContent = 'tmp-modal-content';
         var recModalContent = 'rec-modal-content';
+        var modalBody = 'modal-body';
         var footerId = 'eModalFooter';
         var bin = 'recycle-bin';
         var div = '<div>';
-        var size = {
-            sm: 'sm',
-            lg: 'lg'
-        };
+        var size = { sm: 'sm', lg: 'lg' };
 
         return {
             ajax: ajax,
             alert: alert,
             confirm: confirm,
+            close: close,
             emptyBin: emptyBin,
             prompt: prompt,
+            iframe: iframe,
+            version: '1.1.0',
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
-            close: close,
             size: size
         };
 
@@ -59,23 +59,25 @@
             /// <returns type=""></returns>
 
             var params = {
+                callback: data.callback || callback,
                 loading: true,
                 url: data.url || data,
-                callback: data.callback || callback
+                title: data.title || title || defaultSettings.title
             };
 
-            if (data.url) {
-                $.extend(params, data);
-            }
+            if (data.url) { $.extend(params, data); }
 
             return alert(params, title)
-                .find('.modal-body')
+                .find('.' + modalBody)
                 .load(params.url, error)
                 .closest('.modal-dialog');
 
             function error(responseText, textStatus) {
                 if (textStatus === 'error') {
-                    alert('Url [ ' + params.url + ' ] load fail.', 'Loading: ' + (params.title || title));
+                    var msg = '<div class="alert alert-danger">' +
+                        '<strong>XHR Fail: </strong>Url [ ' + params.url + '] load fail.' +
+                        '</div>';
+                    alert(msg, 'Loading: ' + params.title);
                 } else {
                     if (params.callback) params.callback($modal);
                 }
@@ -116,14 +118,9 @@
                     { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
                 ]
-
             });
 
             function click(ev) {
-                /// <summary></summary>
-                /// <param name="ev"></param>
-                /// <returns type=""></returns>
-
                 var fn = params.callback || callback;
 
                 close();
@@ -136,13 +133,48 @@
                 throw new Error('No callback provided to execute confim modal action.');
             }
         }
+
+        function iframe(params, title, callback) {
+            /// <summary></summary>
+            /// <param name="data"></param>
+            /// <param name="title"></param>
+            /// <returns type=""></returns>
+
+            var html = ('<iframe class="embed-responsive-item" src="%src%" style="width: 100%;height: 75vh;display:none;" />' +
+                '<div class="modal-body">%loading%</div>')
+                .replace('%src%', params.message || params)
+                .replace('%loading%', defaultSettings.loadingHtml);
+
+            var message = $(html)
+                .load(iframeReady);
+
+            return alert({
+                message: message,
+                title: params.title || title,
+                size: params.size || size.lg,
+                buttons: params.buttons || false
+            });
+            //////////
+
+            function iframeReady() {
+                $(this).fadeIn()
+                .parent()
+                .find('div')
+                .remove();
+
+                callback = params.callback || callback;
+                if (typeof (callback) === 'function') {
+                    callback(message);
+                }
+            }
+        }
+
         function emptyBin() {
-            /// <summary>
-            /// 
-            /// </summary>
+            /// <summary></summary>
 
             return $('#' + bin + ' > *').remove();
         }
+
         function prompt(data, title, callback) {
 
             var params = {};
@@ -174,10 +206,6 @@
             return alert(params);
 
             function submit(ev) {
-                /// <summary> </summary>
-                /// <param name="ev"></param>
-                /// <returns type=""></returns>
-
                 var fn = params.callback || callback;
 
                 close();
@@ -190,10 +218,9 @@
             }
 
         }
+
         function setEModalOptions(overrideOptions) {
-            /// <summary>
-            /// 
-            /// </summary>
+            /// <summary></summary>
             /// <param name="overrideOptions"></param>
             /// <returns type=""></returns>
 
@@ -201,10 +228,9 @@
 
             return $.extend(defaultSettings, overrideOptions);
         }
+
         function setModalOptions(overrideOptions) {
-            /// <summary>
-            /// 
-            /// </summary>
+            /// <summary></summary>
             /// <param name="overrideOptions"></param>
             /// <returns type=""></returns>
 
@@ -212,6 +238,7 @@
 
             return $.extend(options, overrideOptions);
         }
+
         function close() {
             return $modal.off('hide.bs.modal').modal('hide');
         }
@@ -225,6 +252,7 @@
 
             return $modal.modal(options);
         }
+
         function getDefaultSettings() {
             return {
                 allowContentRecycle: true,
@@ -233,6 +261,7 @@
                 title: 'Attention'
             };
         }
+
         function getModalInstance() {
             /// <summary>
             /// Return a new modal object if is the first request or the already created model.
@@ -252,9 +281,7 @@
             return $modal;
 
             function createModalElement() {
-                /// <summary>
-                /// 
-                /// </summary>
+                /// <summary></summary>
                 /// <returns type="jQuery object"></returns>
 
                 return $('<div class="modal fade" tabindex="-1">'
@@ -284,15 +311,12 @@
                 });
             }
         }
+
         function getFooter(buttons) {
-            /// <summary>
-            /// 
-            /// </summary>
+            /// <summary></summary>
             /// <returns type=""></returns>
 
-            if (buttons === false) {
-                return '';
-            }
+            if (buttons === false) { return ''; }
 
             var messageFotter = $(div).addClass('modal-footer').prop('id', footerId);
             if (buttons) {
@@ -332,28 +356,32 @@
             }
             return messageFotter;
         }
+
         function getMessage(params) {
             /// <summary></summary>
             /// <param name="params"></param>
             /// <returns type=""></returns>
 
             var $message;
-            var content = params.loading
-                ? defaultSettings.loadingHtml
-                : (params.message || params);
+            var content = params.loading ?
+                defaultSettings.loadingHtml :
+                (params.message || params);
 
             if (content.on || content.onclick) {
-                $message = params.clone === true
-                    ? $(content).clone()
-                    : $(content);
+
+                $message = params.clone === true ?
+                    $(content).clone() :
+                    $(content);
+
                 $message.addClass(params.useBin && !params.loading ? recModalContent : tmpModalContent);
             } else {
-                $message = $(div).addClass('modal-body')
+                $message = $(div).addClass(modalBody)
                     .html(content);
             }
 
             return params.css && (params.css !== $message.css && $message.css(params.css)), $message;
         }
+
         function recycleModal() {
             /// <summary>
             /// Move content to recycle bin if is a DOM object defined by user,
@@ -380,6 +408,7 @@
             // closeOpenPopover();
             // closeOpenTooltips);
         }
+
         function setup(params, title) {
             /// <summary></summary>
             /// <param name='params'></param>
@@ -413,7 +442,7 @@
     });
 
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
-    typeof window.module != 'undefined' && window.module.exports
-        ? window.module.exports = t(window.require(n[0]))
-        : window.eModal = t(window.jQuery);
+    typeof window.module != 'undefined' && window.module.exports ?
+        window.module.exports = t(window.require(n[0])) :
+        window.eModal = t(window.jQuery);
 }));
