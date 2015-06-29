@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.0.2
+1.1.0
 
 ## Quick Start
 
@@ -22,7 +22,10 @@
 	
 	// Display an prompt modal, with a title
 	eModal.prompt('What is the best song ever?', 'Fill the input')
-		
+	
+	// Display an modal whith iframe inside, with a title
+	eModal.iframe('http://saribe.github.io/toastr8/', 'Hot news')
+			
 	// eModal default settings with your custom html loading template
 	eModal.setEModalOptions({ 
         loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><h4>Loading</h4>',
