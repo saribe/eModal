@@ -39,12 +39,10 @@ $(document).ready(function () {/* activate scrollspy menu */
 
     $('.glyphicon-screenshot').click(function () {
         eModal.iframe({
-            url: 'https://embed.spotify.com/?uri=spotify:track:5aLMByWItXLIGmn4Mbfali',
-            size: eModal.size.sm,
-            title: 'The terminator'
-        })
-            .find('iframe')
-            .css('height', '375px');
+            url: 'https://www.youtube.com/embed/VTkvN51OPfI',
+            //    size: eModal.size.sm,
+            title: 'Insiders'
+        });
     });
 
     $('.glyphicon-ok').click(function () {
