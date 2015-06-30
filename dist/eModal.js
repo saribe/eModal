@@ -96,7 +96,7 @@
 
             setup(params, title);
 
-            var $message = $('<div>').append(getMessage(params), getFooter(params.buttons));
+            var $message = $(div).append(getMessage(params), getFooter(params.buttons));
 
             return build($message, params);
         }
@@ -145,10 +145,10 @@
             /// <param name="title"></param>
             /// <returns type=""></returns>
 
-            var html = ('<iframe class="embed-responsive-item" src="%src%" style="width: 100%;height: 75vh;display:none;" />' +
-                '<div class="modal-body">%loading%</div>')
-                .replace('%src%', params.message || params.url || params)
-                .replace('%loading%', defaultSettings.loadingHtml);
+            var html = ('<iframe class="embed-responsive-item" src="0" style="width:100%;height:75vh;display:none;" />' +
+                '<div class=modal-body>1</div>')
+                .replace('"0"', params.message || params.url || params)
+                .replace('>1<', defaultSettings.loadingHtml);
 
             var message = $(html)
                 .load(iframeReady);
@@ -200,7 +200,7 @@
                 { close: false, type: 'submit', text: 'OK' }
             ]);
 
-            params.message = $('<form role=form style="margin-bottom: 0;">' +
+            params.message = $('<form role=form style="margin-bottom:0;">' +
                     '<div class=modal-body>' +
                     '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
                     '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : '') + '">' +
@@ -278,11 +278,11 @@
                 /// <returns type="jQuery object"></returns>
 
                 return $('<div class="modal fade" tabindex="-1">'
-                + ' <div class=modal-dialog>'
-                + '  <div class=modal-content>'
-                + '   <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
-                + '  </div>'
-                + ' </div>'
+                + '<div class=modal-dialog>'
+                + '<div class=modal-content>'
+                + ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
+                + '</div>'
+                + '</div>'
                 + '</div>')
                 .on('hidden.bs.modal', recycleModal)
                 .on('click', 'button.x', function (ev) {
