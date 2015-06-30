@@ -25,7 +25,12 @@
 
         //The modal element UX and events.
         var $modal;
-        var defaultSettings;
+        var defaultSettings = {
+            allowContentRecycle: true,
+            size: '',
+            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div>',
+            title: 'Attention'
+        };
         var options = {};
         var lastParams = {};
 
@@ -224,8 +229,6 @@
             /// <param name="overrideOptions"></param>
             /// <returns type=""></returns>
 
-            !defaultSettings && (defaultSettings = getDefaultSettings());
-
             return $.extend(defaultSettings, overrideOptions);
         }
 
@@ -253,15 +256,6 @@
             return $modal.modal(options);
         }
 
-        function getDefaultSettings() {
-            return {
-                allowContentRecycle: true,
-                size: '',
-                loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div>',
-                title: 'Attention'
-            };
-        }
-
         function getModalInstance() {
             /// <summary>
             /// Return a new modal object if is the first request or the already created model.
@@ -274,7 +268,6 @@
                     $('body').append($(div).prop('id', bin).hide());
                 }
 
-                defaultSettings = getDefaultSettings();
                 $modal = createModalElement();
             }
 
