@@ -147,7 +147,7 @@
 
             var html = ('<iframe class="embed-responsive-item" src="%src%" style="width: 100%;height: 75vh;display:none;" />' +
                 '<div class="modal-body">%loading%</div>')
-                .replace('%src%', params.message || params)
+                .replace('%src%', params.message || params.url || params)
                 .replace('%loading%', defaultSettings.loadingHtml);
 
             var message = $(html)
