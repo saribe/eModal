@@ -50,7 +50,7 @@
             emptyBin: emptyBin,
             prompt: prompt,
             iframe: iframe,
-            version: '1.1.0',
+            version: '1.1.01',
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size
@@ -58,7 +58,7 @@
 
         //#region Public Methods
         function ajax(data, title, callback) {
-            /// <summary></summary>
+            /// <summary>Gets data from url to eModal body</summary>
             /// <param name="data"></param>
             /// <param name="title"></param>
             /// <returns type=""></returns>
@@ -88,8 +88,9 @@
                 }
             }
         }
+
         function alert(params, title) {
-            /// <summary></summary>
+            /// <summary>Non blocking alert whit bootstrap.</summary>
             /// <param name="params"></param>
             /// <param name="title"></param>
             /// <returns type=""></returns>
@@ -100,6 +101,7 @@
 
             return build($message, params);
         }
+
         function confirm(params, title, callback) {
             /// <summary></summary>
             /// <param name="params"></param>
@@ -140,15 +142,11 @@
         }
 
         function iframe(params, title, callback) {
-            /// <summary></summary>
-            /// <param name="data"></param>
-            /// <param name="title"></param>
-            /// <returns type=""></returns>
 
-            var html = ('<iframe class="embed-responsive-item" src="0" style="width:100%;height:75vh;display:none;" />' +
-                '<div class=modal-body>1</div>')
-                .replace('"0"', params.message || params.url || params)
-                .replace('>1<', defaultSettings.loadingHtml);
+            var html = ('<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;display:none;" />' +
+                '<div class=modal-body>%1%</div>')
+                .replace('%0%', params.message || params.url || params)
+                .replace('%1%', defaultSettings.loadingHtml);
 
             var message = $(html)
                 .load(iframeReady);
@@ -175,7 +173,8 @@
         }
 
         function emptyBin() {
-            /// <summary></summary>
+            /// <summary>Remove all dom element cached in document.</summary>
+            /// <returns type="Array">Array with removed elemens.</returns>
 
             return $('#' + bin + ' > *').remove();
         }
@@ -243,6 +242,8 @@
         }
 
         function close() {
+            ///<summary>Close the modal. </summary>
+
             return $modal.off('hide.bs.modal').modal('hide');
         }
         //#endregion
@@ -351,9 +352,8 @@
         }
 
         function getMessage(params) {
-            /// <summary></summary>
-            /// <param name="params"></param>
-            /// <returns type=""></returns>
+            /// <param name='params'>object with opions</param>
+            /// <returns type='jQuery'>eModal body jQuery objec</returns>
 
             var $message;
             var content = params.loading ?
@@ -397,16 +397,13 @@
             }
 
             return $modal;
-
-            // closeOpenPopover();
-            // closeOpenTooltips);
         }
 
         function setup(params, title) {
             /// <summary></summary>
-            /// <param name='params'></param>
-            /// <param name='title'></param>
-            /// <returns type=''></returns>
+            /// <param name='params'>eModal body message or object with opions</param>
+            /// <param name='title'>Modal header title</param>
+            /// <returns type='jQuery'>eModal jQuery objec</returns>
 
             if (!params) throw new Error('Invalid parameters!');
 
