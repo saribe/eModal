@@ -1,4 +1,4 @@
-﻿/* ========================================================================
+/* ========================================================================
  * SaRibe: eModal.js v1.1.0
  * http://saribe.github.io/eModal
  * ========================================================================
@@ -10,51 +10,51 @@
     define(['jquery'], function ($) {
         /// <summary>
         /// @params allowed elements:
-        ///     title    {string}:          The header title string.
-        ///     message  {string|object}:   The body message string or the html element. eg: $(selector);
-        ///     subtitle {string}:          The header subtitle string. This apper in a smaller text.
-        ///     size     {string}:          sm || lg -> define the modal size.
-        ///     loading  {bool}:            set loading progress as message.
-        ///     useBin   {bool}:            set message as recycable.
-        ///     css      {object}:          css objext try apply into message body; only able if message == string
         ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
+        ///     css      {object}:          css objext try apply into message body; only able if message == string
+        ///     loading  {bool}:            set loading progress as message.
+        ///     message  {string|object}:   The body message string or the html element. eg: $(selector);
+        ///     size     {string}:          sm || lg -> define the modal size.
+        ///     subtitle {string}:          The header subtitle string. This apper in a smaller text.
+        ///     title    {string}:          The header title string.
+        ///     useBin   {bool}:            set message as recycable.
         /// </summary>
         /// <param name="params"            >Modal options parameters os string body message.</param>
         /// <param name="title"             >The string header title or a flag to set default params.</param>
         /// <returns type="jQuery Element"  >The modal element.</returns>
 
         //The modal element UX and events.
-        var $modal;
         var defaultSettings = {
             allowContentRecycle: true,
             size: '',
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div>',
             title: 'Attention'
         };
-        var options = {};
-        var lastParams = {};
-
-        var tmpModalContent = 'tmp-modal-content';
-        var recModalContent = 'rec-modal-content';
-        var modalBody = 'modal-body';
-        var footerId = 'eModalFooter';
+        var $modal;
         var bin = 'recycle-bin';
         var div = '<div>';
+        var footerId = 'eModalFooter';
+        var lastParams = {};
+        var modalBody = 'modal-body';
+        var options = {};
+        var recModalContent = 'rec-modal-content';
         var size = { sm: 'sm', lg: 'lg' };
+        var tmpModalContent = 'tmp-modal-content';
 
         return {
             ajax: ajax,
             alert: alert,
-            confirm: confirm,
             close: close,
+            confirm: confirm,
             emptyBin: emptyBin,
-            prompt: prompt,
             iframe: iframe,
-            version: '1.1.01',
+            prompt: prompt,
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
-            size: size
+            size: size,
+            version: '1.1.01'
         };
+        //////////////////////* Implementation *//////////////////////
 
         //#region Public Methods
         function ajax(data, title, callback) {
@@ -66,8 +66,8 @@
             var params = {
                 callback: data.callback || callback,
                 loading: true,
-                url: data.url || data,
-                title: data.title || title || defaultSettings.title
+                title: data.title || title || defaultSettings.title,
+                url: data.url || data
             };
 
             if (data.url) { $.extend(params, data); }
@@ -84,7 +84,7 @@
                         '</div>';
                     alert(msg, 'Loading: ' + params.title);
                 } else {
-                    if (params.callback) params.callback($modal);
+                    if (params.callback) { params.callback($modal); }
                 }
             }
         }
@@ -111,20 +111,20 @@
 
             var label = {
                 OK: 'Cancel',
-                Yes: 'No',
-                True: 'False'
+                True: 'False',
+                Yes: 'No'
             };
             var defaultLable = 'OK';
 
             return alert({
-                message: params.message || params,
-                title: params.title || title,
-                onHide: click,
-                size: params.size,
                 buttons: [
                     { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
-                ]
+                ],
+                message: params.message || params,
+                onHide: click,
+                size: params.size,
+                title: params.title || title
             });
 
             function click(ev) {
@@ -142,7 +142,6 @@
         }
 
         function iframe(params, title, callback) {
-
             var html = ('<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;display:none;" />' +
                 '<div class=modal-body>%1%</div>')
                 .replace('%0%', params.message || params.url || params)
@@ -152,18 +151,19 @@
                 .load(iframeReady);
 
             return alert({
+                buttons: params.buttons || false,
                 message: message,
-                title: params.title || title,
                 size: params.size || size.lg,
-                buttons: params.buttons || false
+                title: params.title || title
             });
             //////////
 
             function iframeReady() {
-                $(this).fadeIn()
-                .parent()
-                .find('div')
-                .remove();
+                $(this)
+                    .fadeIn()
+                    .parent()
+                    .find('div')
+                    .remove();
 
                 callback = params.callback || callback;
                 if (typeof (callback) === 'function') {
@@ -180,15 +180,14 @@
         }
 
         function prompt(data, title, callback) {
-
             var params = {};
             if (typeof data === 'object') {
                 $.extend(params, data);
             }
             else {
+                params.callback = callback;
                 params.message = data;
                 params.title = title;
-                params.callback = callback;
             }
 
             params.buttons = false;
@@ -220,7 +219,6 @@
 
                 throw new Error('No callback provided to execute prompt modal action.');
             }
-
         }
 
         function setEModalOptions(overrideOptions) {
@@ -250,7 +248,6 @@
 
         //#region Private Logic
         function build(message) {
-
             $modal.find('.modal-content')
                .append(message);
 
@@ -295,13 +292,11 @@
                     try {
                         if (btn.closest('form')[0].checkValidity())
                             return close();
-
                     } catch (e) {
                         return close();
                     }
 
                     return $modal;
-
                 });
             }
         }
@@ -361,7 +356,6 @@
                 (params.message || params);
 
             if (content.on || content.onclick) {
-
                 $message = params.clone === true ?
                     $(content).clone() :
                     $(content);
@@ -430,7 +424,6 @@
         }
         //#endregion
     });
-
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
     typeof window.module != 'undefined' && window.module.exports ?
         window.module.exports = t(window.require(n[0])) :
