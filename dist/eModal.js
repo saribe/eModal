@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.1.02
+ * SaRibe: eModal.js v1.1.03
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -32,7 +32,7 @@
         };
         var $modal;
         var bin = 'recycle-bin';
-        var div = '<div style="position: relative;">';
+        var div = '<div style="position: relative;word-wrap:break-word;">';
         var footerId = 'eModalFooter';
         var lastParams = {};
         var modalBody = 'modal-body';
@@ -52,7 +52,7 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.1.02'
+            version: '1.1.03'
         };
 
         //#region Public Methods
