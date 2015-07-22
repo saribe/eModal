@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.1.0
+ * SaRibe: eModal.js v1.1.02
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -32,7 +32,7 @@
         };
         var $modal;
         var bin = 'recycle-bin';
-        var div = '<div>';
+        var div = '<div style="position: relative;">';
         var footerId = 'eModalFooter';
         var lastParams = {};
         var modalBody = 'modal-body';
@@ -52,9 +52,8 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.1.01'
+            version: '1.1.02'
         };
-        //////////////////////* Implementation *//////////////////////
 
         //#region Public Methods
         function ajax(data, title, callback) {
@@ -142,8 +141,8 @@
         }
 
         function iframe(params, title, callback) {
-            var html = ('<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;display:none;" />' +
-                '<div class=modal-body>%1%</div>')
+            var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>'+
+                        '<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;"/>')
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
@@ -160,10 +159,11 @@
 
             function iframeReady() {
                 $(this)
-                    .fadeIn()
                     .parent()
                     .find('div')
-                    .remove();
+                    .fadeOut(function() {
+                        $(this).remove();
+                    });
 
                 callback = params.callback || callback;
                 if (typeof (callback) === 'function') {
@@ -190,13 +190,22 @@
                 params.title = title;
             }
 
-            params.buttons = false;
-            params.onHide = submit;
+            if (params.buttons) {
+                var btn;
+                for (var i = 0, k = params.buttons.length; i < k; i++) {
+                    btn = params.buttons[i];
+                    btn.style = btn.style ? btn.style + ' pull-left' : 'default pull-left';
+                    btn.type = btn.type || 'button';
+                }
+            }
 
             var buttons = getFooter([
                 { close: true, type: 'reset', text: 'Cancel', style: 'danger' },
                 { close: false, type: 'submit', text: 'OK' }
-            ]);
+            ].concat(params.buttons || []));
+
+            params.buttons = false;
+            params.onHide = submit;
 
             params.message = $('<form role=form style="margin-bottom:0;">' +
                     '<div class=modal-body>' +
@@ -241,8 +250,10 @@
 
         function close() {
             ///<summary>Close the modal. </summary>
-
-            return $modal.off('hide.bs.modal').modal('hide');
+            if ($modal) {
+                $modal.off('hide.bs.modal').modal('hide');
+            }
+            return $modal;
         }
         //#endregion
 
@@ -287,7 +298,7 @@
                     var btn = $(ev.currentTarget);
 
                     if (btn.prop('type') !== 'submit')
-                        return close();
+                        return $modal.modal('hide');
 
                     try {
                         if (btn.closest('form')[0].checkValidity())
