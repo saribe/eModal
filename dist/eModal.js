@@ -477,7 +477,7 @@
                 var value = $modal.find('input').val();
                 close();
 
-                return $(ev.currentTarget).html() === 'Cancel' ?
+                return ev.type !== 'submit' ?
                     executeFail(value) :
                     execute(value);
             }
