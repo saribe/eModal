@@ -74,6 +74,11 @@
                     .append(message);
         }
 
+        function _cleanLinq() {
+            thenPool.length = 0;
+            catchCallback = null;
+        }
+
         function _isFunction(instance) {
             return typeof instance === 'function';
         }
@@ -212,6 +217,8 @@
                 .find('.modal-content > div:not(:first-child)')
                 .remove();
 
+            _cleanLinq();
+
             if (!defaultSettings.allowContentRecycle || lastParams.clone) {
                 $content.remove();
             }
@@ -288,7 +295,6 @@
 
         function executeFail(error, tuple) {
             if (!tuple) { tuple = thenPool.shift() }
-            thenPool.length = 0;
 
             if (tuple && _isFunction(tuple.error)) {
                 tuple.error(error);
@@ -297,6 +303,7 @@
                 catchCallback(error);
                 catchCallback = null;
             }
+            _cleanLinq();
             //throw new Error(error);
         }
         //#endregion
@@ -436,6 +443,8 @@
                 params.message = data;
                 params.title = title;
             }
+
+            params.async = true;
 
             if (params.buttons) {
                 var btn;
