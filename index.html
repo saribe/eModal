@@ -329,7 +329,8 @@ eModal.alert(options);</code></pre>
                         <h5>Simple way - Default title</h5>
                         <pre><code data-language="javascript">var message = "Wello World!";
                          
-eModal.confirm(message, null, callback);
+eModal.confirm(message, null)
+      .then(callback, callbackCancel);
                          
 </code></pre>
                     </div>
@@ -338,7 +339,8 @@ eModal.confirm(message, null, callback);
                         <pre><code data-language="javascript">var url = "Wello World!";
 var title = "Alert Title";
                          
-eModal.confirm(message, title, callback);
+eModal.confirm(message, title)
+       .then(callback, callbackCancel);
 </code></pre>
                     </div>
                 </div>
@@ -353,13 +355,13 @@ eModal.confirm(message, title, callback);
         message: "The famouse question?",
         title: 'Header title',
         size: 'sm',
-        callback: function(result) { result ? doActionTrue(result) : doActionFalse(); },
         subtitle: 'smaller text header',
         label: "True"   // use the possitive lable as key
         ...
     };
                  
-eModal.confirm(options);</code></pre>
+eModal.confirm(options)
+      .then(callback, callbackCancel);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
@@ -384,9 +386,9 @@ eModal.confirm(options);</code></pre>
                         <h5>Simple way - Default title</h5>
                         <pre><code data-language="javascript">var message = "Wello World!";
                          
-eModal.prompt(message, null, callback);
-                         
-</code></pre>
+eModal.prompt(message, null);
+      .then(callback, callbackCancel);</code></pre>
+
                     </div>
                     <div class="col-sm-6">
                         <h5>Simple way  - Custom title</h5>
@@ -394,7 +396,7 @@ eModal.prompt(message, null, callback);
 var title = "Alert Title";
                          
 eModal.prompt(message, title, callback);
-</code></pre>
+      .then(callback, callbackCancel);</code></pre>
                     </div>
                 </div>
 
@@ -408,12 +410,12 @@ eModal.prompt(message, title, callback);
         message: "The famous question?",
         title: 'Header title',
         size: 'sm'
-        callback: function(result) { result ? doActionOk(result) : doActionCancel(); },
         subtitle: 'smaller text header'
         ...
     };
                  
-eModal.prompt(options);</code></pre>
+eModal.prompt(options)
+      .then(callback, callbackCancel);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
@@ -537,7 +539,7 @@ eModal.prompt(options);</code></pre>
     <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
     <script src="//rawgit.com/saribe/toastr8/master/dist/js/toastr8.min.js" type="text/javascript"></script>
-    <script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>
+    <script src="//rawgit.com/saribe/eModal/master/dist/eModal.js"></script>
     <script src="app/main.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script async>
@@ -560,10 +562,6 @@ eModal.prompt(options);</code></pre>
         ga('set', '&uid', user);
 
         (adsbygoogle = window.adsbygoogle || []).push({});
-
     </script>
-
-
-
 </body>
 </html>
