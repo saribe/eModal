@@ -1,9 +1,9 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.1.03
+ * SaRibe: eModal.js v1.2.0-rc1
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
- * Licensed under.
+ * Licensed under MIT.
  * ======================================================================== */
 
 ; (function (define) {
@@ -21,25 +21,34 @@
         /// </summary>
         /// <param name="params"            >Modal options parameters os string body message.</param>
         /// <param name="title"             >The string header title or a flag to set default params.</param>
-        /// <returns type="jQuery Element"  >The modal element.</returns>
+        /// <returns type="object"          >{then, catch, element}.</returns>
 
-        //The modal element UX and events.
         var defaultSettings = {
             allowContentRecycle: true,
             size: '',
-            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div>',
+            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
             title: 'Attention'
         };
         var $modal;
         var bin = 'recycle-bin';
-        var div = '<div style="position: relative;word-wrap:break-word;">';
+        var catchCallback;
+        var div = '<div style="position:relative;word-wrap:break-word;">';
         var footerId = 'eModalFooter';
+        var hide = 'hide.bs.modal';
         var lastParams = {};
         var modalBody = 'modal-body';
         var options = {};
         var recModalContent = 'rec-modal-content';
+        var shown = 'shown.bs.modal';
         var size = { sm: 'sm', lg: 'lg' };
+        var thenPool = [];
         var tmpModalContent = 'tmp-modal-content';
+
+        var linq = {
+            element: $modal,
+            'catch': fail,
+            then: then
+        };
 
         return {
             ajax: ajax,
@@ -52,267 +61,24 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.1.03'
+            version: '1.2.0'
         };
+        /////////////////////////* Implementation */////////////////////////
 
-        //#region Public Methods
-        function ajax(data, title, callback) {
-            /// <summary>Gets data from url to eModal body</summary>
-            /// <param name="data"></param>
-            /// <param name="title"></param>
-            /// <returns type=""></returns>
-
-            var params = {
-                callback: data.callback || callback,
-                loading: true,
-                title: data.title || title || defaultSettings.title,
-                url: data.url || data
-            };
-
-            if (data.url) { $.extend(params, data); }
-
-            return alert(params, title)
-                .find('.' + modalBody)
-                .load(params.url, error)
-                .closest('.modal-dialog');
-
-            function error(responseText, textStatus) {
-                if (textStatus === 'error') {
-                    var msg = '<div class="alert alert-danger">' +
-                        '<strong>XHR Fail: </strong>Url [ ' + params.url + '] load fail.' +
-                        '</div>';
-                    alert(msg, 'Loading: ' + params.title);
-                } else {
-                    if (params.callback) { params.callback($modal); }
-                }
-            }
-        }
-
-        function alert(params, title) {
-            /// <summary>Non blocking alert whit bootstrap.</summary>
-            /// <param name="params"></param>
-            /// <param name="title"></param>
-            /// <returns type=""></returns>
-
-            setup(params, title);
-
-            var $message = $(div).append(getMessage(params), getFooter(params.buttons));
-
-            return build($message, params);
-        }
-
-        function confirm(params, title, callback) {
-            /// <summary></summary>
-            /// <param name="params"></param>
-            /// <param name="title"></param>
-            /// <param name="callback"></param>
-            /// <returns type=""></returns>
-
-            var label = {
-                OK: 'Cancel',
-                True: 'False',
-                Yes: 'No'
-            };
-            var defaultLable = 'OK';
-
-            return alert({
-                buttons: [
-                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
-                    { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
-                ],
-                message: params.message || params,
-                onHide: click,
-                size: params.size,
-                title: params.title || title
-            });
-
-            function click(ev) {
-                var fn = params.callback || callback;
-
-                close();
-
-                if (typeof fn === 'function') {
-                    var key = $(ev.currentTarget).html();
-                    return fn(label[key] ? true : false);
-                }
-
-                throw new Error('No callback provided to execute confim modal action.');
-            }
-        }
-
-        function iframe(params, title, callback) {
-            var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>'+
-                        '<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;"/>')
-                .replace('%0%', params.message || params.url || params)
-                .replace('%1%', defaultSettings.loadingHtml);
-
-            var message = $(html)
-                .load(iframeReady);
-
-            return alert({
-                buttons: params.buttons || false,
-                message: message,
-                size: params.size || size.lg,
-                title: params.title || title
-            });
-            //////////
-
-            function iframeReady() {
-                $(this)
-                    .parent()
-                    .find('div')
-                    .fadeOut(function() {
-                        $(this).remove();
-                    });
-
-                callback = params.callback || callback;
-                if (typeof (callback) === 'function') {
-                    callback(message);
-                }
-            }
-        }
-
-        function emptyBin() {
-            /// <summary>Remove all dom element cached in document.</summary>
-            /// <returns type="Array">Array with removed elemens.</returns>
-
-            return $('#' + bin + ' > *').remove();
-        }
-
-        function prompt(data, title, callback) {
-            var params = {};
-            if (typeof data === 'object') {
-                $.extend(params, data);
-            }
-            else {
-                params.callback = callback;
-                params.message = data;
-                params.title = title;
-            }
-
-            if (params.buttons) {
-                var btn;
-                for (var i = 0, k = params.buttons.length; i < k; i++) {
-                    btn = params.buttons[i];
-                    btn.style = btn.style ? btn.style + ' pull-left' : 'default pull-left';
-                    btn.type = btn.type || 'button';
-                }
-            }
-
-            var buttons = getFooter([
-                { close: true, type: 'reset', text: 'Cancel', style: 'danger' },
-                { close: false, type: 'submit', text: 'OK' }
-            ].concat(params.buttons || []));
-
-            params.buttons = false;
-            params.onHide = submit;
-
-            params.message = $('<form role=form style="margin-bottom:0;">' +
-                    '<div class=modal-body>' +
-                    '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
-                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : '') + '">' +
-                    '</div></form>')
-                .append(buttons)
-                .on('submit', submit);
-
-            return alert(params);
-
-            function submit(ev) {
-                var fn = params.callback || callback;
-
-                close();
-
-                if (typeof fn === 'function') {
-                    return fn($(ev.currentTarget).html() === 'Cancel' ? null : $modal.find('input').val());
-                }
-
-                throw new Error('No callback provided to execute prompt modal action.');
-            }
-        }
-
-        function setEModalOptions(overrideOptions) {
-            /// <summary></summary>
-            /// <param name="overrideOptions"></param>
-            /// <returns type=""></returns>
-
-            return $.extend(defaultSettings, overrideOptions);
-        }
-
-        function setModalOptions(overrideOptions) {
-            /// <summary></summary>
-            /// <param name="overrideOptions"></param>
-            /// <returns type=""></returns>
-
-            $modal && $modal.remove();
-
-            return $.extend(options, overrideOptions);
-        }
-
-        function close() {
-            ///<summary>Close the modal. </summary>
-            if ($modal) {
-                $modal.off('hide.bs.modal').modal('hide');
-            }
-            return $modal;
-        }
-        //#endregion
 
         //#region Private Logic
-        function build(message) {
-            $modal.find('.modal-content')
-               .append(message);
-
-            return $modal.modal(options);
+        function _build(message) {
+            $modal
+                .modal(options)
+                .find('.modal-content')
+                    .append(message);
         }
 
-        function getModalInstance() {
-            /// <summary>
-            /// Return a new modal object if is the first request or the already created model.
-            /// </summary>
-            /// <returns type="jQuery Object">The model instance.</returns>
-
-            if (!$modal) {
-                //add recycle bin container to document
-                if (!document.getElementById(bin)) {
-                    $('body').append($(div).prop('id', bin).hide());
-                }
-
-                $modal = createModalElement();
-            }
-
-            return $modal;
-
-            function createModalElement() {
-                /// <summary></summary>
-                /// <returns type="jQuery object"></returns>
-
-                return $('<div class="modal fade" tabindex="-1">'
-                + '<div class=modal-dialog>'
-                + '<div class=modal-content>'
-                + ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
-                + '</div>'
-                + '</div>'
-                + '</div>')
-                .on('hidden.bs.modal', recycleModal)
-                .on('click', 'button.x', function (ev) {
-                    var btn = $(ev.currentTarget);
-
-                    if (btn.prop('type') !== 'submit')
-                        return $modal.modal('hide');
-
-                    try {
-                        if (btn.closest('form')[0].checkValidity())
-                            return close();
-                    } catch (e) {
-                        return close();
-                    }
-
-                    return $modal;
-                });
-            }
+        function _isFunction(instance) {
+            return typeof instance === 'function';
         }
 
-        function getFooter(buttons) {
+        function _getFooter(buttons) {
             /// <summary></summary>
             /// <returns type=""></returns>
 
@@ -357,7 +123,7 @@
             return messageFotter;
         }
 
-        function getMessage(params) {
+        function _getMessage(params) {
             /// <param name='params'>object with opions</param>
             /// <returns type='jQuery'>eModal body jQuery objec</returns>
 
@@ -380,7 +146,55 @@
             return params.css && (params.css !== $message.css && $message.css(params.css)), $message;
         }
 
-        function recycleModal() {
+        function _getModalInstance() {
+            /// <summary>
+            /// Return a new modal object if is the first request or the already created model.
+            /// </summary>
+            /// <returns type="jQuery Object">The model instance.</returns>
+
+            if (!$modal) {
+                //add recycle bin container to document
+                if (!document.getElementById(bin)) {
+                    $('body').append($(div).prop('id', bin).hide());
+                }
+
+                $modal = createModalElement();
+                linq.element = $modal;
+            }
+
+            return $modal;
+
+            function createModalElement() {
+                /// <summary></summary>
+                /// <returns type="jQuery object"></returns>
+
+                return $('<div class="modal fade" tabindex="-1">'
+                + '<div class=modal-dialog>'
+                + '<div class=modal-content>'
+                + ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
+                + '</div>'
+                + '</div>'
+                + '</div>')
+                .on('hidden.bs.modal', _recycleModal)
+                .on('click', 'button.x', function (ev) {
+                    var btn = $(ev.currentTarget);
+
+                    if (btn.prop('type') !== 'submit')
+                        return $modal.modal('hide');
+
+                    try {
+                        if (btn.closest('form')[0].checkValidity())
+                            return close();
+                    } catch (e) {
+                        return close();
+                    }
+
+                    return $modal;
+                });
+            }
+        }
+
+        function _recycleModal() {
             /// <summary>
             /// Move content to recycle bin if is a DOM object defined by user,
             /// delete itar if is a simple string message.
@@ -393,7 +207,8 @@
                    .appendTo('#' + bin);
 
             $modal
-                .off('hide.bs.modal')
+                .off(hide)
+                .off(shown)
                 .find('.modal-content > div:not(:first-child)')
                 .remove();
 
@@ -404,7 +219,7 @@
             return $modal;
         }
 
-        function setup(params, title) {
+        function _setup(params, title) {
             /// <summary></summary>
             /// <param name='params'>eModal body message or object with opions</param>
             /// <param name='title'>Modal header title</param>
@@ -412,11 +227,11 @@
 
             if (!params) throw new Error('Invalid parameters!');
 
-            recycleModal();
+            _recycleModal();
             lastParams = params;
 
             // Lazy loading
-            var $ref = getModalInstance();
+            var $ref = _getModalInstance();
 
             //#region change size
             $ref.find('.modal-dialog')
@@ -430,10 +245,262 @@
                 .append($('<small>').html(params.subtitle || ''));
             //#endregion
 
-            $ref.on('hide.bs.modal', params.onHide);
+            $ref.on(hide, params.onHide);
+
             return $ref;
         }
         //#endregion
+
+        //#region linq
+        function fail(error) {
+            if (_isFunction(error)) {
+                catchCallback = error;
+            }
+        }
+
+        function then(success, error) {
+            if (_isFunction(success)) {
+                var tuple = {
+                    error: error,
+                    success: success
+                };
+                thenPool.push(tuple);
+            }
+
+            return linq;
+        }
+
+        function execute(value) {
+            var tuple = thenPool.shift();
+
+            if (tuple) {
+                try {
+                    //TODO: check if is promise
+                    var newValue = tuple.success(value || $modal);
+                    return execute(newValue);
+                } catch (error) {
+                    executeFail(error, tuple);
+                }
+            }
+
+            return value;
+        }
+
+        function executeFail(error, tuple) {
+            if (!tuple) { tuple = thenPool.shift() }
+            thenPool.length = 0;
+
+            if (tuple && _isFunction(tuple.error)) {
+                tuple.error(error);
+            }
+            if (_isFunction(catchCallback)) {
+                catchCallback(error);
+                catchCallback = null;
+            }
+            //throw new Error(error);
+        }
+        //#endregion
+
+        //#region Public Methods
+        function ajax(data, title) {
+            /// <summary>Gets data from url to eModal body</summary>
+            /// <param name="data"></param>
+            /// <param name="title"></param>
+            /// <returns type=""></returns>
+
+            var params = {
+                async: true,
+                loading: true,
+                title: data.title || title || defaultSettings.title,
+                url: data.url || data
+            };
+
+            if (data.url) { $.extend(params, data); }
+
+            alert(params, title)
+                .element
+                .find('.' + modalBody)
+                .load(params.url, error);
+
+            return linq;
+
+            function error(responseText, textStatus) {
+                var hasError = textStatus === 'error';
+                $modal.on(shown, hasError ? executeFail : execute);
+                if (hasError) {
+                    var msg = '<div class="alert alert-danger">' +
+                        '<strong>XHR Fail: </strong>Url [ ' + params.url + '] load fail.' +
+                        '</div>';
+
+                    $modal
+                       .find('.' + modalBody)
+                       .html(msg);
+                }
+            }
+        }
+
+        function alert(params, title) {
+            /// <summary>Non blocking alert whit bootstrap.</summary>
+            /// <param name="params"></param>
+            /// <param name="title"></param>
+            /// <returns type=""></returns>
+
+            _setup(params, title);
+            var $message = $(div).append(_getMessage(params), _getFooter(params.buttons));
+            _build($message);
+
+            if (!params.async) {
+                $modal.on(shown, execute);
+            }
+
+            return linq;
+        }
+
+        function confirm(params, title) {
+            /// <summary></summary>
+            /// <param name="params"></param>
+            /// <param name="title"></param>
+            /// <param name="callback"></param>
+            /// <returns type=""></returns>
+
+            var label = {
+                OK: 'Cancel',
+                True: 'False',
+                Yes: 'No'
+            };
+            var defaultLable = 'OK';
+
+            return alert({
+                async: true,
+                buttons: [
+                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
+                    { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
+                ],
+                message: params.message || params,
+                onHide: click,
+                size: params.size,
+                title: params.title || title
+            });
+
+            function click(ev) {
+                close();
+
+                var key = $(ev.currentTarget).html();
+                return label[key] ? execute() : executeFail();
+            }
+        }
+
+        function iframe(params, title) {
+            var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
+                        '<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;"/>')
+                .replace('%0%', params.message || params.url || params)
+                .replace('%1%', defaultSettings.loadingHtml);
+
+            var message = $(html)
+                .load(iframeReady);
+
+            return alert({
+                async: true,
+                buttons: params.buttons || false,
+                message: message,
+                size: params.size || size.lg,
+                title: params.title || title
+            });
+            //////////
+
+            function iframeReady() {
+                $(this)
+                    .parent()
+                    .find('div')
+                    .fadeOut(function () {
+                        $(this).remove();
+                    });
+
+                return execute();
+            }
+        }
+
+        function emptyBin() {
+            /// <summary>Remove all dom element cached in document.</summary>
+            /// <returns type="Array">Array with removed elemens.</returns>
+
+            return $('#' + bin + ' > *').remove();
+        }
+
+        function prompt(data, title) {
+            var params = {};
+            if (typeof data === 'object') {
+                $.extend(params, data);
+            }
+            else {
+                params.message = data;
+                params.title = title;
+            }
+
+            if (params.buttons) {
+                var btn;
+                for (var i = 0, k = params.buttons.length; i < k; i++) {
+                    btn = params.buttons[i];
+                    btn.style = (btn.style || 'default') + ' pull-left';
+                    btn.type = btn.type || 'button';
+                }
+            }
+
+            var buttons = _getFooter([
+                { close: true, type: 'reset', text: 'Cancel', style: 'danger' },
+                { close: false, type: 'submit', text: 'OK' }
+            ].concat(params.buttons || []));
+
+            params.buttons = false;
+            params.onHide = submit;
+
+            params.message = $('<form role=form style="margin-bottom:0;">' +
+                    '<div class=modal-body>' +
+                    '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
+                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : '') + '">' +
+                    '</div></form>')
+                .append(buttons)
+                .on('submit', submit);
+
+            return alert(params);
+
+            function submit(ev) {
+                var value = $modal.find('input').val();
+                close();
+
+                return $(ev.currentTarget).html() === 'Cancel' ?
+                    executeFail(value) :
+                    execute(value);
+            }
+        }
+
+        function setEModalOptions(overrideOptions) {
+            /// <summary></summary>
+            /// <param name="overrideOptions"></param>
+            /// <returns type=""></returns>
+
+            return $.extend(defaultSettings, overrideOptions);
+        }
+
+        function setModalOptions(overrideOptions) {
+            /// <summary></summary>
+            /// <param name="overrideOptions"></param>
+            /// <returns type=""></returns>
+
+            $modal && $modal.remove();
+
+            return $.extend(options, overrideOptions);
+        }
+
+        function close() {
+            ///<summary>Close the modal. </summary>
+            if ($modal) {
+                $modal.off(hide).modal('hide');
+            }
+            return $modal;
+        }
+        //#endregion
+
     });
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
     typeof window.module != 'undefined' && window.module.exports ?

@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.1.03
+1.2.0-rc1
 
 ## Quick Start
 
@@ -15,10 +15,12 @@
 
 ### Other Options
 	// Display a confirm modal, with custom title.
-	eModal.confirm('Do you really want to pass?', 'Gandalf question', function(answer){...});
+	eModal.confirm('Do you really want to pass?', 'Question from Gandalf')
+          .then(confirmCallback, optionalCancelCallback);
 	
 	// Display a ajax modal, with a title
-	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply', function(DOMElement){...})
+	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply')
+          .then(ajaxOnLoadCallback);
 	
 	// Display an prompt modal, with a title
 	eModal.prompt('What is the best song ever?', 'Fill the input')
