@@ -418,7 +418,7 @@
             function iframeReady() {
                 $(this)
                     .parent()
-                    .find('div')
+                    .find('div.tmp-modal-content')
                     .fadeOut(function () {
                         $(this).remove();
                     });
