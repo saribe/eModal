@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.0-rc1
+ * SaRibe: eModal.js v1.2.1-rc1
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -67,7 +67,7 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.2.0'
+            version: '1.2.1'
         };
         /////////////////////////* Implementation */////////////////////////
 

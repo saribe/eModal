@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.2.0-rc1
+1.2.1-rc1
 
 ## Quick Start
 
@@ -33,6 +33,19 @@
         loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><h4>Loading</h4>',
         ...
     });
+
+## Breaking changes
+
+The callback argument for prompt, confirm, ajax and iframe, now are provided in then function.
+
+     V 1.1.X
+        eModal
+            .confirm(question, title, function(trueOrFalse) { trueOrFalse ? doTrue() : doFalse(); });
+
+    V 1.2.X
+        eModal
+            .confirm(question, title)
+            .then(doTrue, doFalse);
 
 ## Demo and documentation
 - Demo can be found at http://saribe.github.io/eModal
