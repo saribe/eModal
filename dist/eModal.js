@@ -21,10 +21,11 @@
         /// </summary>
         /// <param name="params"            >Modal options parameters os string body message.</param>
         /// <param name="title"             >The string header title or a flag to set default params.</param>
-        /// <returns type="object"          >{then, catch, element}.</returns>
+        /// <returns type="object"          >{ then, catch, element }.</returns>
 
         var defaultSettings = {
             allowContentRecycle: true,
+            confirmLabel: 'OK',
             size: '',
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
             title: 'Attention'
@@ -35,6 +36,11 @@
         var div = '<div style="position:relative;word-wrap:break-word;">';
         var footerId = 'eModalFooter';
         var hide = 'hide.bs.modal';
+        var label = {
+            OK: 'Cancel',
+            True: 'False',
+            Yes: 'No'
+        };
         var lastParams = {};
         var modalBody = 'modal-body';
         var options = {};
@@ -370,18 +376,11 @@
             /// <param name="callback"></param>
             /// <returns type=""></returns>
 
-            var label = {
-                OK: 'Cancel',
-                True: 'False',
-                Yes: 'No'
-            };
-            var defaultLable = 'OK';
-
             return alert({
                 async: true,
                 buttons: [
-                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultLable], style: 'danger' },
-                    { close: true, click: click, text: label[params.label] ? params.label : defaultLable }
+                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultSettings.confirmLabel], style: 'danger' },
+                    { close: true, click: click, text: label[params.label] ? params.label : defaultSettings.confirmLabel }
                 ],
                 message: params.message || params,
                 onHide: click,
@@ -418,7 +417,7 @@
             function iframeReady() {
                 $(this)
                     .parent()
-                    .find('div.tmp-modal-content')
+                    .find('div' + tmpModalContent)
                     .fadeOut(function () {
                         $(this).remove();
                     });
