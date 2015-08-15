@@ -8,7 +8,7 @@
 ## Quick Start
 
 1. Link to eModal.js `<script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>`
-2. use eModal to display a modal for alert, ajax, prompt or confirm
+2. use eModal to display a modal for alert, ajax, prompt, confirm or iframe
 
 		// Display an alert modal with default title (Attention)
 		eModal.alert('You shall not pass!');

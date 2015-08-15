@@ -51,8 +51,8 @@
         var tmpModalContent = 'tmp-modal-content';
 
         var linq = {
-            element: $modal,
             'catch': fail,
+            element: $modal,
             then: then
         };
 
@@ -81,8 +81,8 @@
         }
 
         function _cleanLinq() {
-            thenPool.length = 0;
             catchCallback = null;
+            thenPool.length = 0;
         }
 
         function _isFunction(instance) {
@@ -417,7 +417,7 @@
             function iframeReady() {
                 $(this)
                     .parent()
-                    .find('div' + tmpModalContent)
+                    .find('div.' + tmpModalContent)
                     .fadeOut(function () {
                         $(this).remove();
                     });
@@ -476,9 +476,12 @@
                 var value = $modal.find('input').val();
                 close();
 
-                return ev.type !== 'submit' ?
+                //TODO:
+                ev.type !== 'submit' ?
                     executeFail(value) :
                     execute(value);
+
+                return false;
             }
         }
 
