@@ -46,7 +46,7 @@
         var options = {};
         var recModalContent = 'rec-modal-content';
         var shown = 'shown.bs.modal';
-        var size = { sm: 'sm', lg: 'lg' };
+        var size = { sm: 'sm', lg: 'lg', xl: 'xl' };
         var thenPool = [];
         var tmpModalContent = 'tmp-modal-content';
 
@@ -179,7 +179,7 @@
                 /// <summary></summary>
                 /// <returns type="jQuery object"></returns>
 
-                return $('<div class="modal fade" tabindex="-1">'
+                return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}</style>'
                 + '<div class=modal-dialog>'
                 + '<div class=modal-content>'
                 + ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>'
@@ -248,7 +248,7 @@
 
             //#region change size
             $ref.find('.modal-dialog')
-                .removeClass('modal-sm modal-lg')
+                .removeClass('modal-sm modal-lg modal-xl')
                 .addClass(params.size ? 'modal-' + params.size : defaultSettings.size);
             //#endregion
 
