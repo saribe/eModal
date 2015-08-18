@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.1-rc1
+ * SaRibe: eModal.js v1.2.02
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -23,32 +23,34 @@
         /// <param name="title"             >The string header title or a flag to set default params.</param>
         /// <returns type="object"          >{ then, catch, element }.</returns>
 
-        var defaultSettings = {
-            allowContentRecycle: true,
-            confirmLabel: 'OK',
-            size: '',
-            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
-            title: 'Attention'
-        };
         var $modal;
         var bin = 'recycle-bin';
         var catchCallback;
         var div = '<div style="position:relative;word-wrap:break-word;">';
-        var footerId = 'eModalFooter';
-        var hide = 'hide.bs.modal';
-        var label = {
-            OK: 'Cancel',
-            True: 'False',
-            Yes: 'No'
-        };
+        var empty = '';
+        var eventClick = 'click';
+        var eventHide = 'hide';
+        var eventShown = 'shown.bs.modal';
+        var eventSubmit = 'submit';
+        var footerId = 'eFooter';
+        var hide = eventHide + '.bs.modal';
+        var keyDanger = 'danger';
+        var label = { OK: 'Cancel', True: 'False', Yes: 'No' };
         var lastParams = {};
         var modalBody = 'modal-body';
         var options = {};
-        var recModalContent = 'rec-modal-content';
-        var shown = 'shown.bs.modal';
+        var recModalContent = 'modal-rec';
         var size = { sm: 'sm', lg: 'lg', xl: 'xl' };
         var thenPool = [];
-        var tmpModalContent = 'tmp-modal-content';
+        var tmpModalContent = 'modal-tmp';
+
+        var defaultSettings = {
+            allowContentRecycle: true,
+            confirmLabel: 'OK',
+            size: empty,
+            loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
+            title: 'Attention'
+        };
 
         var linq = {
             'catch': fail,
@@ -93,13 +95,13 @@
             /// <summary></summary>
             /// <returns type=""></returns>
 
-            if (buttons === false) { return ''; }
+            if (buttons === false) { return empty; }
 
             var messageFotter = $(div).addClass('modal-footer').prop('id', footerId);
             if (buttons) {
                 for (var i = 0, k = buttons.length; i < k; i++) {
                     var btnOp = buttons[i];
-                    var btn = $('<button>').addClass('btn btn-' + (btnOp.style || 'info'));
+                    var btn = $('<button>').addClass('btn btn-' + (btnOp.style || 'primary'));
 
                     for (var index in btnOp) {
                         if (btnOp.hasOwnProperty(index)) {
@@ -111,7 +113,7 @@
                                            .addClass('x');
                                     }
                                     break;
-                                case 'click':
+                                case eventClick:
                                     //click event
                                     btn.click(btnOp.click);
                                     break;
@@ -129,7 +131,7 @@
                 }
             } else {
                 //if no buttons defined by user, add a standard close button.
-                messageFotter.append('<button class="x btn btn-info" data-dismiss=modal type=button>Close</button>');
+                messageFotter.append('<button class="x btn btn-primary" data-dismiss=modal type=button>Close</button>');
             }
             return messageFotter;
         }
@@ -187,11 +189,11 @@
                 + '</div>'
                 + '</div>')
                 .on('hidden.bs.modal', _recycleModal)
-                .on('click', 'button.x', function (ev) {
+                .on(eventClick, 'button.x', function (ev) {
                     var btn = $(ev.currentTarget);
 
-                    if (btn.prop('type') !== 'submit')
-                        return $modal.modal('hide');
+                    if (btn.prop('type') !== eventSubmit)
+                        return $modal.modal(eventHide);
 
                     try {
                         if (btn.closest('form')[0].checkValidity())
@@ -212,14 +214,14 @@
             /// All modal messages can be deleted if default setting "allowContentRecycle" = false.
             /// </summary>
 
-            if (!$modal) return $modal;
+            if (!$modal) return;
 
             var $content = $modal.find('.' + recModalContent).removeClass(recModalContent)
                    .appendTo('#' + bin);
 
             $modal
                 .off(hide)
-                .off(shown)
+                .off(eventShown)
                 .find('.modal-content > div:not(:first-child)')
                 .remove();
 
@@ -228,8 +230,6 @@
             if (!defaultSettings.allowContentRecycle || lastParams.clone) {
                 $content.remove();
             }
-
-            return $modal;
         }
 
         function _setup(params, title) {
@@ -255,12 +255,10 @@
             //#region change title
             $ref.find('.modal-title')
                 .html((params.title || title || defaultSettings.title) + ' ')
-                .append($('<small>').html(params.subtitle || ''));
+                .append($('<small>').html(params.subtitle || empty));
             //#endregion
 
             $ref.on(hide, params.onHide);
-
-            return $ref;
         }
         //#endregion
 
@@ -339,7 +337,7 @@
 
             function error(responseText, textStatus) {
                 var hasError = textStatus === 'error';
-                $modal.on(shown, hasError ? executeFail : execute);
+                $modal.on(eventShown, hasError ? executeFail : execute);
                 if (hasError) {
                     var msg = '<div class="alert alert-danger">' +
                         '<strong>XHR Fail: </strong>Url [ ' + params.url + '] load fail.' +
@@ -363,7 +361,7 @@
             _build($message);
 
             if (!params.async) {
-                $modal.on(shown, execute);
+                $modal.on(eventShown, execute);
             }
 
             return linq;
@@ -379,7 +377,7 @@
             return alert({
                 async: true,
                 buttons: [
-                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultSettings.confirmLabel], style: 'danger' },
+                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultSettings.confirmLabel], style: keyDanger },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultSettings.confirmLabel }
                 ],
                 message: params.message || params,
@@ -398,7 +396,7 @@
 
         function iframe(params, title) {
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
-                        '<iframe class="embed-responsive-item" src="%0%" style="width:100%;height:75vh;"/>')
+                        '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;"/>')
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
@@ -409,7 +407,7 @@
                 async: true,
                 buttons: params.buttons || false,
                 message: message,
-                size: params.size || size.lg,
+                size: params.size || size.xl,
                 title: params.title || title
             });
             //////////
@@ -455,8 +453,8 @@
             }
 
             var buttons = _getFooter([
-                { close: true, type: 'reset', text: 'Cancel', style: 'danger' },
-                { close: false, type: 'submit', text: 'OK' }
+                { close: true, type: 'reset', text: label.OK, style: keyDanger },
+                { close: false, type: eventSubmit, text: defaultSettings.confirmLabel }
             ].concat(params.buttons || []));
 
             params.buttons = false;
@@ -464,11 +462,11 @@
 
             params.message = $('<form role=form style="margin-bottom:0;">' +
                     '<div class=modal-body>' +
-                    '<label for=prompt-input class=control-label>' + (params.message || '') + '</label>' +
-                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || '') + (params.pattern ? '" pattern="' + params.pattern : '') + '">' +
+                    '<label for=prompt-input class=control-label>' + (params.message || empty) + '</label>' +
+                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || empty) + (params.pattern ? '" pattern="' + params.pattern : empty) + '">' +
                     '</div></form>')
                 .append(buttons)
-                .on('submit', submit);
+                .on(eventSubmit, submit);
 
             return alert(params);
 
@@ -477,7 +475,7 @@
                 close();
 
                 //TODO:
-                ev.type !== 'submit' ?
+                ev.type !== eventSubmit ?
                     executeFail(value) :
                     execute(value);
 
@@ -506,7 +504,7 @@
         function close() {
             ///<summary>Close the modal. </summary>
             if ($modal) {
-                $modal.off(hide).modal('hide');
+                $modal.off(hide).modal(eventHide);
             }
             return $modal;
         }
@@ -516,5 +514,5 @@
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
     typeof window.module != 'undefined' && window.module.exports ?
         window.module.exports = t(window.require(n[0])) :
-        window.eModal = t(window.jQuery);
+        window.eModal = t(window.$);
 }));

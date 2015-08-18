@@ -3,7 +3,7 @@
 
 
 ## Current Version
-1.2.1-rc1
+1.2.02
 
 ## Quick Start
 
