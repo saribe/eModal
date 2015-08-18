@@ -396,7 +396,7 @@
 
         function iframe(params, title) {
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
-                        '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;margin: -1px -1px -6px -1px;"/>')
+                        '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
