@@ -4,7 +4,7 @@
     "Samuel Ribeiro"
   ],
   "dependencies": {
-    "jQuery": "~1.7.4",
+    "jquery": "~1.7.4",
     "bootstrap": "~3.3.5"
   },
   "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript.",
