@@ -14,14 +14,14 @@
         ///     css      {object}:          css objext try apply into message body; only able if message == string
         ///     loading  {bool}:            set loading progress as message.
         ///     message  {string|object}:   The body message string or the html element. eg: $(selector);
-        ///     size     {string}:          sm || lg -> define the modal size.
+        ///     size     {string}:          sm || lg || xl -> define the modal size.
         ///     subtitle {string}:          The header subtitle string. This apper in a smaller text.
         ///     title    {string}:          The header title string.
         ///     useBin   {bool}:            set message as recycable.
         /// </summary>
-        /// <param name="params"            >Modal options parameters os string body message.</param>
-        /// <param name="title"             >The string header title or a flag to set default params.</param>
-        /// <returns type="object"          >{ then, catch, element }.</returns>
+        /// <param name="params"  >Modal options parameters os string body message.</param>
+        /// <param name="title"   >The string header title or a flag to set default params.</param>
+        /// <returns type="object">{ then, catch, element }.</returns>
 
         var $modal;
         var bin = 'recycle-bin';
@@ -34,6 +34,7 @@
         var eventSubmit = 'submit';
         var footerId = 'eFooter';
         var hide = eventHide + '.bs.modal';
+        var input = 'input';
         var keyDanger = 'danger';
         var label = { OK: 'Cancel', True: 'False', Yes: 'No' };
         var lastParams = {};
@@ -72,7 +73,6 @@
             version: '1.2.1'
         };
         /////////////////////////* Implementation */////////////////////////
-
 
         //#region Private Logic
         function _build(message) {
@@ -175,7 +175,10 @@
                 linq.element = $modal;
             }
 
-            return $modal;
+            return $modal
+                .on(eventShown, function () {
+                    $(this).find(input).first().focus();
+                });
 
             function createModalElement() {
                 /// <summary></summary>
@@ -263,24 +266,6 @@
         //#endregion
 
         //#region linq
-        function fail(error) {
-            if (_isFunction(error)) {
-                catchCallback = error;
-            }
-        }
-
-        function then(success, error) {
-            if (_isFunction(success)) {
-                var tuple = {
-                    error: error,
-                    success: success
-                };
-                thenPool.push(tuple);
-            }
-
-            return linq;
-        }
-
         function execute(value) {
             var tuple = thenPool.shift();
 
@@ -309,6 +294,24 @@
             }
             _cleanLinq();
             //throw new Error(error);
+        }
+
+        function fail(error) {
+            if (_isFunction(error)) {
+                catchCallback = error;
+            }
+        }
+
+        function then(success, error) {
+            if (_isFunction(success)) {
+                var tuple = {
+                    error: error,
+                    success: success
+                };
+                thenPool.push(tuple);
+            }
+
+            return linq;
         }
         //#endregion
 
@@ -463,7 +466,7 @@
             params.message = $('<form role=form style="margin-bottom:0;">' +
                     '<div class=modal-body>' +
                     '<label for=prompt-input class=control-label>' + (params.message || empty) + '</label>' +
-                    '<input type=text class=form-control id=prompt-input required autofocus value="' + (params.value || empty) + (params.pattern ? '" pattern="' + params.pattern : empty) + '">' +
+                    '<input type=text class=form-control required autocomplete="on" value="' + (params.value || empty) + (params.pattern ? '" pattern="' + params.pattern : empty) + '">' +
                     '</div></form>')
                 .append(buttons)
                 .on(eventSubmit, submit);
@@ -471,7 +474,7 @@
             return alert(params);
 
             function submit(ev) {
-                var value = $modal.find('input').val();
+                var value = $modal.find(input).val();
                 close();
 
                 //TODO:
@@ -509,7 +512,6 @@
             return $modal;
         }
         //#endregion
-
     });
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
     typeof window.module != 'undefined' && window.module.exports ?
