@@ -50,7 +50,8 @@
             confirmLabel: 'OK',
             size: empty,
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
-            title: 'Attention'
+            title: 'Attention',
+            fixedHeader: false
         };
 
         var linq = {
@@ -191,6 +192,7 @@
                 + '</div>'
                 + '</div>'
                 + '</div>')
+                .on('scroll', _scrollEvent)
                 .on('hidden.bs.modal', _recycleModal)
                 .on(eventClick, 'button.x', function (ev) {
                     var btn = $(ev.currentTarget);
@@ -208,6 +210,13 @@
                     return $modal;
                 });
             }
+        }
+
+        function _scrollEvent(){
+        	if(defaultSettings.fixedHeader){
+        		var a = $modal.scrollTop();
+				$modal.find('.modal-header').css('position', 'fixed').css('top',a+'px');
+        	}
         }
 
         function _recycleModal() {
