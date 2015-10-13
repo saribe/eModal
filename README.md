@@ -1,9 +1,8 @@
 # eModal for Bootstrap
 **eModal** is a Easy way to manage modal dialogs using bootstrap.
 
-
 ## Current Version
-1.2.02
+1.2.03
 
 ## Quick Start
 
@@ -17,19 +16,19 @@
 	// Display a confirm modal, with custom title.
 	eModal.confirm('Do you really want to pass?', 'Question from Gandalf')
           .then(confirmCallback, optionalCancelCallback);
-	
+
 	// Display a ajax modal, with a title
 	eModal.ajax('http://mydomail.com/page.html', 'Jobs - Form apply')
           .then(ajaxOnLoadCallback);
-	
+
 	// Display an prompt modal, with a title
 	eModal.prompt('What is the best song ever?', 'Fill the input')
-	
+
 	// Display an modal whith iframe inside, with a title
 	eModal.iframe('http://saribe.github.io/toastr8/', 'Hot news')
-			
+
 	// eModal default settings with your custom html loading template
-	eModal.setEModalOptions({ 
+	eModal.setEModalOptions({
         loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><h4>Loading</h4>',
         ...
     });
@@ -51,7 +50,7 @@ The callback argument for prompt, confirm, ajax and iframe, now are provided in 
 - Demo can be found at http://saribe.github.io/eModal
 
 ## Copyright
-Copyright © 2014-2015 
+Copyright © 2014-2015
 
 ## License
 Under MIT license - http://www.opensource.org/licenses/mit-license.php

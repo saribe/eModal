@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.02
+ * SaRibe: eModal.js v1.2.03
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -11,21 +11,20 @@
         /// <summary>
         /// @params allowed elements:
         ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
-        ///     css      {object}:          css objext try apply into message body; only able if message == string
+        ///     css      {object}:          css object try apply into message body; only able if message == string
         ///     loading  {bool}:            set loading progress as message.
-        ///     message  {string|object}:   The body message string or the html element. eg: $(selector);
+        ///     message  {string|object}:   The body message string or the HTML element. eg: $(selector);
         ///     size     {string}:          sm || lg || xl -> define the modal size.
-        ///     subtitle {string}:          The header subtitle string. This apper in a smaller text.
+        ///     subtitle {string}:          The header subtitle string. This appear in a smaller text.
         ///     title    {string}:          The header title string.
-        ///     useBin   {bool}:            set message as recycable.
+        ///     useBin   {bool}:            set message as recyclable.
         /// </summary>
-        /// <param name="params"  >Modal options parameters os string body message.</param>
-        /// <param name="title"   >The string header title or a flag to set default params.</param>
+        /// <param name="params"  >Modal options parameters of string body message.</param>
+        /// <param name="title"   >The string header title or a flag to set default parameters.</param>
         /// <returns type="object">{ then, catch, element }.</returns>
 
         var $modal;
         var bin = 'recycle-bin';
-        var catchCallback;
         var div = '<div style="position:relative;word-wrap:break-word;">';
         var empty = '';
         var eventClick = 'click';
@@ -42,7 +41,6 @@
         var options = {};
         var recModalContent = 'modal-rec';
         var size = { sm: 'sm', lg: 'lg', xl: 'xl' };
-        var thenPool = [];
         var tmpModalContent = 'modal-tmp';
 
         var defaultSettings = {
@@ -53,11 +51,7 @@
             title: 'Attention'
         };
 
-        var linq = {
-            'catch': fail,
-            element: $modal,
-            then: then
-        };
+        var linq = null;
 
         return {
             ajax: ajax,
@@ -70,7 +64,7 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.2.1'
+            version: '1.2.03'
         };
         /////////////////////////* Implementation */////////////////////////
 
@@ -82,19 +76,7 @@
                     .append(message);
         }
 
-        function _cleanLinq() {
-            catchCallback = null;
-            thenPool.length = 0;
-        }
-
-        function _isFunction(instance) {
-            return typeof instance === 'function';
-        }
-
         function _getFooter(buttons) {
-            /// <summary></summary>
-            /// <returns type=""></returns>
-
             if (buttons === false) { return empty; }
 
             var messageFotter = $(div).addClass('modal-footer').prop('id', footerId);
@@ -121,7 +103,7 @@
                                     btn.html(btnOp[index]);
                                     break;
                                 default:
-                                    //all other possible html attributes to button element
+                                    //all other possible HTML attributes to button element
                                     btn.attr(index, btnOp[index]);
                             }
                         }
@@ -137,8 +119,8 @@
         }
 
         function _getMessage(params) {
-            /// <param name='params'>object with opions</param>
-            /// <returns type='jQuery'>eModal body jQuery objec</returns>
+            /// <param name='params'>object with options</param>
+            /// <returns type='jQuery'>eModal body jQuery object</returns>
 
             var $message;
             var content = params.loading ?
@@ -213,7 +195,7 @@
         function _recycleModal() {
             /// <summary>
             /// Move content to recycle bin if is a DOM object defined by user,
-            /// delete itar if is a simple string message.
+            /// delete it if is a simple string message.
             /// All modal messages can be deleted if default setting "allowContentRecycle" = false.
             /// </summary>
 
@@ -228,8 +210,6 @@
                 .find('.modal-content > div:not(:first-child)')
                 .remove();
 
-            _cleanLinq();
-
             if (!defaultSettings.allowContentRecycle || lastParams.clone) {
                 $content.remove();
             }
@@ -237,9 +217,13 @@
 
         function _setup(params, title) {
             /// <summary></summary>
-            /// <param name='params'>eModal body message or object with opions</param>
+            /// <param name='params'>eModal body message or object with options</param>
             /// <param name='title'>Modal header title</param>
-            /// <returns type='jQuery'>eModal jQuery objec</returns>
+            /// <returns type='jQuery'>eModal jQuery object</returns>
+
+            linq = $.Deferred();
+            linq.catch = linq.fail;
+            linq.element = $modal;
 
             if (!params) throw new Error('Invalid parameters!');
 
@@ -265,59 +249,9 @@
         }
         //#endregion
 
-        //#region linq
-        function execute(value) {
-            var tuple = thenPool.shift();
-
-            if (tuple) {
-                try {
-                    //TODO: check if is promise
-                    var newValue = tuple.success(value || $modal);
-                    return execute(newValue);
-                } catch (error) {
-                    executeFail(error, tuple);
-                }
-            }
-
-            return value;
-        }
-
-        function executeFail(error, tuple) {
-            if (!tuple) { tuple = thenPool.shift() }
-
-            if (tuple && _isFunction(tuple.error)) {
-                tuple.error(error);
-            }
-            if (_isFunction(catchCallback)) {
-                catchCallback(error);
-                catchCallback = null;
-            }
-            _cleanLinq();
-            //throw new Error(error);
-        }
-
-        function fail(error) {
-            if (_isFunction(error)) {
-                catchCallback = error;
-            }
-        }
-
-        function then(success, error) {
-            if (_isFunction(success)) {
-                var tuple = {
-                    error: error,
-                    success: success
-                };
-                thenPool.push(tuple);
-            }
-
-            return linq;
-        }
-        //#endregion
-
         //#region Public Methods
         function ajax(data, title) {
-            /// <summary>Gets data from url to eModal body</summary>
+            /// <summary>Gets data from URL to eModal body</summary>
             /// <param name="data"></param>
             /// <param name="title"></param>
             /// <returns type=""></returns>
@@ -340,10 +274,10 @@
 
             function error(responseText, textStatus) {
                 var hasError = textStatus === 'error';
-                $modal.on(eventShown, hasError ? executeFail : execute);
+                $modal.on(eventShown, hasError ? linq.reject : linq.resolve);
                 if (hasError) {
                     var msg = '<div class="alert alert-danger">' +
-                        '<strong>XHR Fail: </strong>Url [ ' + params.url + '] load fail.' +
+                        '<strong>XHR Fail: </strong>URL [ ' + params.url + '] load fail.' +
                         '</div>';
 
                     $modal
@@ -364,7 +298,7 @@
             _build($message);
 
             if (!params.async) {
-                $modal.on(eventShown, execute);
+                $modal.on(eventShown, linq.resolve);
             }
 
             return linq;
@@ -393,7 +327,7 @@
                 close();
 
                 var key = $(ev.currentTarget).html();
-                return label[key] ? execute() : executeFail();
+                return label[key] ? linq.resolve() : linq.reject();
             }
         }
 
@@ -423,13 +357,13 @@
                         $(this).remove();
                     });
 
-                return execute();
+                return linq.resolve();
             }
         }
 
         function emptyBin() {
-            /// <summary>Remove all dom element cached in document.</summary>
-            /// <returns type="Array">Array with removed elemens.</returns>
+            /// <summary>Remove all DOM element cached in document.</summary>
+            /// <returns type="Array">Array with removed elements.</returns>
 
             return $('#' + bin + ' > *').remove();
         }
@@ -479,8 +413,8 @@
 
                 //TODO:
                 ev.type !== eventSubmit ?
-                    executeFail(value) :
-                    execute(value);
+                    linq.reject(value) :
+                    linq.resolve(value);
 
                 return false;
             }
