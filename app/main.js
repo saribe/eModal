@@ -1,4 +1,4 @@
-$(document).ready(function () {/* activate scrollspy menu */
+$(document).ready(function () {/* activate scroll spy menu */
 
     var hashTimer;
     var iconPrefix = '.glyphicon-';
@@ -10,11 +10,11 @@ $(document).ready(function () {/* activate scrollspy menu */
         .find('a[href*=#]:not([href=#])')
             .click(hrefClick);
 
-    $(iconPrefix + 'cloud')       .click(ajaxDemo);
-    $(iconPrefix + 'comment')     .click(alertDemo);
-    $(iconPrefix + 'ok')          .click(confirmDemo);
-    $(iconPrefix + 'pencil')      .click(promptDemo);
-    $(iconPrefix + 'screenshot')  .click(iframeDemo);
+    $(iconPrefix + 'cloud').click(ajaxDemo);
+    $(iconPrefix + 'comment').click(alertDemo);
+    $(iconPrefix + 'ok').click(confirmDemo);
+    $(iconPrefix + 'pencil').click(promptDemo);
+    $(iconPrefix + 'screenshot').click(iframeDemo);
     ///////////////////* Implementation *///////////////////
 
     // Demos
@@ -23,7 +23,7 @@ $(document).ready(function () {/* activate scrollspy menu */
         var params = {
             buttons: [
                { text: 'Close', close: true, style: 'danger' },
-               { text: 'New contenet', close: false, style: 'success', click: ajaxDemo }
+               { text: 'New content', close: false, style: 'success', click: ajaxDemo }
             ],
             size: eModal.size.lg,
             title: title,
@@ -39,7 +39,7 @@ $(document).ready(function () {/* activate scrollspy menu */
         var title = 'Alert modal';
         return eModal
             .alert('You welcome! Want clean code ?', title)
-            .then(function() { t8.facebook('Alert modal is visible.', title); });
+            .then(function () { t8.facebook('Alert modal is visible.', title); });
     }
 
     function confirmDemo() {

@@ -59,7 +59,7 @@
                 <h1 class="text-center v-center">What it can do?</h1>
                 <br />
                 <div class="row text-center">
-                    <p itemprop="description">Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript. This isn't bootstrap, is a healper to use modals.</p>
+                    <p itemprop="description">Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript. This isn't bootstrap, is a helper to use modals.</p>
                     <p itemprop="requirements">
                         Bootstrap and jQuery are <strong>dependencies</strong> to eModal.js.
                     </p>
@@ -108,7 +108,7 @@
                         <div class="row">
                             <div class="col-sm-10  text-center">
                                 <h3>iFrame</h3>
-                                <p>Iframes are hard to deal with it? We don't think so!</p>
+                                <p>IFrames are hard to deal with it? We don't think so!</p>
                                 <i class="glyphicon glyphicon-screenshot fa-5x pointer" title="Try me!"></i>
                             </div>
                         </div>
@@ -150,7 +150,6 @@
                         </div>
                         <br />
                         <p class="text-white text-center">Loading Stage</p>
-
                     </div>
 
                     <div class="col-sm-4">
@@ -167,7 +166,6 @@
                         </div>
                         <br />
                         <p class="text-white text-center">Error Stage</p>
-
                     </div>
 
                     <div class="col-sm-4">
@@ -193,9 +191,7 @@
                         </div>
                         <br />
                         <p class="text-white text-center">Success Stage</p>
-
                     </div>
-
                 </div>
 
                 <h2>How to use</h2>
@@ -223,22 +219,22 @@ eModal.ajax(url, "XHR Title");
                 <pre><code data-language="javascript">var options = {
         url: "/views/portview.html",
         title:'Header title',
-        size: 'sm'
+        size: eModal.size.sm,
         subtitle: 'smaller text header',
         buttons: [
-            {text: 'Ok', style: 'info',   close: true, click: eventA },
+            {text: 'OK', style: 'info',   close: true, click: eventA },
             {text: 'KO', style: 'danger', close: true, click: eventB }
         ],
         ...
     };
-                 
+
 eModal.ajax(options);</code></pre>
 
                 <p class="alert alert-info">By default, the ajax modal <strong>has not</strong> buttons defined! The loading animation setup is a <code>'progress-bar-striped'</code> from bootstrap, however, you can custumize it by changing the eModal default settings with your custom html loading template.</p>
 
                 <strong>EXAMPLE USING FONT AWESOME</strong>
 
-                <pre><code data-language="javascript">eModal.setEModalOptions({ 
+                <pre><code data-language="javascript">eModal.setEModalOptions({
         loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
         ...
     });</code></pre>
@@ -256,7 +252,6 @@ eModal.ajax(options);</code></pre>
                     </div>
                 </div>
             </div>
-
         </section>
 
         <section class="container-fluid" id="alert">
@@ -272,17 +267,16 @@ eModal.ajax(options);</code></pre>
                 <div class="row">
                     <div class="col-sm-6">
                         <h5>Simple way - Default title</h5>
-                        <pre><code data-language="javascript">var message = "Wello World!";
-                         
+                        <pre><code data-language="javascript">var message = "Hello World!";
+
 eModal.alert(message);
-                         
 </code></pre>
                     </div>
                     <div class="col-sm-6">
                         <h5>Simple way  - Custom title</h5>
-                        <pre><code data-language="javascript">var url = "Wello World!";
+                        <pre><code data-language="javascript">var url = "Hello World!";
 var title = "Alert Title";
-                         
+
 eModal.ajax(message, title);
 </code></pre>
                     </div>
@@ -302,16 +296,15 @@ eModal.ajax(message, title);
         useBin: true
         ...
     };
-                 
+
 eModal.alert(options);</code></pre>
 
                 <div class="alert alert-info">
                     The element whit id 'my-element-id' will be moved to dialog body and according with parameter <code>'useBin'</code> it will be deleted or recycle.
                     When <code>'useBin'</code> is <code>true</code>, after close the dialog, the element will be sent to a '#recycle-bin' container and all events will be preserved.
-                    If <code>false</code>, it will be deleted and it will not be possible to reuse de same element.
+                    If <code>false</code>, it will be deleted and it will not be possible to reuse the same element.
                 </div>
             </div>
-
         </section>
 
         <section class="container-fluid" id="confirm">
@@ -327,18 +320,17 @@ eModal.alert(options);</code></pre>
                 <div class="row">
                     <div class="col-sm-6">
                         <h5>Simple way - Default title</h5>
-                        <pre><code data-language="javascript">var message = "Wello World!";
-                         
+                        <pre><code data-language="javascript">var message = "Hello World!";
+
 eModal.confirm(message, null)
       .then(callback, callbackCancel);
-                         
 </code></pre>
                     </div>
                     <div class="col-sm-6">
                         <h5>Simple way  - Custom title</h5>
-                        <pre><code data-language="javascript">var url = "Wello World!";
+                        <pre><code data-language="javascript">var url = "Hello World!";
 var title = "Alert Title";
-                         
+
 eModal.confirm(message, title)
        .then(callback, callbackCancel);
 </code></pre>
@@ -350,32 +342,31 @@ eModal.confirm(message, title)
                     <strong>Tip: </strong> You can use change the default label name! <small><code>{ label: 'Yes' | 'True'| 'OK' }</code></small>
                 </div>
 
-                <h5>Message using alternative lable</h5>
+                <h5>Message using alternative label</h5>
                 <pre><code data-language="javascript">var options = {
-        message: "The famouse question?",
+        message: "The famous question?",
         title: 'Header title',
-        size: 'sm',
+        size: eModal.size.xl,
         subtitle: 'smaller text header',
-        label: "True"   // use the possitive lable as key
+        label: "True"   // use the positive label as key
         ...
     };
-                 
+
 eModal.confirm(options)
       .then(callback, callbackCancel);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
-                    Callback event will retrive a boolean argument as the standard javascritp confirm.
+                    Callback event will retrieve a boolean argument as the standard javaScritp confirm.
                 </div>
             </div>
-
         </section>
 
         <section class="container-fluid" id="prompt">
             <div class="container">
                 <h1>Prompt</h1>
                 <br>
-                <p class="lead">eModal.prompt(), do you whant prompt a question? A simple form is ready!</p>
+                <p class="lead">eModal.prompt(), do you what prompt a question? A simple form is ready!</p>
                 <br>
 
                 <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></div></div>
@@ -384,17 +375,16 @@ eModal.confirm(options)
                 <div class="row">
                     <div class="col-sm-6">
                         <h5>Simple way - Default title</h5>
-                        <pre><code data-language="javascript">var message = "Wello World!";
-                         
+                        <pre><code data-language="javascript">var message = "Hello World!";
+
 eModal.prompt(message, null);
       .then(callback, callbackCancel);</code></pre>
-
                     </div>
                     <div class="col-sm-6">
                         <h5>Simple way  - Custom title</h5>
-                        <pre><code data-language="javascript">var url = "Wello World!";
+                        <pre><code data-language="javascript">var url = "Hello World!";
 var title = "Alert Title";
-                         
+
 eModal.prompt(message, title, callback);
       .then(callback, callbackCancel);</code></pre>
                     </div>
@@ -405,21 +395,21 @@ eModal.prompt(message, title, callback);
                     <strong>Tip: </strong> You can use the title as the prompt question!
                 </div>
 
-                <h5>Message using alternative lable</h5>
+                <h5>Message using alternative label</h5>
                 <pre><code data-language="javascript">var options = {
         message: "The famous question?",
         title: 'Header title',
-        size: 'sm'
+        size: eModal.size.lg,
         subtitle: 'smaller text header'
         ...
     };
-                 
+
 eModal.prompt(options)
       .then(callback, callbackCancel);</code></pre>
 
                 <div class="alert alert-info">
                     The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
-                    Callback event will retrive a boolean argument as the standard javascritp confirm.
+                    Callback event will retrieve a boolean argument as the standard javaScritp confirm.
                 </div>
             </div>
         </section>
@@ -449,19 +439,19 @@ eModal.prompt(options)
                             <td>message</td>
                             <td>string, DOM object or jQuery object</td>
                             <td></td>
-                            <td>The body message string or the html element. eg: $(selector)</td>
+                            <td>The body message string or the HTML element. e.g.: $(selector)</td>
                         </tr>
                         <tr>
                             <td>subtitle</td>
                             <td>string</td>
                             <td></td>
-                            <td>The header subtitle string. This apper in a smaller text</td>
+                            <td>The header subtitle string. This appear in a smaller text</td>
                         </tr>
                         <tr>
                             <td>size</td>
                             <td>string</td>
                             <td></td>
-                            <td>Defines the size of modal [<code>'sm'</code> | <code>'lg'</code>]</td>
+                            <td>Defines the size of modal [<code>'sm'</code> | <code>'lg'</code> | <code>'xl'</code>]</td>
                         </tr>
                         <tr>
                             <td>loading</td>
@@ -473,13 +463,13 @@ eModal.prompt(options)
                             <td>useBin</td>
                             <td>bool</td>
                             <td>false</td>
-                            <td>set message as recycable</td>
+                            <td>set message as recyclable</td>
                         </tr>
                         <tr>
                             <td>css</td>
                             <td>object</td>
                             <td></td>
-                            <td>css objext try apply into message body; only able if message == string</td>
+                            <td>css object try apply into message body; only able if message == string</td>
                         </tr>
                         <tr>
                             <td>buttons</td>
@@ -505,7 +495,7 @@ eModal.prompt(options)
                     <div class="col-xs-6 col-md-3">
                         <h4>Follow Us</h4>
                         <ul class="nav">
-                            <li><a href="//github.com/saribe/emodal/" itemprop="discussionUrl"><i class="fa fa-lg fa-fw fa-github"></i> Github</a></li>
+                            <li><a href="//github.com/saribe/emodal/" itemprop="discussionUrl"><i class="fa fa-lg fa-fw fa-github"></i> GitHub</a></li>
                         </ul>
                     </div>
                     <div class="col-xs-6 col-md-3">
@@ -516,21 +506,19 @@ eModal.prompt(options)
                         <span class="label label-info">bs eModal</span>,
                         <span class="label label-info">eModal</span>,
                         <span class="label label-info">bootstrap</span>,
-                        <span class="label label-info">jquery</span>,
+                        <span class="label label-info">jQuery</span>,
                         <span class="label label-info">ajax</span>,
-                        <span class="label label-info">iframe</span>,
+                        <span class="label label-info">iFrame</span>,
                         <span class="label label-info">confirm</span>,
                         <span class="label label-info">alert</span>,
                         <span class="label label-info">html</span>,
-                        <span class="label label-info">javascript</span>,
+                        <span class="label label-info">javaScript</span>,
                         <span class="label label-info">css</span>,
                     </div>
                 </div><!--/row-->
             </div>
         </footer>
     </div>
-
-
 
     <!-- script references -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
