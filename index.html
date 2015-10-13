@@ -1,0 +1,545 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="application-name" content="bs eModal">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="description" content="Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript. This is not bootstrap, is an healper to use modals. Bootstrap and jQuery are dependencies to eModal.js.">
+
+    <title>Easy Modal for Bootstrap</title>
+
+    <link rel="icon" type="image/x-icon" href="//maispc.com/altura.ico">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.1/united/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/tricolore.css" rel="stylesheet">
+    <link href="//rawgit.com/saribe/toastr8/master/dist/css/toastr8.min.css" rel="stylesheet" />
+    <link href="content/css/styles.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body itemscope itemtype="http://schema.org/SoftwareApplication">
+
+    <header class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                    <span class="sr-only" itemprop="keywords">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" itemprop="name">bs eModal</a>
+            </div>
+            <nav class="navbar-collapse collapse" id="navbar-collapsible" role="navigation">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#demo">Live demo</a></li>
+                    <li><a href="#ajax">Ajax</a></li>
+                    <li><a href="#alert">Alert</a></li>
+                    <li><a href="#confirm">Confirm</a></li>
+                    <li><a href="#prompt">Prompt</a></li>
+                    <li><a href="#options">Options</a></li>
+                    <li></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main" data-spy="scroll" data-target="#navbar-collapsible">
+        <a class="row btn btn-sm github-button" target="_blank" href="https://github.com/saribe/eModal" itemprop="url">
+            <div class="col-xs-3"><i class="fa fa-fw fa-4x fa-github"></i></div>
+            <div class="col-xs-9 text-center"><small>View project on</small><br><span class="fa-2x"> GitHub </span></div>
+        </a>
+        <section class="container-fluid" id="demo">
+
+            <div class="container">
+                <h1 class="text-center v-center">What it can do?</h1>
+                <br />
+                <div class="row text-center">
+                    <p itemprop="description">Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript. This isn't bootstrap, is a helper to use modals.</p>
+                    <p itemprop="requirements">
+                        Bootstrap and jQuery are <strong>dependencies</strong> to eModal.js.
+                    </p>
+                </div>
+
+                <div class="row" itemprop="about">
+                    <div class="col-sm-1 text-center"></div>
+                    <div class="col-sm-2 text-center">
+                        <div class="row">
+                            <div class="col-sm-10 text-center">
+                                <h3>Ajax</h3>
+                                <p>You must get the message from a remote server? No problem!</p>
+                                <i class="glyphicon glyphicon-cloud fa-5x pointer" title="Try me!"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="row">
+                            <div class="col-sm-10 text-center">
+                                <h3>Alert</h3>
+                                <p>Traditional alert box. Using only text or a lot of magic!?</p>
+                                <i class="glyphicon glyphicon-comment fa-5x pointer" title="Try me!"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2 text-center">
+                        <div class="row">
+                            <div class="col-sm-10 text-center">
+                                <h3>Confirm</h3>
+                                <p>Get an okay from user, has never been so simple and clean!</p>
+                                <i class="glyphicon glyphicon-ok fa-5x pointer" title="Try me!"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="row">
+                            <div class="col-sm-10  text-center">
+                                <h3>Prompt</h3>
+                                <p>Do you have a question for the user? We take care of it...</p>
+                                <i class="glyphicon glyphicon-pencil fa-5x pointer" title="Try me!"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <div class="row">
+                            <div class="col-sm-10  text-center">
+                                <h3>iFrame</h3>
+                                <p>IFrames are hard to deal with it? We don't think so!</p>
+                                <i class="glyphicon glyphicon-screenshot fa-5x pointer" title="Try me!"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-1 text-center"></div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <!-- Default -->
+            <div class="container text-center">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-2338199678296542"
+                     data-ad-slot="6984347162"
+                     data-ad-format="auto"></ins>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="ajax">
+            <div class="container">
+                <h1>Ajax</h1>
+                <br>
+                <p class="lead">eModal.ajax(), allow's you to get remote views into your modal fast and easy!</p>
+                <br>
+                <div class="row" style="color: initial;">
+
+                    <div class="col-sm-4">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">XHR Title <small></small></h4>
+                            </div>
+                            <div class="modal-body"><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=100 aria-valuemin=0 aria-valuemax=100 style="width: 100%"><span class=sr-only>100% Complete</span></div></div></div>
+                            <div class="modal-footer">
+                                <button class="x btn btn-info" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                        <br />
+                        <p class="text-white text-center">Loading Stage</p>
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">XHR Title <small></small></h4>
+                            </div>
+                            <div class="modal-body"><div class="alert alert-danger"><strong>XHR Fail: </strong>URL [http://yourUrl.net/content] load fail.</div></div>
+                            <div class="modal-footer">
+                                <button class="x btn btn-info" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                        <br />
+                        <p class="text-white text-center">Error Stage</p>
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title">XHR Title <small></small></h4>
+                            </div>
+                            <div class="modal-body">
+                                <section>
+                                    <h3 class="text-center">Change this Content. Change the world.</h3>
+                                    <div class="row">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <img src="content/images/bg_smartphones.jpg" class="img-responsive center-block" alt="Phone image">
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="x btn btn-info" data-dismiss="modal" type="button">Close</button>
+                            </div>
+                        </div>
+                        <br />
+                        <p class="text-white text-center">Success Stage</p>
+                    </div>
+                </div>
+
+                <h2>How to use</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Simple way - Default title</h5>
+                        <pre><code data-language="javascript">var url = "/views/portview.html";
+eModal.ajax(url);
+</code></pre>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Simple way  - Custom title</h5>
+                        <pre><code data-language="javascript">var url = "/views/portview.html";
+eModal.ajax(url, "XHR Title");
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="glyphicon glyphicon-star-empty pull-right"></span>
+                    <strong>Tip: </strong> You can add custom buttons to footer!
+                </div>
+
+                <h5>Full custom modal</h5>
+                <pre><code data-language="javascript">var options = {
+        url: "/views/portview.html",
+        title:'Header title',
+        size: emodal.size.lg,
+        subtitle: 'smaller text header',
+        buttons: [
+            {text: 'OK', style: 'info',   close: true, click: eventA },
+            {text: 'KO', style: 'danger', close: true, click: eventB }
+        ],
+        ...
+    };
+eModal.ajax(options);</code></pre>
+
+                <p class="alert alert-info">By default, the ajax modal <strong>has not</strong> buttons defined! The loading animation setup is a <code>'progress-bar-striped'</code> from bootstrap, however, you can customize it by changing the eModal default settings with your custom HTML loading template.</p>
+
+                <strong>EXAMPLE USING FONT AWESOME</strong>
+
+                <pre><code data-language="javascript">eModal.setEModalOptions({
+        loadingHtml: '<span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span><span class="h4">Loading</span>',
+        ...
+    });</code></pre>
+
+                <div class="modal-dialog modal-sm" style="color: initial;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Loading <small>example</small></h4>
+                        </div>
+                        <div class="modal-body text-center">
+                            <span class="fa fa-circle-o-notch fa-spin fa-3x text-primary"></span>
+                            <h4>Loading</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="alert">
+            <div class="container">
+                <h1>Alert</h1>
+                <br>
+                <p class="lead">eModal.alert(), this launch a non blocking alert, using a bootstrap modal!</p>
+                <br>
+
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Alert modal <small></small></h4></div><div class="modal-body">An amazing message!</div><div class="modal-footer"><button class="x btn btn-info" data-dismiss="modal" type="button">Close</button></div></div></div>
+
+                <h2>How to use</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Simple way - Default title</h5>
+                        <pre><code data-language="javascript">var message = "Hello World!";
+eModal.alert(message);
+</code></pre>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Simple way  - Custom title</h5>
+                        <pre><code data-language="javascript">var url = "Hello World!";
+var title = "Alert Title";
+eModal.ajax(message, title);
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="glyphicon glyphicon-star-empty pull-right"></span>
+                    <strong>Tip: </strong> You can use DOM elements as messages!
+                </div>
+
+                <h5>Message using DOM element</h5>
+                <pre><code data-language="javascript">var options = {
+        message: $("#my-element-id"),
+        title: 'Header title',
+        size: eModal.size.xl,
+        subtitle: 'smaller text header',
+        useBin: true
+        ...
+    };
+eModal.alert(options);</code></pre>
+
+                <div class="alert alert-info">
+                    The element whit id 'my-element-id' will be moved to dialog body and according with parameter <code>'useBin'</code> it will be deleted or recycle.
+                    When <code>'useBin'</code> is <code>true</code>, after close the dialog, the element will be sent to a '#recycle-bin' container and all events will be preserved.
+                    If <code>false</code>, it will be deleted and it will not be possible to reuse The same element.
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="confirm">
+            <div class="container">
+                <h1>Confirm</h1>
+                <br>
+                <p class="lead">eModal.confirm(), do you need a true or false user feedback? There is a nice way to do it!</p>
+                <br>
+
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><h4 class="modal-title">Confirm modal <small></small></h4></div><div class="modal-body">Is this dialog cool?</div><div class="modal-footer"><button class="x btn btn-danger" data-dismiss="modal" type="button">No</button><button class="x btn btn-info" data-dismiss="modal" type="button">Yes</button></div></div></div>
+
+                <h2>How to use</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Simple way - Default title</h5>
+                        <pre><code data-language="javascript">var message = "Hello World!";
+eModal.confirm(message, null)
+      .then(callback, callbackCancel);
+</code></pre>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Simple way  - Custom title</h5>
+                        <pre><code data-language="javascript">var url = "Hello World!";
+var title = "Alert Title";
+eModal.confirm(message, title)
+       .then(callback, callbackCancel);
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="glyphicon glyphicon-star-empty pull-right"></span>
+                    <strong>Tip: </strong> You can use change the default label name! <small><code>{ label: 'Yes' | 'True'| 'OK' }</code></small>
+                </div>
+
+                <h5>Message using alternative label</h5>
+                <pre><code data-language="javascript">var options = {
+        message: "The famous question?",
+        title: 'Header title',
+        size: eModal.size.sm,
+        subtitle: 'smaller text header',
+        label: "True"   // use the positive label as key
+        ...
+    };
+eModal.confirm(options)
+      .then(callback, callbackCancel);</code></pre>
+
+                <div class="alert alert-info">
+                    The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
+                    Callback event will retrieve a boolean argument as the standard javaScritp confirm.
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="prompt">
+            <div class="container">
+                <h1>Prompt</h1>
+                <br>
+                <p class="lead">eModal.prompt(), do you what prompt a question? A simple form is ready!</p>
+                <br>
+
+                <div class="modal-dialog modal-sm" style="color:initial"><div class="modal-content"><div class="modal-header"><button type="button" class="x close" data-dismiss="modal">x</button><h4 class="modal-title">Prompt modal <small></small></h4></div><form role="form" style="margin-bottom:0"><div class="modal-body"><label for="prompt-input" class="control-label">What's your name?</label><input type="text" class="form-control" id="prompt-input" required></div><div class="modal-footer"><button class="btn btn-danger x" data-dismiss="modal" type="reset">Cancel</button><button class="btn btn-info" type="submit">OK</button></div></form></div></div>
+
+                <h2>How to use</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Simple way - Default title</h5>
+                        <pre><code data-language="javascript">var message = "Hello World!";
+eModal.prompt(message, null);
+      .then(callback, callbackCancel);</code></pre>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Simple way  - Custom title</h5>
+                        <pre><code data-language="javascript">var url = "Hello World!";
+var title = "Alert Title";
+eModal.prompt(message, title, callback);
+      .then(callback, callbackCancel);</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <span class="glyphicon glyphicon-star-empty pull-right"></span>
+                    <strong>Tip: </strong> You can use the title as the prompt question!
+                </div>
+
+                <h5>Message using alternative label</h5>
+                <pre><code data-language="javascript">var options = {
+        message: "The famous question?",
+        title: 'Header title',
+        size: eModal.size.sm,
+        subtitle: 'smaller text header'
+        ...
+    };
+eModal.prompt(options)
+      .then(callback, callbackCancel);</code></pre>
+
+                <div class="alert alert-info">
+                    The <strong>callback is a mandatory</strong> argument, if it is not provided, the dialog will open, however, when on hidden, it will <strong>throw an exception</strong>.
+                    Callback event will retrieve a boolean argument as the standard JavaScript confirm.
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid" id="options">
+            <div class="container">
+                <h2 class="text-center">Do you see what I mean?</h2>
+                <p class="text-center lead">Add some compelling information here</p>
+                <h3>Options</h3>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>type</th>
+                            <th>default</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>title</td>
+                            <td>string</td>
+                            <td><code>'Attention'</code></td>
+                            <td>The header title string</td>
+                        </tr>
+                        <tr>
+                            <td>message</td>
+                            <td>string, DOM object or jQuery object</td>
+                            <td></td>
+                            <td>The body message string or the HTML element. e.g.: $(selector)</td>
+                        </tr>
+                        <tr>
+                            <td>subtitle</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>The header subtitle string. This appear in a smaller text</td>
+                        </tr>
+                        <tr>
+                            <td>size</td>
+                            <td>string</td>
+                            <td></td>
+                            <td>Defines the size of modal [<code>'sm'</code> | <code>'lg'</code>| <code>'xl'</code>]</td>
+                        </tr>
+                        <tr>
+                            <td>loading</td>
+                            <td>bool</td>
+                            <td>false</td>
+                            <td>set loading progress as message</td>
+                        </tr>
+                        <tr>
+                            <td>useBin</td>
+                            <td>bool</td>
+                            <td>false</td>
+                            <td>set message as recyclable</td>
+                        </tr>
+                        <tr>
+                            <td>css</td>
+                            <td>object</td>
+                            <td></td>
+                            <td>css object try apply into message body; only able if message == string</td>
+                        </tr>
+                        <tr>
+                            <td>buttons</td>
+                            <td>Array of objects</td>
+                            <td></td>
+                            <td>An array of objects to configure buttons to modal footer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer id="footer" class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-3">
+                        <h4>Download</h4>
+                        <ul class="nav">
+                            <li><a href="//github.com/saribe/emodal/zipball/master" itemprop="downloadUrl"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .zip file</a></li>
+                            <li><a href="//github.com/saribe/emodal/tarball/master" itemprop="downloadUrl"><i class="fa fa-lg fa-fw fa-file-zip-o"></i> .tar.gz file</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <h4>Follow Us</h4>
+                        <ul class="nav">
+                            <li><a href="//github.com/saribe/emodal/" itemprop="discussionUrl"><i class="fa fa-lg fa-fw fa-github"></i> GitHub</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <!--<h4></h4>-->
+                        <ul class="nav"></ul>
+                    </div>
+                    <div class="col-xs-6 col-md-3" itemprop="keywords">
+                        <span class="label label-info">bs eModal</span>,
+                        <span class="label label-info">eModal</span>,
+                        <span class="label label-info">bootstrap</span>,
+                        <span class="label label-info">jQuery</span>,
+                        <span class="label label-info">ajax</span>,
+                        <span class="label label-info">iFrame</span>,
+                        <span class="label label-info">confirm</span>,
+                        <span class="label label-info">alert</span>,
+                        <span class="label label-info">html</span>,
+                        <span class="label label-info">javaScript</span>,
+                        <span class="label label-info">css</span>,
+                    </div>
+                </div><!--/row-->
+            </div>
+        </footer>
+    </div>
+
+    <!-- script references -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
+    <script src="//rawgit.com/saribe/toastr8/master/dist/js/toastr8.min.js" type="text/javascript"></script>
+    <script src="//rawgit.com/saribe/eModal/master/dist/eModal.js"></script>
+    <script src="app/main.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async>
+        (function (i, s, o, g, r) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-59229588-2', 'auto');
+        ga('send', 'pageview');
+        var user = localStorage.getItem("USER_ID");
+        user || (user = "anonymous: " + (new Date).toJSON(), localStorage.setItem("USER_ID", user));
+        ga('set', '&uid', user);
+
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</body>
+</html>
