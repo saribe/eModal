@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.03
+ * SaRibe: eModal.js v1.2.04
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -7,7 +7,7 @@
  * ======================================================================== */
 
 ; (function (define) {
-    define(['jquery'], function ($) {
+    define(['jquery', 'Q'], function ($, q) {
         /// <summary>
         /// @params allowed elements:
         ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
@@ -51,8 +51,6 @@
             title: 'Attention'
         };
 
-        var linq = null;
-
         return {
             ajax: ajax,
             alert: alert,
@@ -64,7 +62,7 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.2.03'
+            version: '1.2.04'
         };
         /////////////////////////* Implementation */////////////////////////
 
@@ -74,6 +72,16 @@
                 .modal(options)
                 .find('.modal-content')
                     .append(message);
+        }
+
+        function _createDeferred() {
+            var dfd = q ? q.defer() : $.Deferred();
+            if (!q) {
+                dfd.catch = dfd.fail;
+                dfd.promise = dfd.promise();
+            }
+            dfd.promise.element = $modal;
+            return dfd;
         }
 
         function _getFooter(buttons) {
@@ -154,7 +162,6 @@
                 }
 
                 $modal = createModalElement();
-                linq.element = $modal;
             }
 
             return $modal
@@ -221,10 +228,6 @@
             /// <param name='title'>Modal header title</param>
             /// <returns type='jQuery'>eModal jQuery object</returns>
 
-            linq = $.Deferred();
-            linq.catch = linq.fail;
-            linq.element = $modal;
-
             if (!params) throw new Error('Invalid parameters!');
 
             _recycleModal();
@@ -255,9 +258,11 @@
             /// <param name="data"></param>
             /// <param name="title"></param>
             /// <returns type=""></returns>
+            var dfd = _createDeferred();
 
             var params = {
                 async: true,
+                deferred: dfd,
                 loading: true,
                 title: data.title || title || defaultSettings.title,
                 url: data.url || data
@@ -265,16 +270,14 @@
 
             if (data.url) { $.extend(params, data); }
 
-            alert(params, title)
+            return alert(params, title)
                 .element
                 .find('.' + modalBody)
                 .load(params.url, error);
 
-            return linq;
-
             function error(responseText, textStatus) {
                 var hasError = textStatus === 'error';
-                $modal.on(eventShown, hasError ? linq.reject : linq.resolve);
+                $modal.on(eventShown, hasError ? dfd.reject : dfd.resolve);
                 if (hasError) {
                     var msg = '<div class="alert alert-danger">' +
                         '<strong>XHR Fail: </strong>URL [ ' + params.url + '] load fail.' +
@@ -294,14 +297,16 @@
             /// <returns type=""></returns>
 
             _setup(params, title);
+
+            var dfd = params.deferred || _createDeferred();
             var $message = $(div).append(_getMessage(params), _getFooter(params.buttons));
+
             _build($message);
 
             if (!params.async) {
-                $modal.on(eventShown, linq.resolve);
+                $modal.on(eventShown, dfd.resolve);
             }
-
-            return linq;
+            return dfd.promise;
         }
 
         function confirm(params, title) {
@@ -311,12 +316,15 @@
             /// <param name="callback"></param>
             /// <returns type=""></returns>
 
+            var dfd = _createDeferred();
+
             return alert({
                 async: true,
                 buttons: [
                     { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultSettings.confirmLabel], style: keyDanger },
                     { close: true, click: click, text: label[params.label] ? params.label : defaultSettings.confirmLabel }
                 ],
+                deferred: dfd,
                 message: params.message || params,
                 onHide: click,
                 size: params.size,
@@ -327,11 +335,12 @@
                 close();
 
                 var key = $(ev.currentTarget).html();
-                return label[key] ? linq.resolve() : linq.reject();
+                return label[key] ? dfd.resolve() : dfd.reject();
             }
         }
 
         function iframe(params, title) {
+            var dfd = _createDeferred();
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
                         '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
                 .replace('%0%', params.message || params.url || params)
@@ -343,6 +352,7 @@
             return alert({
                 async: true,
                 buttons: params.buttons || false,
+                deferred: dfd,
                 message: message,
                 size: params.size || size.xl,
                 title: params.title || title
@@ -357,7 +367,7 @@
                         $(this).remove();
                     });
 
-                return linq.resolve();
+                return dfd.resolve();
             }
         }
 
@@ -369,7 +379,10 @@
         }
 
         function prompt(data, title) {
-            var params = {};
+            var dfd = _createDeferred();
+            var params = {
+                deferred: dfd
+            };
             if (typeof data === 'object') {
                 $.extend(params, data);
             }
@@ -413,8 +426,8 @@
 
                 //TODO:
                 ev.type !== eventSubmit ?
-                    linq.reject(value) :
-                    linq.resolve(value);
+                    dfd.reject(value) :
+                    dfd.resolve(value);
 
                 return false;
             }
@@ -439,7 +452,7 @@
         }
 
         function close() {
-            ///<summary>Close the modal. </summary>
+            ///<summary>Close the modal.</summary>
             if ($modal) {
                 $modal.off(hide).modal(eventHide);
             }
@@ -449,6 +462,6 @@
     });
 }(typeof define == 'function' && define.amd ? define : function (n, t) {
     typeof window.module != 'undefined' && window.module.exports ?
-        window.module.exports = t(window.require(n[0])) :
-        window.eModal = t(window.$);
+        window.module.exports = t(window.require(n[0], n[1])) :
+        window.eModal = t(window.$, window.Q);
 }));

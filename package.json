@@ -24,7 +24,7 @@
         "type": "git",
         "url": "git+https://github.com/saribe/eModal.git"
     },
-    "version": "1.2.03",
+    "version": "1.2.04",
     "name": "emodal",
     "bugs": {
         "url": "https://github.com/saribe/eModal/issues"
