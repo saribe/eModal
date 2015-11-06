@@ -270,23 +270,28 @@
 
             if (data.url) { $.extend(params, data); }
 
-            return alert(params, title)
-                .element
-                .find('.' + modalBody)
-                .load(params.url, error);
+            $.ajax({ url: params.url, dataType: 'text' })
+                .success(ok)
+                .fail(error);
 
-            function error(responseText, textStatus) {
-                var hasError = textStatus === 'error';
-                $modal.on(eventShown, hasError ? dfd.reject : dfd.resolve);
-                if (hasError) {
-                    var msg = '<div class="alert alert-danger">' +
-                        '<strong>XHR Fail: </strong>URL [ ' + params.url + '] load fail.' +
-                        '</div>';
+            return alert(params, title);
 
-                    $modal
-                       .find('.' + modalBody)
-                       .html(msg);
-                }
+            function ok(html) {
+                $modal
+                    .find('.' + modalBody)
+                    .html(html);
+
+                return dfd.resolve($modal);
+            }
+            function error(responseText/*, textStatus*/) {
+                var msg = '<div class="alert alert-danger">' +
+                    '<strong>XHR Fail: </strong>URL [ ' + params.url + '] load fail.' +
+                    '</div>';
+
+                $modal
+                   .find('.' + modalBody)
+                   .html(msg);
+                return dfd.reject(responseText);
             }
         }
 

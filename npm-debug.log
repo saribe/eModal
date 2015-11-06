@@ -45,123 +45,117 @@
 31 verbose addNameRange registry:https://registry.npmjs.org/bootstrap not in flight; fetching
 32 verbose request uri https://registry.npmjs.org/bootstrap
 33 verbose request no auth needed
-34 info attempt registry request try #1 at 4:13:05 PM
-35 verbose request id 18a2a5dcc7655cc5
-36 verbose etag "DXBLV736PFAZS2YVHT8CZ3RIH"
+34 info attempt registry request try #1 at 5:24:22 PM
+35 verbose request id 2143292cad1804d1
+36 verbose etag "F358O2V8SE059WOQAWNIMTVYH"
 37 http request GET https://registry.npmjs.org/bootstrap
 38 verbose request uri https://registry.npmjs.org/jquery
 39 verbose request no auth needed
-40 info attempt registry request try #1 at 4:13:05 PM
-41 verbose etag "3RSCYDX2SORU3DJHBQ20012M0"
+40 info attempt registry request try #1 at 5:24:22 PM
+41 verbose etag "6KY4V7JMFIWZLK7FS0EIBPELO"
 42 http request GET https://registry.npmjs.org/jquery
-43 http 200 https://registry.npmjs.org/bootstrap
-44 silly get cb [ 200,
-44 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-44 silly get     etag: '"F358O2V8SE059WOQAWNIMTVYH"',
-44 silly get     'content-type': 'application/json',
-44 silly get     'cache-control': 'max-age=60',
-44 silly get     'content-length': '26183',
-44 silly get     'accept-ranges': 'bytes',
-44 silly get     date: 'Fri, 06 Nov 2015 16:13:05 GMT',
+43 http 304 https://registry.npmjs.org/jquery
+44 silly get cb [ 304,
+44 silly get   { date: 'Fri, 06 Nov 2015 17:24:22 GMT',
 44 silly get     via: '1.1 varnish',
-44 silly get     age: '11',
+44 silly get     'cache-control': 'max-age=60',
+44 silly get     etag: '"6KY4V7JMFIWZLK7FS0EIBPELO"',
+44 silly get     age: '6',
 44 silly get     connection: 'keep-alive',
-44 silly get     'x-served-by': 'cache-ams4140-AMS',
+44 silly get     'x-served-by': 'cache-lhr6332-LHR',
 44 silly get     'x-cache': 'HIT',
 44 silly get     'x-cache-hits': '1',
-44 silly get     'x-timer': 'S1446826385.880936,VS0,VE0',
+44 silly get     'x-timer': 'S1446830662.325499,VS0,VE0',
 44 silly get     vary: 'Accept' } ]
-45 verbose get saving bootstrap to C:\Users\t-saribe\AppData\Roaming\npm-cache\registry.npmjs.org\bootstrap\.cache.json
-46 silly addNameRange number 2 { name: 'bootstrap', range: '>=3.3.5 <3.4.0', hasData: true }
-47 silly addNameRange versions [ 'bootstrap',
-47 silly addNameRange   [ '0.0.1',
-47 silly addNameRange     '0.0.2',
-47 silly addNameRange     '3.1.1',
-47 silly addNameRange     '3.2.0',
-47 silly addNameRange     '3.3.0',
-47 silly addNameRange     '3.3.1',
-47 silly addNameRange     '3.3.2',
-47 silly addNameRange     '3.3.4',
-47 silly addNameRange     '3.3.5' ] ]
-48 silly addNamed bootstrap@3.3.5
-49 verbose addNamed "3.3.5" is a plain semver version for bootstrap
-50 silly cache afterAdd bootstrap@3.3.5
-51 verbose afterAdd C:\Users\t-saribe\AppData\Roaming\npm-cache\bootstrap\3.3.5\package\package.json not in flight; writing
-52 verbose afterAdd C:\Users\t-saribe\AppData\Roaming\npm-cache\bootstrap\3.3.5\package\package.json written
-53 http 200 https://registry.npmjs.org/jquery
-54 silly get cb [ 200,
-54 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-54 silly get     etag: '"6KY4V7JMFIWZLK7FS0EIBPELO"',
-54 silly get     'content-type': 'application/json',
-54 silly get     'cache-control': 'max-age=60',
-54 silly get     'content-length': '57987',
-54 silly get     'accept-ranges': 'bytes',
-54 silly get     date: 'Fri, 06 Nov 2015 16:13:05 GMT',
-54 silly get     via: '1.1 varnish',
-54 silly get     age: '57',
-54 silly get     connection: 'keep-alive',
-54 silly get     'x-served-by': 'cache-ams4132-AMS',
-54 silly get     'x-cache': 'HIT',
-54 silly get     'x-cache-hits': '1',
-54 silly get     'x-timer': 'S1446826385.885806,VS0,VE0',
-54 silly get     vary: 'Accept' } ]
-55 verbose get saving jquery to C:\Users\t-saribe\AppData\Roaming\npm-cache\registry.npmjs.org\jquery\.cache.json
-56 silly addNameRange number 2 { name: 'jquery', range: '>=1.7.4 <1.8.0', hasData: true }
-57 silly addNameRange versions [ 'jquery',
-57 silly addNameRange   [ '1.5.1',
-57 silly addNameRange     '1.6.2',
-57 silly addNameRange     '1.6.3',
-57 silly addNameRange     '1.7.2',
-57 silly addNameRange     '1.7.3',
-57 silly addNameRange     '1.8.2',
-57 silly addNameRange     '1.8.3',
-57 silly addNameRange     '2.1.0-beta2',
-57 silly addNameRange     '2.1.0-beta3',
-57 silly addNameRange     '1.11.0-beta3',
-57 silly addNameRange     '1.11.0-rc1',
-57 silly addNameRange     '2.1.0-rc1',
-57 silly addNameRange     '1.11.0',
-57 silly addNameRange     '2.1.0',
-57 silly addNameRange     '2.1.1-beta1',
-57 silly addNameRange     '1.11.1-beta1',
-57 silly addNameRange     '2.1.1-rc1',
-57 silly addNameRange     '1.11.1-rc1',
-57 silly addNameRange     '2.1.1-rc2',
-57 silly addNameRange     '1.11.1-rc2',
-57 silly addNameRange     '2.1.1',
-57 silly addNameRange     '1.11.1',
-57 silly addNameRange     '1.9.1',
-57 silly addNameRange     '2.1.2',
-57 silly addNameRange     '1.11.2',
-57 silly addNameRange     '2.1.3',
-57 silly addNameRange     '2.1.4',
-57 silly addNameRange     '1.11.3',
-57 silly addNameRange     '3.0.0-alpha1' ] ]
-58 verbose stack Error: No compatible version found: jquery@'>=1.7.4 <1.8.0'
-58 verbose stack Valid install targets:
-58 verbose stack ["1.5.1","1.6.2","1.6.3","1.7.2","1.7.3","1.8.2","1.8.3","2.1.0-beta2","2.1.0-beta3","1.11.0-beta3","1.11.0-rc1","2.1.0-rc1","1.11.0","2.1.0","2.1.1-beta1","1.11.1-beta1","2.1.1-rc1","1.11.1-rc1","2.1.1-rc2","1.11.1-rc2","2.1.1","1.11.1","1.9.1","2.1.2","1.11.2","2.1.3","2.1.4","1.11.3","3.0.0-alpha1"]
-58 verbose stack
-58 verbose stack     at installTargetsError (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:274:12)
-58 verbose stack     at next (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:253:17)
-58 verbose stack     at setData (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:230:5)
-58 verbose stack     at RES (C:\Program Files\nodejs\node_modules\npm\node_modules\inflight\inflight.js:23:14)
-58 verbose stack     at f (C:\Program Files\nodejs\node_modules\npm\node_modules\once\once.js:17:25)
-58 verbose stack     at fixName (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:29:5)
-58 verbose stack     at saved (C:\Program Files\nodejs\node_modules\npm\lib\cache\caching-client.js:173:7)
-58 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
-59 verbose cwd C:\Users\t-saribe\Desktop\eModal\eModal
-60 error Windows_NT 6.3.9600
-61 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
-62 error node v0.12.4
-63 error npm  v2.10.1
-64 error code ETARGET
-65 error notarget No compatible version found: jquery@'>=1.7.4 <1.8.0'
-65 error notarget Valid install targets:
-65 error notarget ["1.5.1","1.6.2","1.6.3","1.7.2","1.7.3","1.8.2","1.8.3","2.1.0-beta2","2.1.0-beta3","1.11.0-beta3","1.11.0-rc1","2.1.0-rc1","1.11.0","2.1.0","2.1.1-beta1","1.11.1-beta1","2.1.1-rc1","1.11.1-rc1","2.1.1-rc2","1.11.1-rc2","2.1.1","1.11.1","1.9.1","2.1.2","1.11.2","2.1.3","2.1.4","1.11.3","3.0.0-alpha1"]
-65 error notarget
-65 error notarget This is most likely not a problem with npm itself.
-65 error notarget In most cases you or one of your dependencies are requesting
-65 error notarget a package version that doesn't exist.
-65 error notarget
-65 error notarget It was specified as a dependency of 'emodal'
-66 verbose exit [ 1, true ]
+45 verbose etag https://registry.npmjs.org/jquery from cache
+46 verbose get saving jquery to C:\Users\t-saribe\AppData\Roaming\npm-cache\registry.npmjs.org\jquery\.cache.json
+47 silly addNameRange number 2 { name: 'jquery', range: '>=1.7.4 <1.8.0', hasData: true }
+48 silly addNameRange versions [ 'jquery',
+48 silly addNameRange   [ '1.5.1',
+48 silly addNameRange     '1.6.2',
+48 silly addNameRange     '1.6.3',
+48 silly addNameRange     '1.7.2',
+48 silly addNameRange     '1.7.3',
+48 silly addNameRange     '1.8.2',
+48 silly addNameRange     '1.8.3',
+48 silly addNameRange     '2.1.0-beta2',
+48 silly addNameRange     '2.1.0-beta3',
+48 silly addNameRange     '1.11.0-beta3',
+48 silly addNameRange     '1.11.0-rc1',
+48 silly addNameRange     '2.1.0-rc1',
+48 silly addNameRange     '1.11.0',
+48 silly addNameRange     '2.1.0',
+48 silly addNameRange     '2.1.1-beta1',
+48 silly addNameRange     '1.11.1-beta1',
+48 silly addNameRange     '2.1.1-rc1',
+48 silly addNameRange     '1.11.1-rc1',
+48 silly addNameRange     '2.1.1-rc2',
+48 silly addNameRange     '1.11.1-rc2',
+48 silly addNameRange     '2.1.1',
+48 silly addNameRange     '1.11.1',
+48 silly addNameRange     '1.9.1',
+48 silly addNameRange     '2.1.2',
+48 silly addNameRange     '1.11.2',
+48 silly addNameRange     '2.1.3',
+48 silly addNameRange     '2.1.4',
+48 silly addNameRange     '1.11.3',
+48 silly addNameRange     '3.0.0-alpha1' ] ]
+49 http 304 https://registry.npmjs.org/bootstrap
+50 silly get cb [ 304,
+50 silly get   { date: 'Fri, 06 Nov 2015 17:24:22 GMT',
+50 silly get     via: '1.1 varnish',
+50 silly get     'cache-control': 'max-age=60',
+50 silly get     etag: '"F358O2V8SE059WOQAWNIMTVYH"',
+50 silly get     age: '0',
+50 silly get     connection: 'keep-alive',
+50 silly get     'x-served-by': 'cache-lhr6334-LHR',
+50 silly get     'x-cache': 'HIT',
+50 silly get     'x-cache-hits': '1',
+50 silly get     'x-timer': 'S1446830662.309637,VS0,VE89',
+50 silly get     vary: 'Accept' } ]
+51 verbose etag https://registry.npmjs.org/bootstrap from cache
+52 verbose get saving bootstrap to C:\Users\t-saribe\AppData\Roaming\npm-cache\registry.npmjs.org\bootstrap\.cache.json
+53 silly addNameRange number 2 { name: 'bootstrap', range: '>=3.3.5 <3.4.0', hasData: true }
+54 silly addNameRange versions [ 'bootstrap',
+54 silly addNameRange   [ '0.0.1',
+54 silly addNameRange     '0.0.2',
+54 silly addNameRange     '3.1.1',
+54 silly addNameRange     '3.2.0',
+54 silly addNameRange     '3.3.0',
+54 silly addNameRange     '3.3.1',
+54 silly addNameRange     '3.3.2',
+54 silly addNameRange     '3.3.4',
+54 silly addNameRange     '3.3.5' ] ]
+55 silly addNamed bootstrap@3.3.5
+56 verbose addNamed "3.3.5" is a plain semver version for bootstrap
+57 silly cache afterAdd bootstrap@3.3.5
+58 verbose afterAdd C:\Users\t-saribe\AppData\Roaming\npm-cache\bootstrap\3.3.5\package\package.json not in flight; writing
+59 verbose afterAdd C:\Users\t-saribe\AppData\Roaming\npm-cache\bootstrap\3.3.5\package\package.json written
+60 verbose stack Error: No compatible version found: jquery@'>=1.7.4 <1.8.0'
+60 verbose stack Valid install targets:
+60 verbose stack ["1.5.1","1.6.2","1.6.3","1.7.2","1.7.3","1.8.2","1.8.3","2.1.0-beta2","2.1.0-beta3","1.11.0-beta3","1.11.0-rc1","2.1.0-rc1","1.11.0","2.1.0","2.1.1-beta1","1.11.1-beta1","2.1.1-rc1","1.11.1-rc1","2.1.1-rc2","1.11.1-rc2","2.1.1","1.11.1","1.9.1","2.1.2","1.11.2","2.1.3","2.1.4","1.11.3","3.0.0-alpha1"]
+60 verbose stack
+60 verbose stack     at installTargetsError (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:274:12)
+60 verbose stack     at next (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:253:17)
+60 verbose stack     at setData (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:230:5)
+60 verbose stack     at RES (C:\Program Files\nodejs\node_modules\npm\node_modules\inflight\inflight.js:23:14)
+60 verbose stack     at f (C:\Program Files\nodejs\node_modules\npm\node_modules\once\once.js:17:25)
+60 verbose stack     at fixName (C:\Program Files\nodejs\node_modules\npm\lib\cache\add-named.js:29:5)
+60 verbose stack     at saved (C:\Program Files\nodejs\node_modules\npm\lib\cache\caching-client.js:173:7)
+60 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+61 verbose cwd C:\Users\t-saribe\Desktop\eModal\eModal
+62 error Windows_NT 6.3.9600
+63 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+64 error node v0.12.4
+65 error npm  v2.10.1
+66 error code ETARGET
+67 error notarget No compatible version found: jquery@'>=1.7.4 <1.8.0'
+67 error notarget Valid install targets:
+67 error notarget ["1.5.1","1.6.2","1.6.3","1.7.2","1.7.3","1.8.2","1.8.3","2.1.0-beta2","2.1.0-beta3","1.11.0-beta3","1.11.0-rc1","2.1.0-rc1","1.11.0","2.1.0","2.1.1-beta1","1.11.1-beta1","2.1.1-rc1","1.11.1-rc1","2.1.1-rc2","1.11.1-rc2","2.1.1","1.11.1","1.9.1","2.1.2","1.11.2","2.1.3","2.1.4","1.11.3","3.0.0-alpha1"]
+67 error notarget
+67 error notarget This is most likely not a problem with npm itself.
+67 error notarget In most cases you or one of your dependencies are requesting
+67 error notarget a package version that doesn't exist.
+67 error notarget
+67 error notarget It was specified as a dependency of 'emodal'
+68 verbose exit [ 1, true ]
