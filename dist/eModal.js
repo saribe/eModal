@@ -25,7 +25,7 @@
 
         var $modal;
         var bin = 'recycle-bin';
-        var div = '<div style="position:relative;word-wrap:break-word;">';
+        var div = '<div>';
         var empty = '';
         var eventClick = 'click';
         var eventHide = 'hide';
@@ -105,7 +105,8 @@
                                     break;
                                 case eventClick:
                                     //click event
-                                    btn.click(btnOp.click);
+                                    var fn = btnOp.click.bind(_getModalInstance(true).find('.modal-content'));
+                                    btn.click(fn);
                                     break;
                                 case 'text':
                                     btn.html(btnOp[index]);
@@ -142,14 +143,16 @@
 
                 $message.addClass(params.useBin && !params.loading ? recModalContent : tmpModalContent);
             } else {
-                $message = $(div).addClass(modalBody)
+                $message = $(div)
+                    .attr('style', 'position:relative;word-wrap:break-word;')
+                    .addClass(modalBody)
                     .html(content);
             }
 
             return params.css && (params.css !== $message.css && $message.css(params.css)), $message;
         }
 
-        function _getModalInstance() {
+        function _getModalInstance(getIfExists) {
             /// <summary>
             /// Return a new modal object if is the first request or the already created model.
             /// </summary>
@@ -162,6 +165,10 @@
                 }
 
                 $modal = createModalElement();
+            }
+
+            if (getIfExists && $modal) {
+                return $modal;
             }
 
             return $modal
