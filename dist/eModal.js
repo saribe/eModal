@@ -7,7 +7,7 @@
  * ======================================================================== */
 
 ; (function (define) {
-    define(['jquery', 'Q'], function ($, q) {
+    define(['jquery'], function ($) {
         /// <summary>
         /// @params allowed elements:
         ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
@@ -75,13 +75,25 @@
         }
 
         function _createDeferred() {
-            var dfd = q ? q.defer() : $.Deferred();
-            if (!q) {
-                dfd.catch = dfd.fail;
-                dfd.promise = dfd.promise();
+            var defer;
+
+            // try native promise
+            //if (Promise) defer = Promise.defer();
+
+            var q;
+
+            try { q = require('Q'); }   // Load option Q by require if exist
+            catch (e) { q = window.Q; }
+
+            if (q) {                    // try Q
+                defer = q.defer();
+            } else {                    // Use jQuery :(
+                defer = $.Deferred();
+                defer.promise = defer.promise();
             }
-            dfd.promise.element = $modal;
-            return dfd;
+
+            defer.promise.element = $modal;
+            return defer;
         }
 
         function _getFooter(buttons) {
@@ -465,6 +477,7 @@
 
         function close() {
             ///<summary>Close the modal.</summary>
+
             if ($modal) {
                 $modal.off(hide).modal(eventHide);
             }
@@ -472,8 +485,10 @@
         }
         //#endregion
     });
-}(typeof define == 'function' && define.amd ? define : function (n, t) {
-    typeof window.module != 'undefined' && window.module.exports ?
-        window.module.exports = t(window.require(n[0], n[1])) :
-        window.eModal = t(window.$, window.Q);
-}));
+}(typeof define == 'function' && define.amd ?
+    define :
+    function (n, t) {
+        typeof window.module != 'undefined' && window.module.exports ?
+            window.module.exports = t(window.require(n[0])) :
+            window.eModal = t(window.$);
+    }));
