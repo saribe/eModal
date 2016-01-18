@@ -3,7 +3,7 @@
 define(['../dist/eModal'], function (eModal) {
     var p = 'Passed!';
 
-    window.eModal = eModal;
+    //window.eModal = eModal;
 
     QUnit.test('eModal', function (assert) {
         assert.ok(eModal, p);
