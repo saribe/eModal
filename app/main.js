@@ -47,7 +47,7 @@ $(document).ready(function () {/* activate scroll spy menu */
         return eModal
             .confirm('It is simple enough?', 'Confirm modal')
             .then(function (/* DOM */) { t8.success('Thank you for your OK pressed!', title); })
-            .fail(function (/*null*/) { t8.skype('Thank you for your Cancel pressed!', title) });
+            .catch(function (/*null*/) { t8.skype('Thank you for your Cancel pressed!', title) });
     }
 
     function iframeDemo() {
@@ -62,7 +62,7 @@ $(document).ready(function () {/* activate scroll spy menu */
         return eModal
             .prompt({ size: eModal.size.sm, message: 'What\'s your name?', title: title })
             .then(function (input) { t8.github({ message: 'Hi ' + input + '!', title: title, imgURI: 'https://avatars0.githubusercontent.com/u/4276775?v=3&s=89' }) })
-            .fail(function (/**/) { t8.android('Why don\'t you tell me your name?', title); });
+            .catch(function (/**/) { t8.android('Why don\'t you tell me your name?', title); });
     }
 
     //#region Page Events
