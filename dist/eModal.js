@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.04
+ * SaRibe: eModal.js v1.2.05
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -11,17 +11,17 @@
         /// <summary>
         /// @params allowed elements:
         ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
-        ///     css      {object}:          css object try apply into message body; only able if message == string
-        ///     loading  {bool}:            set loading progress as message.
-        ///     message  {string|object}:   The body message string or the HTML element. eg: $(selector);
+        ///     css      {object}:          CSS object try apply into message body; only able if message == string
+        ///     loading  {boolean}:         Set loading progress as message.
+        ///     message  {string|object}:   The body message string or the HTML element. e.g.: $(selector);
         ///     size     {string}:          sm || lg || xl -> define the modal size.
         ///     subtitle {string}:          The header subtitle string. This appear in a smaller text.
         ///     title    {string}:          The header title string.
-        ///     useBin   {bool}:            set message as recyclable.
+        ///     useBin   {boolean}:         Set message as recyclable.
         /// </summary>
-        /// <param name="params"  >Modal options parameters of string body message.</param>
-        /// <param name="title"   >The string header title or a flag to set default parameters.</param>
-        /// <returns type="object">{ then, catch, element }.</returns>
+        /// <param name="params"   >Modal options parameters of string body message.</param>
+        /// <param name="title"    >The string header title or a flag to set default parameters.</param>
+        /// <returns type="Promise">{ then, element }.</returns>
 
         var $modal;
         var bin = 'recycle-bin';
@@ -62,11 +62,15 @@
             setEModalOptions: setEModalOptions,
             setModalOptions: setModalOptions,
             size: size,
-            version: '1.2.04'
+            version: '1.2.05'
         };
         /////////////////////////* Implementation */////////////////////////
 
-        //#region Private Logic
+        //#region /////////////////////////* Private Logic */////////////////////////
+        /**
+         * Find modal body and append message to it.
+         * @param {String | DOM} message
+         */
         function _build(message) {
             $modal
                 .modal(options)
@@ -74,6 +78,11 @@
                     .append(message);
         }
 
+        /**
+         * Will find what Promises approach the developer is using.
+         * Will use Promises A+ if Q.js is present, otherwise will use Promises A from jQuery.
+         * @returns {Promise}
+         */
         function _createDeferred() {
             var defer;
 
@@ -96,6 +105,11 @@
             return defer;
         }
 
+        /**
+         * Will create modal DOM footer with all buttons.
+         * @param {Array} buttons - all custom buttons, if none, will generate defaults
+         * @returns {$DOM} footer DOM element
+         */
         function _getFooter(buttons) {
             if (buttons === false) { return empty; }
 
@@ -139,21 +153,23 @@
             return messageFotter;
         }
 
-        function _getMessage(params) {
-            /// <param name='params'>object with options</param>
-            /// <returns type='jQuery'>eModal body jQuery object</returns>
-
+        /**
+         * Extract message from arguments.
+         * @param {Object | String} data - this can be the message string or the full detailed object
+         * @returns {$DOM}
+         */
+        function _getMessage(data) {
             var $message;
-            var content = params.loading ?
+            var content = data.loading ?
                 defaultSettings.loadingHtml :
-                (params.message || params);
+                (data.message || data);
 
             if (content.on || content.onclick) {
-                $message = params.clone === true ?
+                $message = data.clone === true ?
                     $(content).clone() :
                     $(content);
 
-                $message.addClass(params.useBin && !params.loading ? recModalContent : tmpModalContent);
+                $message.addClass(data.useBin && !data.loading ? recModalContent : tmpModalContent);
             } else {
                 $message = $(div)
                     .attr('style', 'position:relative;word-wrap:break-word;')
@@ -161,15 +177,15 @@
                     .html(content);
             }
 
-            return params.css && (params.css !== $message.css && $message.css(params.css)), $message;
+            return data.css && (data.css !== $message.css && $message.css(data.css)), $message;
         }
 
-        function _getModalInstance(getIfExists) {
-            /// <summary>
-            /// Return a new modal object if is the first request or the already created model.
-            /// </summary>
-            /// <returns type="jQuery Object">The model instance.</returns>
-
+        /**
+         * Return a new modal object if is the first request or the already created model.
+         * @param {boolean} skipEventChageIfExists
+         * @returns {jQuery Object}
+         */
+        function _getModalInstance(skipEventChageIfExists) {
             if (!$modal) {
                 //add recycle bin container to document
                 if (!document.getElementById(bin)) {
@@ -179,7 +195,7 @@
                 $modal = createModalElement();
             }
 
-            if (getIfExists && $modal) {
+            if (skipEventChageIfExists && $modal) {
                 return $modal;
             }
 
@@ -218,13 +234,12 @@
             }
         }
 
+        /**
+         * Move content to recycle bin if is a DOM object defined by user,
+         * delete it if is a simple string message.
+         * All modal messages can be deleted if default setting "allowContentRecycle" = false.
+         */
         function _recycleModal() {
-            /// <summary>
-            /// Move content to recycle bin if is a DOM object defined by user,
-            /// delete it if is a simple string message.
-            /// All modal messages can be deleted if default setting "allowContentRecycle" = false.
-            /// </summary>
-
             if (!$modal) return;
 
             var $content = $modal.find('.' + recModalContent).removeClass(recModalContent)
@@ -241,12 +256,14 @@
             }
         }
 
+        /**
+         * Handle default values and toggle between {Object | String}.
+         * Create or get Modal element
+         * @param {Object | String} data - this can be the message string or the full detailed object
+         * @param {String} title - the string that will be shown in modal header
+         * @returns {Promise} Promise with modal $DOM element
+         */
         function _setup(params, title) {
-            /// <summary></summary>
-            /// <param name='params'>eModal body message or object with options</param>
-            /// <param name='title'>Modal header title</param>
-            /// <returns type='jQuery'>eModal jQuery object</returns>
-
             if (!params) throw new Error('Invalid parameters!');
 
             _recycleModal();
@@ -271,12 +288,14 @@
         }
         //#endregion
 
-        //#region Public Methods
+        //#region /////////////////////////* Public Methods */////////////////////////
+        /**
+         * Gets data from URL to eModal body
+         * @param {Object | String} data - this can be the message string or the full detailed object
+         * @param {String} title - the string that will be shown in modal header
+         * @returns {Promise} Promise with modal $DOM element
+         */
         function ajax(data, title) {
-            /// <summary>Gets data from URL to eModal body</summary>
-            /// <param name="data"></param>
-            /// <param name="title"></param>
-            /// <returns type=""></returns>
             var dfd = _createDeferred();
 
             var params = {
@@ -314,45 +333,45 @@
             }
         }
 
-        function alert(params, title) {
-            /// <summary>Non blocking alert whit bootstrap.</summary>
-            /// <param name="params"></param>
-            /// <param name="title"></param>
-            /// <returns type=""></returns>
+        /**
+         * Non blocking alert whit bootstrap.
+         * @param {Object | String} data - this can be the message string or the full detailed object.
+         * @param {String} title - the string that will be shown in modal header.
+         * @returns {Promise} Promise with modal $DOM element
+         */
+        function alert(data, title) {
+            _setup(data, title);
 
-            _setup(params, title);
-
-            var dfd = params.deferred || _createDeferred();
-            var $message = $(div).append(_getMessage(params), _getFooter(params.buttons));
+            var dfd = data.deferred || _createDeferred();
+            var $message = $(div).append(_getMessage(data), _getFooter(data.buttons));
 
             _build($message);
 
-            if (!params.async) {
-                $modal.on(eventShown, dfd.resolve);
-            }
+            if (!data.async) { $modal.on(eventShown, dfd.resolve); }
+
             return dfd.promise;
         }
 
-        function confirm(params, title) {
-            /// <summary></summary>
-            /// <param name="params"></param>
-            /// <param name="title"></param>
-            /// <param name="callback"></param>
-            /// <returns type=""></returns>
-
+        /**
+         * Non blocking confirm dialog with bootstrap.
+         * @param {Object | String} data - this can be the message string or the full detailed object.
+         * @param {String} title - the string that will be shown in modal header.
+         * @returns {Promise} Promise with modal $DOM element
+         */
+        function confirm(data, title) {
             var dfd = _createDeferred();
 
             return alert({
                 async: true,
                 buttons: [
-                    { close: true, click: click, text: label[params.label] ? label[params.label] : label[defaultSettings.confirmLabel], style: keyDanger },
-                    { close: true, click: click, text: label[params.label] ? params.label : defaultSettings.confirmLabel }
+                    { close: true, click: click, text: label[data.label] ? label[data.label] : label[defaultSettings.confirmLabel], style: keyDanger },
+                    { close: true, click: click, text: label[data.label] ? data.label : defaultSettings.confirmLabel }
                 ],
                 deferred: dfd,
-                message: params.message || params,
+                message: data.message || data,
                 onHide: click,
-                size: params.size,
-                title: params.title || title
+                size: data.size,
+                title: data.title || title
             });
 
             function click(ev) {
@@ -363,6 +382,12 @@
             }
         }
 
+        /**
+         * Will load a URL in iFrame inside the modal body.
+         * @param {Object | String} data - this can be the URL string or the full detailed object.
+         * @param {String} title - the string that will be shown in modal header.
+         * @returns {Promise} Promise with modal $DOM element
+         */
         function iframe(params, title) {
             var dfd = _createDeferred();
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
@@ -395,18 +420,26 @@
             }
         }
 
+        /**
+         * Remove all Dom elements in recycle bin.
+         * @returns {Array} All removed elements
+         */
         function emptyBin() {
-            /// <summary>Remove all DOM element cached in document.</summary>
-            /// <returns type="Array">Array with removed elements.</returns>
-
             return $('#' + bin + ' > *').remove();
         }
 
+        /**
+         * Provides one value form.
+         * @param {Object | String} data - this can be the value string label or the full detailed object.
+         * @param {String} title - the string that will be shown in modal header.
+         * @returns {Promise} Promise with modal $DOM element
+         */
         function prompt(data, title) {
             var dfd = _createDeferred();
             var params = {
                 deferred: dfd
             };
+
             if (typeof data === 'object') {
                 $.extend(params, data);
             }
@@ -457,6 +490,11 @@
             }
         }
 
+        /**
+         * Set or change eModal options.
+         * @param {Object} overrideOptions
+         * @returns {Object} merged eModal options
+         */
         function setEModalOptions(overrideOptions) {
             /// <summary></summary>
             /// <param name="overrideOptions"></param>
@@ -465,6 +503,11 @@
             return $.extend(defaultSettings, overrideOptions);
         }
 
+        /**
+         * Set or change bootstrap modal options.
+         * @param {Object} overrideOptions
+         * @returns {Object} merged eModal options
+         */
         function setModalOptions(overrideOptions) {
             /// <summary></summary>
             /// <param name="overrideOptions"></param>
@@ -475,9 +518,11 @@
             return $.extend(options, overrideOptions);
         }
 
+        /**
+         * Close the current open eModal
+         * @returns {$DOM} eModal DOM element
+         */
         function close() {
-            ///<summary>Close the modal.</summary>
-
             if ($modal) {
                 $modal.off(hide).modal(eventHide);
             }
