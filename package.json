@@ -1,5 +1,7 @@
 {
+    "name": "emodal",
     "author": "Samuel Ribeiro Pinto",
+    "version": "1.2.6",
     "contributors": [
         "Samuel Ribeiro"
     ],
@@ -22,10 +24,8 @@
     "main": "eModal.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/saribe/eModal.git"
+        "url": "https://github.com/saribe/eModal.git"
     },
-    "version": "1.2.05",
-    "name": "emodal",
     "bugs": {
         "url": "https://github.com/saribe/eModal/issues"
     },
@@ -33,8 +33,11 @@
     "directories": {
         "test": "test"
     },
-    "devDependencies": { },
+    "devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-qunit-istanbul": "^0.4.0"
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "grunt testEModal --verbose"
     }
 }
