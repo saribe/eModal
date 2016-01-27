@@ -1,9 +1,5 @@
-﻿define('jquery', [], function () { return window.$; });
-
-define(['../dist/eModal'], function (eModal) {
+﻿(function ($) {
     var p = 'Passed!';
-
-    //window.eModal = eModal;
 
     QUnit.test('eModal', function (assert) {
         assert.ok(eModal, p);
@@ -76,4 +72,4 @@ define(['../dist/eModal'], function (eModal) {
         c.element.find('.x:first').click();
         assert.ok(!c.element.find('.modal-title').is(':visible'), p);
     });
-});
+})(jQuery);
