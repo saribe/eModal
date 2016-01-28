@@ -34,10 +34,9 @@
         "test": "test"
     },
     "devDependencies": {
-		"grunt": "~0.4.1",
-		"grunt-qunit-istanbul": "^0.4.0"
+		"testee": "~0.2.5"
     },
     "scripts": {
-        "test": "grunt testEModal --verbose"
+        "test": "testee test/index.html --browsers firefox"
     }
 }
