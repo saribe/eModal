@@ -7,7 +7,7 @@
     ],
     "dependencies": {
         "jquery": "~2.1.1",
-        "bootstrap": "~3.3.5"
+        "bootstrap": "~3.3.6"
     },
     "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
     "keywords": [
@@ -34,7 +34,7 @@
         "test": "test"
     },
     "devDependencies": {
-		"testee": "~0.2.5"
+        "testee": "~0.2.5"
     },
     "scripts": {
         "test": "testee test/index.html --browsers firefox"
