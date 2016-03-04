@@ -1,15 +1,24 @@
 {
-    "name": "emodal",
     "author": "Samuel Ribeiro Pinto",
-    "version": "1.2.6",
+    "bugs": {
+        "url": "https://github.com/saribe/eModal/issues"
+    },
     "contributors": [
         "Samuel Ribeiro"
     ],
     "dependencies": {
-        "jquery": "~2.1.1",
         "bootstrap": "~3.3.6"
     },
     "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "jsdom": "^8.1.0",
+        "mocha": "^2.4.5"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "homepage": "https://github.com/saribe/eModal#readme",
     "keywords": [
         "bootstrap",
         "modal",
@@ -21,22 +30,14 @@
         "easy"
     ],
     "license": "MIT",
-    "main": "eModal.js",
+    "main": "dist/eModal.js",
+    "name": "emodal",
     "repository": {
         "type": "git",
         "url": "https://github.com/saribe/eModal.git"
     },
-    "bugs": {
-        "url": "https://github.com/saribe/eModal/issues"
-    },
-    "homepage": "https://github.com/saribe/eModal#readme",
-    "directories": {
-        "test": "test"
-    },
-    "devDependencies": {
-        "testee": "~0.2.5"
-    },
     "scripts": {
-        "test": "testee test/index.html --browsers firefox"
-    }
+        "test": "mocha test/index.spec.js -w"
+    },
+    "version": "1.2.6"
 }

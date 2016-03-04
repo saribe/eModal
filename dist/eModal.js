@@ -1,28 +1,29 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.05
+ * SaRibe: eModal.js v1.2.6
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
  * Licensed under MIT.
  * ======================================================================== */
 
+/**
+ * Easy Modal for bootstrap, is a simple way to create modal dialogs using javascript.
+ * @params allowed elements:
+ *     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
+ *     css      {object}:          CSS object try apply into message body; only able if message == string
+ *     loading  {boolean}:         Set loading progress as message.
+ *     message  {string|object}:   The body message string or the HTML element. e.g.: $(selector);
+ *     size     {string}:          sm || lg || xl -> define the modal size.
+ *     subtitle {string}:          The header subtitle string. This appear in a smaller text.
+ *     title    {string}:          The header title string.
+ *     useBin   {boolean}:         Set message as recyclable.
+ * </summary>
+ * <param name="params"   >Modal options parameters of string body message.</param>
+ * <param name="title"    >The string header title or a flag to set default parameters.</param>
+ * <returns type="Promise">{ then, element }.</returns>
+ */
 ; (function (define) {
-    define(['jquery'], function ($) {
-        /// <summary>
-        /// @params allowed elements:
-        ///     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
-        ///     css      {object}:          CSS object try apply into message body; only able if message == string
-        ///     loading  {boolean}:         Set loading progress as message.
-        ///     message  {string|object}:   The body message string or the HTML element. e.g.: $(selector);
-        ///     size     {string}:          sm || lg || xl -> define the modal size.
-        ///     subtitle {string}:          The header subtitle string. This appear in a smaller text.
-        ///     title    {string}:          The header title string.
-        ///     useBin   {boolean}:         Set message as recyclable.
-        /// </summary>
-        /// <param name="params"   >Modal options parameters of string body message.</param>
-        /// <param name="title"    >The string header title or a flag to set default parameters.</param>
-        /// <returns type="Promise">{ then, element }.</returns>
-
+    define(['jquery'], function ($, root) {
         var $modal;
         var bin = 'recycle-bin';
         var div = '<div>';
@@ -45,26 +46,26 @@
 
         var defaultSettings = {
             allowContentRecycle: true,
-            confirmLabel: 'OK',
-            size: empty,
+            confirmLabel: Object.keys(label)[0],
+            labels: label,
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
+            size: empty,
             title: 'Attention'
         };
 
-        return {
-            ajax: ajax,
-            alert: alert,
-            close: close,
-            confirm: confirm,
-            emptyBin: emptyBin,
-            iframe: iframe,
-            prompt: prompt,
-            setEModalOptions: setEModalOptions,
-            setModalOptions: setModalOptions,
-            size: size,
-            version: '1.2.05'
-        };
-        /////////////////////////* Implementation */////////////////////////
+        root.ajax = ajax;
+        root.alert = alert;
+        root.close = close;
+        root.confirm = confirm;
+        root.emptyBin = emptyBin;
+        root.iframe = iframe;
+        root.prompt = prompt;
+        root.setEModalOptions = setEModalOptions;
+        root.setModalOptions = setModalOptions;
+        root.size = size;
+        root.version = '1.2.6';
+
+        return root;
 
         //#region /////////////////////////* Private Logic */////////////////////////
         /**
@@ -188,7 +189,7 @@
         function _getModalInstance(skipEventChageIfExists) {
             if (!$modal) {
                 //add recycle bin container to document
-                if (!document.getElementById(bin)) {
+                if (!$('#' + bin).length) {
                     $('body').append($(div).prop('id', bin).hide());
                 }
 
@@ -205,9 +206,6 @@
                 });
 
             function createModalElement() {
-                /// <summary></summary>
-                /// <returns type="jQuery object"></returns>
-
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}</style>'
                 + '<div class=modal-dialog>'
                 + '<div class=modal-content>'
@@ -496,10 +494,6 @@
          * @returns {Object} merged eModal options
          */
         function setEModalOptions(overrideOptions) {
-            /// <summary></summary>
-            /// <param name="overrideOptions"></param>
-            /// <returns type=""></returns>
-
             return $.extend(defaultSettings, overrideOptions);
         }
 
@@ -509,10 +503,6 @@
          * @returns {Object} merged eModal options
          */
         function setModalOptions(overrideOptions) {
-            /// <summary></summary>
-            /// <param name="overrideOptions"></param>
-            /// <returns type=""></returns>
-
             $modal && $modal.remove();
 
             return $.extend(options, overrideOptions);
@@ -532,8 +522,8 @@
     });
 }(typeof define == 'function' && define.amd ?
     define :
-    function (n, t) {
-        typeof window.module != 'undefined' && window.module.exports ?
-            window.module.exports = t(window.require(n[0])) :
-            window.eModal = t(window.$);
+    function (args, mName) {
+        this.eModal = typeof module != 'undefined' && module.exports ?
+            mName(require(args[0]), module.exports) :
+            mName(window.$, {});
     }));
