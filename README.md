@@ -1,4 +1,4 @@
-# eModal for Bootstrap [![Build Status](https://travis-ci.org/MythicAngel/eModal.svg?branch=master)](https://travis-ci.org/MythicAngel/eModal)
+# eModal for Bootstrap [![Build Status](https://travis-ci.org/saribe/eModal.svg?branch=master)](https://travis-ci.org/saribe/eModal)
 **eModal** is a Easy way to manage modal dialogs using bootstrap.
 
 ## Current Version
