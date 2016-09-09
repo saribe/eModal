@@ -301,12 +301,13 @@
                 deferred: dfd,
                 loading: true,
                 title: data.title || title || defaultSettings.title,
-                url: data.url || data
+                url: data.url || data,
+                dataType: 'text'
             };
 
             if (data.url) { $.extend(params, data); }
 
-            $.ajax({ url: params.url, dataType: 'text' })
+            $.ajax(params)
                 .success(ok)
                 .fail(error);
 
