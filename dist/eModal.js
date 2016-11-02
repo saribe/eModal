@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.61
+ * SaRibe: eModal.js v1.2.62
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -71,10 +71,11 @@
         root.emptyBin = emptyBin;
         root.iframe = iframe;
         root.prompt = prompt;
+        root.setId = setId;
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
-        root.version = '1.2.61';
+        root.version = '1.2.62';
 
         return root;
 
@@ -528,6 +529,12 @@
 
                 return false;
             }
+        }
+
+        function setId(id) {
+            _getModalInstance(true)
+                .find(MODAL_DIALOG)
+                .prop('id', id);
         }
 
         /**
