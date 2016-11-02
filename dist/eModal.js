@@ -22,7 +22,7 @@
  * <param name="title"    >The string header title or a flag to set default parameters.</param>
  * <returns type="Promise">{ then, element }.</returns>
  */
-;
+
 (function (define) {
     define(['jquery'], function ($, root) {
         var $modal;
@@ -324,7 +324,7 @@
                 loading: true,
                 title: data.title || title || defaultSettings.title,
                 url: data.url || data,
-                dataType: 'text'
+                dataType: data.dataType || 'text'
             };
 
             if (data.url) {
@@ -332,8 +332,8 @@
             }
 
             $.ajax(params)
-                .success(ok)
-                .fail(error);
+                .success(data.success || ok)
+                .fail(data.error || error);
 
             return alert(params, title);
 
@@ -393,11 +393,12 @@
                     close: true,
                     click: click,
                     text: LABEL[data.label] ? LABEL[data.label] : LABEL[defaultSettings.confirmLabel],
-                    style: KEY_DANGER
+                    style: data.style && data.style[0] || KEY_DANGER
                 }, {
                     close: true,
                     click: click,
-                    text: LABEL[data.label] ? data.label : defaultSettings.confirmLabel
+                    text: LABEL[data.label] ? data.label : defaultSettings.confirmLabel,
+                    style: data.style && data.style[1]
                 }],
                 deferred: dfd,
                 message: data.message || data,
