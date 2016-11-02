@@ -332,21 +332,23 @@
             }
 
             $.ajax(params)
-                .success(data.success || ok)
-                .fail(data.error || error);
+                .success(ok)
+                .fail(error);
 
             return alert(params, title);
 
             function ok(html) {
                 $modal
                     .find('.' + MODAL_BODY)
-                    .html(html);
+                    .html(data.success ? data.success(html) : html);
 
                 return dfd.resolve($modal);
             }
 
-            function error(responseText /*, textStatus*/ ) {
-                var msg = '<div class="alert alert-danger">' +
+            function error(responseText, textStatus) {
+                var msg = data.error ?
+                    data.error(responseText, textStatus, params) :
+                    '<div class="alert alert-danger">' +
                     '<strong>XHR Fail: </strong>URL [ ' + params.url + '] load fail.' +
                     '</div>';
 
