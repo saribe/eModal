@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.64
+ * SaRibe: eModal.js v1.2.65
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -76,7 +76,7 @@
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
-        root.version = '1.2.64';
+        root.version = '1.2.65';
 
         return root;
 
@@ -334,7 +334,7 @@
             }
 
             $.ajax(params)
-                .success(ok)
+                .done(ok)
                 .fail(error);
 
             return alert(params, title);
