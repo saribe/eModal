@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.63
+ * SaRibe: eModal.js v1.2.64
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -23,6 +23,7 @@
  * <returns type="Promise">{ then, element }.</returns>
  */
 
+;
 (function (define) {
     define(['jquery'], function ($, root) {
         var $modal;
@@ -75,7 +76,7 @@
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
-        root.version = '1.2.63';
+        root.version = '1.2.64';
 
         return root;
 
@@ -118,7 +119,7 @@
                 defer.promise = defer.promise();
             }
 
-            defer.promise.element = $modal.find(MODAL_DIALOG);
+            defer.promise.element = _getModalInstance(true).find(MODAL_DIALOG);
             return defer;
         }
 
