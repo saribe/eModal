@@ -220,7 +220,7 @@
                 return $modal;
             }
 
-            if(defaultSettings.autofocus){
+            if (defaultSettings.autofocus) {
                 return $modal
                     .on(EVENT_SHOW, function () {
                         $(this).find(INPUT).first().focus();
@@ -229,12 +229,12 @@
 
             function createModalElement() {
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
-                        '<div class=modal-dialog>' +
-                        '<div class=modal-content>' +
-                        ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>')
+                    '<div class=modal-dialog>' +
+                    '<div class=modal-content>' +
+                    ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>')
                     .on('hidden.bs.modal', _recycleModal)
                     .on(EVENT_CLICK, 'button.x', function (ev) {
                         var btn = $(ev.currentTarget);
@@ -324,7 +324,7 @@
 
             var dfd = _createDeferred();
 
-            if(typeof data === 'object'){
+            if (typeof data === 'object') {
                 setEModalOptions(data);
             }
 
@@ -380,7 +380,7 @@
 
             var dfd = data.deferred || _createDeferred();
 
-            if(typeof data === 'object'){
+            if (typeof data === 'object') {
                 setEModalOptions(data);
             }
 
@@ -404,7 +404,7 @@
         function confirm(data, title) {
             var dfd = _createDeferred();
 
-            if(typeof data === 'object'){
+            if (typeof data === 'object') {
                 setEModalOptions(data);
             }
 
@@ -445,12 +445,12 @@
         function iframe(params, title) {
             var dfd = _createDeferred();
 
-            if(typeof data === 'object'){
+            if (typeof data === 'object') {
                 setEModalOptions(data);
             }
 
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
-                    '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
+                '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
@@ -496,7 +496,7 @@
         function prompt(data, title) {
             var dfd = _createDeferred();
 
-            if(typeof data === 'object'){
+            if (typeof data === 'object') {
                 setEModalOptions(data);
             }
 
@@ -537,10 +537,10 @@
             params.onHide = submit;
 
             params.message = $('<form role=form style="margin-bottom:0;">' +
-                    '<div class=modal-body>' +
-                    '<label for=prompt-input class=control-label>' + (params.message || EMPTY) + '</label>' +
-                    '<input type=text class=form-control required autocomplete="on" value="' + (params.value || EMPTY) + (params.pattern ? '" pattern="' + params.pattern : EMPTY) + '">' +
-                    '</div></form>')
+                '<div class=modal-body>' +
+                '<label for=prompt-input class=control-label>' + (params.message || EMPTY) + '</label>' +
+                '<input type=text class=form-control required autocomplete="on" value="' + (params.value || EMPTY) + (params.pattern ? '" pattern="' + params.pattern : EMPTY) + '">' +
+                '</div></form>')
                 .append(buttons)
                 .on(EVENT_SUBMIT, submit);
 
