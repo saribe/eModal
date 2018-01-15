@@ -227,7 +227,7 @@
                     });
             }
 
-            return $modalmodal;
+            return $modal;
 
             function createModalElement() {
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
