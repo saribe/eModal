@@ -61,7 +61,8 @@
             labels: LABEL,
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
             size: EMPTY,
-            title: 'Attention'
+            title: 'Attention',
+            autofocus: false
         };
 
         root.addLabel = addLabel;
@@ -219,10 +220,12 @@
                 return $modal;
             }
 
-            return $modal
-                .on(EVENT_SHOW, function () {
-                    $(this).find(INPUT).first().focus();
-                });
+            if(defaultSettings.autofocus){
+                return $modal
+                    .on(EVENT_SHOW, function () {
+                        $(this).find(INPUT).first().focus();
+                    });
+            }
 
             function createModalElement() {
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
@@ -318,13 +321,18 @@
          * @returns {Promise} Promise with modal $DOM element
          */
         function ajax(data, title) {
+
             var dfd = _createDeferred();
+
+            if(typeof data === 'object'){
+                setEModalOptions(data);
+            }
 
             var params = {
                 async: true,
                 deferred: dfd,
                 loading: true,
-                title: data.title || title || defaultSettings.title,
+                title: title || defaultSettings.title,
                 url: data.url || data,
                 dataType: data.dataType || 'text'
             };
@@ -371,6 +379,11 @@
             _setup(data, title);
 
             var dfd = data.deferred || _createDeferred();
+
+            if(typeof data === 'object'){
+                setEModalOptions(data);
+            }
+
             var $message = $(DIV).append(_getMessage(data), _getFooter(data.buttons));
 
             _build($message);
@@ -390,6 +403,10 @@
          */
         function confirm(data, title) {
             var dfd = _createDeferred();
+
+            if(typeof data === 'object'){
+                setEModalOptions(data);
+            }
 
             return alert({
                 async: true,
@@ -427,6 +444,11 @@
          */
         function iframe(params, title) {
             var dfd = _createDeferred();
+
+            if(typeof data === 'object'){
+                setEModalOptions(data);
+            }
+
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
                     '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
                 .replace('%0%', params.message || params.url || params)
@@ -473,6 +495,11 @@
          */
         function prompt(data, title) {
             var dfd = _createDeferred();
+
+            if(typeof data === 'object'){
+                setEModalOptions(data);
+            }
+
             var params = {
                 deferred: dfd
             };
