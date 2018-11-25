@@ -230,10 +230,10 @@
             return $modal;
 
             function createModalElement() {
-                return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
+                return $('<div class="modal fade" tabindex="-1"><style>@media(min-width:992px){.modal-xl{max-width:none;width:96%;}}.modal-body{max-height:calc(100vh-145px);overflow-y:auto;}</style>' +
                     '<div class=modal-dialog>' +
                     '<div class=modal-content>' +
-                    ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>' +
+                    '<div class=modal-header><h5 class="modal-title">Modal title</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>' +
                     '</div>' +
                     '</div>' +
                     '</div>')
@@ -456,8 +456,7 @@
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
-            var message = $(html)
-                .load(iframeReady);
+            var message = $(html).on('load', iframeReady);
 
             return alert({
                 async: true,
