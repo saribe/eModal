@@ -8,7 +8,7 @@
     ],
     "dependencies": {
         "bootstrap": "^3.3.7",
-        "jquery": "^2.0.0"
+        "jquery": ">=3.0.0"
     },
     "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
     "devDependencies": {
@@ -40,5 +40,5 @@
     "scripts": {
         "test": "mocha test/index.spec.js"
     },
-    "version": "1.2.65"
+    "version": "1.2.66"
 }

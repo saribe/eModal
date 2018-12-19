@@ -77,7 +77,7 @@
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
-        root.version = '1.2.65';
+        root.version = '1.2.66';
 
         return root;
 
@@ -233,7 +233,7 @@
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
                     '<div class=modal-dialog>' +
                     '<div class=modal-content>' +
-                    ' <div class=modal-header><button type=button class="x close" data-dismiss=modal><span aria-hidden=true>&times;</span><span class=sr-only>Close</span></button><h4 class=modal-title></h4></div>' +
+                    ' <div class=modal-header><button type=button class="x close" data-dismiss=modal aria-label="Close"><span aria-hidden=true>&times;</span></button><h5 class=modal-title></h5></div>' +
                     '</div>' +
                     '</div>' +
                     '</div>')
@@ -254,6 +254,27 @@
                         return $modal;
                     });
             }
+        }
+
+        /**
+         * @param {String} version 
+         * @returns {Boolean}
+         */
+        function _jQueryMinVersion(version) {
+            var $ver = $.fn.jquery.split('.');
+            var ver = version.split('.');
+            var $major = $ver[0];
+            var $minor = $ver[1];
+            var $patch = $ver[2];
+            var major = ver[0];
+            var minor = ver[1];
+            var patch = ver[2];
+        
+            return !(
+                (major > $major) ||
+                (major === $major && minor > $minor) ||
+                (major === $major && minor === $minor && patch > $patch)
+            );
         }
 
         /**
@@ -333,6 +354,7 @@
             var params = {
                 async: true,
                 deferred: dfd,
+                xhrFields: { withCredentials: false },
                 loading: true,
                 title: title || defaultSettings.title,
                 url: data.url || data,
@@ -456,8 +478,9 @@
                 .replace('%0%', params.message || params.url || params)
                 .replace('%1%', defaultSettings.loadingHtml);
 
-            var message = $(html)
-                .load(iframeReady);
+            var message = _jQueryMinVersion('3.0.0') ? 
+                $(html).on('load', iframeReady):
+                $(html).load(iframeReady);
 
             return alert({
                 async: true,

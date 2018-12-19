@@ -2,7 +2,7 @@
 **eModal** is a Easy way to manage modal dialogs using bootstrap.
 
 ## Current Version
-1.2.65
+1.2.66
 
 ## Quick Start
 
