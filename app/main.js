@@ -20,6 +20,7 @@ $(document)
         // Demos
         function ajaxDemo() {
             var title = 'Ajax modal';
+            var pars = Math.floor((Math.random() * 7) + 1);
             var params = {
                 buttons: [
                    { text: 'Close', close: true, style: 'danger' },
@@ -27,7 +28,7 @@ $(document)
                 ],
                 size: eModal.size.lg,
                 title: title,
-                url: 'http://maispc.com/app/proxy.php?url=http://loripsum.net/api/' + Math.floor((Math.random() * 7) + 1) + '/short/ul/bq/prude/code/decorete'
+                url: 'https://baconipsum.com/api/?type=all-meat&paras=' + pars + '&start-with-lorem=1&format=html'
             };
 
             return eModal
@@ -55,10 +56,10 @@ $(document)
         }
 
         function iframeDemo() {
-            var title = 'Insiders';
+            var title = 'Bicycle in Richmond Park';
 
             return eModal
-                .iframe('https://www.youtube.com/embed/VTkvN51OPfI', title)
+                .iframe('https://www.youtube.com/embed/YRgluqis7rQ?autoplay=1', title)
                 .then(function () { t8.success('iFrame loaded!!!!', title) });
         }
 
