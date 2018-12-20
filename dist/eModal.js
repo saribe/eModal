@@ -65,7 +65,8 @@
             title: 'Attention',
             autofocus: false
         };
-
+        
+        root = root || {};
         root.addLabel = addLabel;
         root.ajax = ajax;
         root.alert = alert;
@@ -635,6 +636,6 @@
     define :
     function (args, mName) {
         this.eModal = typeof module != 'undefined' && module.exports ?
-            mName(require(args[0]), module.exports) :
-            mName(window.$, {});
+            mName(require(args[0], {}), module.exports) :
+            mName(window.$);
     }));
