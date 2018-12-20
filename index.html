@@ -538,7 +538,7 @@ eModal.prompt(options)
             localStorage.setItem("USER_ID", uid);
             window.ga = window.ga || tmpGa;
             window.adsbygoogle = window.adsbygoogle || tmpAds;
-            ga.l=+new Date;
+            window.ga.l=+new Date;
     
             ga('create', 'UA-59229588-2', 'auto');
             ga('send', 'pageview');
@@ -548,18 +548,25 @@ eModal.prompt(options)
             window.adsbygoogle.push({});
 
             setTimeout(function() {
-                if (ga === tmpGa) {
-                    document.writeln(unescape("%3Cscript src='content/js/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                if (window.ga === tmpGa) {
+                    load('content/js/ga.js');
                 }
 
-                if (tmpAds === window.adsbygoogle) {
-                    document.writeln(unescape("%3Cscript src='content/js/g.js' type='text/javascript'%3E%3C/script%3E"));
+                if (window.adsbygoogle === tmpAds) {
+                    load('content/js/g.js');
                 }
             }, 2500);
 
+            function load(src) {
+                var script = document.createElement('script');
+                script.async=1
+                script.src = src;
+                document.head.appendChild(script);
+            }
+
             function tmpGa(){(ga.q=ga.q||[]).push(arguments)};
         </script>
-    <script async src='//cdnjs.cloudflare.com/ajax/libs/ga-lite/2.0.1/ga-lite.js'></script>
+    <script async src='//www.google-analytics.com/analytics.js'></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js"></script>
