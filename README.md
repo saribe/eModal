@@ -6,7 +6,7 @@
 
 ## Quick Start
 
-1. Link to eModal.js `<script src="//rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>`
+1. Link to eModal.js `<script src="//cdn.rawgit.com/saribe/eModal/1.2.67/dist/eModal.min.js"></script>`
 2. use eModal to display a modal for alert, ajax, prompt, confirm or iframe
 
 		// Display an alert modal with default title (Attention)
