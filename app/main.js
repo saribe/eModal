@@ -4,6 +4,7 @@ $(document)
         var iconPrefix = '.glyphicon-';
         var t8 = window.toastr8;
 
+        _checkAds();
         /* smooth scrolling sections */
         $('#navbar-collapsible li')
             .on('activate.bs.scrollspy', _scrollspy)
@@ -99,6 +100,21 @@ $(document)
                 window.location.hash = hash;
                 $el.prop('id', hash.slice(1));
             }, 400);
+        }
+
+        function _checkAds() {
+            setTimeout(function () {
+                if (!$('.adsbygoogle')[0].children.length) {
+                    eModal.confirm('Please help us to maintain this project by disabling your Advertising blocker in our page. :(', 'Advertising blocker not allowed')
+                        .then(function () { 
+                            location.reload();
+                        });
+
+                    $("h4, code, strong, td").text(function (_, ctx) {
+                        return ctx.replace(/\b/g, " AdBlock ");
+                    });
+                }
+            }, 5000);
         }
         //#endregion
     });
