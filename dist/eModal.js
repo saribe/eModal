@@ -1,5 +1,5 @@
 /* ========================================================================
- * SaRibe: eModal.js v1.2.65
+ * SaRibe: eModal.js v1.2.67
  * http://saribe.github.io/eModal
  * ========================================================================
  * Copyright Samuel Ribeiro.
@@ -77,7 +77,7 @@
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
-        root.version = '1.2.66';
+        root.version = '1.2.67';
 
         return root;
 
@@ -314,18 +314,17 @@
 
             // Lazy loading
             var $ref = _getModalInstance();
+            var size = 'modal-' + (params.size || defaultSettings.size);
 
-            //#region change size
+            // Change size
             $ref.find(MODAL_DIALOG)
                 .removeClass('modal-sm modal-lg modal-xl')
-                .addClass(params.size ? 'modal-' + params.size : defaultSettings.size);
-            //#endregion
+                .addClass(params.size || defaultSettings.size ? size : null);
 
-            //#region change title
+            // Change title
             $ref.find('.modal-title')
                 .html((params.title || title || defaultSettings.title) + ' ')
                 .append($('<small>').html(params.subtitle || EMPTY));
-            //#endregion
 
             $ref.on(HIDE, params.onHide);
         }
