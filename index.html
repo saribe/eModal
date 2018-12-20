@@ -532,29 +532,35 @@ eModal.prompt(options)
     <script type='text/javascript' src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
     <![endif]-->
+    <script>
+            var uid = localStorage.getItem("USER_ID") || "anonymous: " + (new Date).toString();
+            var tmpAds = [];
+            localStorage.setItem("USER_ID", uid);
+            window.ga = window.ga || tmpGa;
+            window.adsbygoogle = window.adsbygoogle || tmpAds;
+            ga.l=+new Date;
+    
+            ga('create', 'UA-59229588-2', 'auto');
+            ga('send', 'pageview');
+            ga('set', '&uid', uid);
+
+            window.adsbygoogle.push({});
+            window.adsbygoogle.push({});
+
+            setTimeout(function() {
+                if (ga === tmpGa) {
+                    document.writeln(unescape("%3Cscript src='content/js/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                }
+
+                if (tmpAds === window.adsbygoogle) {
+                    document.writeln(unescape("%3Cscript src='content/js/g.js' type='text/javascript'%3E%3C/script%3E"));
+                }
+            }, 2500);
+
+            function tmpGa(){(ga.q=ga.q||[]).push(arguments)};
+        </script>
+    <script async src='//cdnjs.cloudflare.com/ajax/libs/ga-lite/2.0.1/ga-lite.js'></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script async>
-        (function (i, s, o, g, r) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-59229588-2', 'auto');
-        ga('send', 'pageview');
-        var user = localStorage.getItem("USER_ID");
-        user || (user = "anonymous: " + (new Date).toJSON(), localStorage.setItem("USER_ID", user));
-        ga('set', '&uid', user);
-
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>

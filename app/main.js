@@ -104,7 +104,12 @@ $(document)
 
         function _checkAds() {
             setTimeout(function () {
-                if (!$('.adsbygoogle')[0].children.length) {
+                var isBlocked = !$('.adsbygoogle')[0].children.length;
+                
+                if (window.ga) {
+                    window.ga('send', 'event', 'adBlock', isBlocked ? 'blocked' : 'allowed');
+                }
+                if (isBlocked) {
                     eModal.confirm('Please help us to maintain this project by disabling your Advertising blocker in our page. :(', 'Advertising blocker not allowed')
                         .then(function () { 
                             location.reload();
