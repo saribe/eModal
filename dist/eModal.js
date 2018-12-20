@@ -11,6 +11,7 @@
  * @params allowed elements:
  *     buttons  {array}:           An array of objects to configure buttons to modal footer; only able if message == string
  *     css      {object}:          CSS object try apply into message body; only able if message == string
+ *     data     {object}:          Used for iframe with post data parameters              
  *     loading  {boolean}:         Set loading progress as message.
  *     message  {string|object}:   The body message string or the HTML element. e.g.: $(selector);
  *     size     {string}:          sm || lg || xl -> define the modal size.
@@ -472,10 +473,15 @@
                 setEModalOptions(data);
             }
 
+            var postData = params.data ? 
+                Object.keys(params.data).map(mapData).join(' ') : 
+                '';
+
             var html = ('<div class=modal-body style="position: absolute;width: 100%;background-color: rgba(255,255,255,0.8);height: 100%;">%1%</div>' +
-                '<iframe class="embed-responsive-item" frameborder=0 src="%0%" style="width:100%;height:75vh;display:block;"/>')
+                '<iframe class="embed-responsive-item" frameborder=0 src="%0%" %2% style="width:100%;height:75vh;display:block;"/>')
                 .replace('%0%', params.message || params.url || params)
-                .replace('%1%', defaultSettings.loadingHtml);
+                .replace('%1%', defaultSettings.loadingHtml)
+                .replace('%2%', postData);
 
             var message = _jQueryMinVersion('3.0.0') ? 
                 $(html).on('load', iframeReady):
@@ -490,6 +496,10 @@
                 title: params.title || title
             });
             //////////
+
+            function mapData(item) {
+                return item + '="' + params.data[item] + '"';
+            }
 
             function iframeReady() {
                 $(this)
