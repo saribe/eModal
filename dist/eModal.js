@@ -235,7 +235,7 @@
                 return $('<div class="modal fade" tabindex="-1"><style>.modal-xl{width:96%;}.modal-body{max-height: calc(100vh - 145px);overflow-y: auto;}</style>' +
                     '<div class=modal-dialog>' +
                     '<div class=modal-content>' +
-                    ' <div class=modal-header><button type=button class="x close" data-dismiss=modal aria-label="Close"><span aria-hidden=true>&times;</span></button><h5 class=modal-title></h5></div>' +
+                    ' <div class=modal-header><h5 class=modal-title></h5><button type=button class="x close" data-dismiss=modal aria-label="Close"><span aria-hidden=true>&times;</span></button></div>' +
                     '</div>' +
                     '</div>' +
                     '</div>')
