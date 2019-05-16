@@ -1,4 +1,4 @@
-# eModal for Bootstrap [![Build Status](https://travis-ci.org/saribe/eModal.svg?branch=master)](https://travis-ci.org/saribe/eModal) [![CDNJS](https://img.shields.io/cdnjs/v/eModal.svg)](https://cdnjs.com/libraries/eModal)
+# eModal for Bootstrap [![Build Status](https://travis-ci.org/saribe/eModal.svg?branch=master)](https://travis-ci.org/saribe/eModal) [![CDNJS](https://img.shields.io/cdnjs/v/eModal.svg)](https://cdnjs.com/libraries/eModal) [![Greenkeeper badge](https://badges.greenkeeper.io/saribe/eModal.svg)](https://greenkeeper.io/)
 **eModal** is a Easy way to manage modal dialogs using bootstrap.
 
 ## Current Version
