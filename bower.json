@@ -2,7 +2,7 @@
     "name": "emodal",
     "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
     "main": "dist/eModal.min.js",
-    "version": "1.2.68",
+    "version": "1.2.69",
     "authors": [
         "Samuel Ribeiro"
     ],

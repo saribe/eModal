@@ -2,11 +2,11 @@
 **eModal** is a Easy way to manage modal dialogs using bootstrap.
 
 ## Current Version
-1.2.68
+1.2.69
 
 ## Quick Start
 
-1. Link to eModal.js `<script src="//cdnjs.cloudflare.com/ajax/libs/eModal/1.2.68/eModal.min.js"></script>`
+1. Link to eModal.js `<script src="//cdnjs.cloudflare.com/ajax/libs/eModal/1.2.69/eModal.min.js"></script>`
 2. use eModal to display a modal for alert, ajax, prompt, confirm or iframe
 
 		// Display an alert modal with default title (Attention)

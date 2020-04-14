@@ -41,5 +41,5 @@
     "scripts": {
         "test": "mocha test/index.spec.js"
     },
-    "version": "1.2.68"
+    "version": "1.2.69"
 }
