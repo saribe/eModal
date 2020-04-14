@@ -6,7 +6,7 @@
 
 ## Quick Start
 
-1. Link to eModal.js `<script src="//cdnjs.cloudflare.com/ajax/libs/eModal/1.2.69/eModal.min.js"></script>`
+1. Link to eModal.js `<script src="https://unpkg.com/emodal@1.2.69/dist/eModal.min.js" />`
 2. use eModal to display a modal for alert, ajax, prompt, confirm or iframe
 
 		// Display an alert modal with default title (Attention)
