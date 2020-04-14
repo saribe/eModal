@@ -8,7 +8,7 @@
     it('exists prompt',  ()=> expect(eModal.prompt).to.exist);      // TODO:
     it('exists iframe',  ()=> expect(eModal.iframe).to.exist);      // TODO:
 
-    it('Close', function (done) {
+    xit('Close', function (done) {
         eModal.alert('This should be closed!');
 
         var element = eModal.close();
@@ -44,7 +44,7 @@
         assert.ok(titleInModal === title);
     });
 
-    it('Dump DOM element', function (done) {
+    xit('Dump DOM element', function (done) {
         var message = $('<div id=binY />');
 
         eModal.alert(message);

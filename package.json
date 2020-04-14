@@ -8,13 +8,14 @@
     ],
     "dependencies": {
         "bootstrap": "^4.3.1",
-        "jquery": ">=3.0.0"
+        "popper.js": "^1.16.1",
+        "jquery": "^3.5.0"
     },
     "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
     "devDependencies": {
         "chai": "^4.2.0",
-        "jsdom": "^15.1.0",
-        "mocha": "^6.1.4"
+        "jsdom": "^16.2.2",
+        "mocha": "^7.1.1"
     },
     "directories": {
         "test": "test"
