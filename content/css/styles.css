@@ -8,7 +8,12 @@ html, body {
     position: relative;
 }
 
+.modal-header {
+    display: flex;
+}
+
 .github-button {
+    display: flex;
     position: absolute;
     right: 30px;
     border: 1px solid;
@@ -35,17 +40,17 @@ html, body {
     background-color: #fff;
 }
 
-.glyphicon.pointer {
+.pointer {
     color: #dd4814;
 }
 
-    .glyphicon.pointer:hover {
-        color: #ae3910;
-    }
+.pointer:hover {
+    color: #ae3910;
+}
 
 #main > section.container-fluid {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 100px;
+    padding-bottom: 75px;
     min-height: calc(100% - 1px);
 }
 
@@ -112,7 +117,7 @@ footer {
     position: absolute;
     left: 0;
     right: 0;
-    top: 51px;
+    top: 0px;
     bottom: 0;
     overflow-x: hidden;
     overflow-y: auto;

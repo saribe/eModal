@@ -1,21 +1,21 @@
 $(document)
     .ready(function () {
-        var hashTimer;
-        var iconPrefix = '.glyphicon-';
+        // var hashTimer;
+        var iconPrefix = '.fa-';
         var t8 = window.toastr8;
 
         _checkAds();
         /* smooth scrolling sections */
-        $('#navbar-collapsible li')
-            .on('activate.bs.scrollspy', _scrollspy)
-            .find('a[href*="#"]:not([href="#"])')
-                .click(_hrefClick);
+        // $('#navbar-collapsible li')
+        //     .on('activate.bs.scrollspy', _scrollspy)
+        //     .find('a[href*="#"]:not([href="#"])')
+        //         .click(_hrefClick);
 
         $(iconPrefix + 'cloud').click(ajaxDemo);
         $(iconPrefix + 'comment').click(alertDemo);
-        $(iconPrefix + 'ok').click(confirmDemo);
-        $(iconPrefix + 'pencil').click(promptDemo);
-        $(iconPrefix + 'screenshot').click(iframeDemo);
+        $(iconPrefix + 'check').click(confirmDemo);
+        $(iconPrefix + 'pencil-alt').click(promptDemo);
+        $(iconPrefix + 'internet-explorer').click(iframeDemo);
         ///////////////////* Implementation *///////////////////
 
         // Demos
@@ -42,7 +42,7 @@ $(document)
 
             return eModal
                 .alert('You welcome! Want clean code?', title)
-                .then(function () { t8.facebook('Alert modal is visible.', title); });
+                .then(function () { t8.info('Alert modal is visible.', title); });
         }
 
         function confirmDemo() {
@@ -52,7 +52,7 @@ $(document)
                 .confirm('It is simple enough?', 'Confirm modal')
                 .then(
                     function (/* DOM */) { t8.success('Thank you for your OK pressed!', title); },
-                    function (/*null*/) { t8.skype('Thank you for your Cancel pressed!', title) }
+                    function (/*null*/) { t8.warning('Thank you for your Cancel pressed!', title) }
                     );
         }
 
@@ -70,37 +70,37 @@ $(document)
             return eModal
                 .prompt({ size: eModal.size.sm, message: 'What\'s your name?', title: title })
                 .then(
-                    function (input) { t8.github({ message: 'Hi ' + input + '!', title: title, imgURI: 'https://avatars0.githubusercontent.com/u/4276775?v=3&s=89' }) },
-                    function (/**/) { t8.android('Why don\'t you tell me your name?', title); });
+                    function (input) { t8.success({ message: 'Hi ' + input + '!', title: title, imgURI: 'https://avatars0.githubusercontent.com/u/4276775?v=3&s=89' }) },
+                    function (/**/) { t8.error('Why don\'t you tell me your name?', title); });
         }
 
         //#region Page Events
-        function _hrefClick(e) {
-            e.preventDefault();
-            var hash = this.hash;
+        // function _hrefClick(e) {
+        //     e.preventDefault();
+        //     var hash = this.hash;
 
-            if (hash !== location.hash) {
-                var query = '#main';
-                var scroll = $(this.hash).offset().top - 50 + $(query).scrollTop();
+        //     if (hash !== location.hash) {
+        //         var query = '#main';
+        //         var scroll = $(this.hash).offset().top - 50 + $(query).scrollTop();
 
-                $(query)
-                    .stop()
-                    .animate({ scrollTop: scroll }, 1000);
-            }
-        }
+        //         $(query)
+        //             .stop()
+        //             .animate({ scrollTop: scroll }, 1000);
+        //     }
+        // }
 
-        function _scrollspy() {
-            var el = this;
-            clearTimeout(hashTimer);
+        // function _scrollspy() {
+        //     var el = this;
+        //     clearTimeout(hashTimer);
 
-            hashTimer = setTimeout(function () {
-                var hash = $(el).find('a').get(0).hash;
-                var $el = $(hash).prop('id', '');
+        //     hashTimer = setTimeout(function () {
+        //         var hash = $(el).find('a').get(0).hash;
+        //         var $el = $(hash).prop('id', '');
 
-                window.location.hash = hash;
-                $el.prop('id', hash.slice(1));
-            }, 400);
-        }
+        //         window.location.hash = hash;
+        //         $el.prop('id', hash.slice(1));
+        //     }, 400);
+        // }
 
         function _checkAds() {
             setTimeout(function () {
