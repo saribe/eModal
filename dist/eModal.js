@@ -15,6 +15,7 @@
  *     loading  {boolean}:         Set loading progress as message.
  *     message  {string|object}:   The body message string or the HTML element. e.g.: $(selector);
  *     size     {string}:          sm || lg || xl -> define the modal size.
+ *     classes  {string}:          Custom class (or classes) to be used. Can be used for custom modal size or something else.
  *     subtitle {string}:          The header subtitle string. This appear in a smaller text.
  *     title    {string}:          The header title string.
  *     useBin   {boolean}:         Set message as recyclable.
@@ -62,6 +63,7 @@
             labels: LABEL,
             loadingHtml: '<h5>Loading...</h5><div class=progress><div class="progress-bar progress-bar-striped active" style="width: 100%"></div></div>',
             size: EMPTY,
+            classes: EMPTY, 
             title: 'Attention',
             autofocus: false
         };
@@ -79,6 +81,7 @@
         root.setEModalOptions = setEModalOptions;
         root.setModalOptions = setModalOptions;
         root.size = SIZE;
+        root.classes = '';
         root.version = '1.2.67';
 
         return root;
@@ -320,8 +323,20 @@
 
             // Change size
             $ref.find(MODAL_DIALOG)
-                .removeClass('modal-sm modal-lg modal-xl')
-                .addClass(params.size || defaultSettings.size ? size : null);
+                .removeClass()              // Remove all classes (including custom classes)
+                .addClass('modal-dialog')   // Put back modal-dialog class
+                ;
+
+            if(size == 'modal-xl')                                // In case of XL size ... 
+                $ref.find(MODAL_DIALOG).css('max-width', 'none'); // Remove max-width limitation from bootstrap css
+            else
+                $ref.find(MODAL_DIALOG).css('max-width', '');     // otherwise use max-width from bootstrap css
+
+            $ref.find(MODAL_DIALOG)
+                    .addClass(params.size || defaultSettings.size ? size : null);
+            if(params.classes != '') 
+                $ref.find(MODAL_DIALOG).addClass(params.classes);
+
 
             // Change title
             $ref.find('.modal-title')
@@ -450,6 +465,7 @@
                 message: data.message || data,
                 onHide: click,
                 size: data.size,
+                classes: data.classes,
                 title: data.title || title
             });
 
@@ -494,6 +510,7 @@
                 deferred: dfd,
                 message: message,
                 size: params.size || SIZE.xl,
+                classes: params.classes || EMPTY , 
                 title: params.title || title
             });
             //////////
