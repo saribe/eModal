@@ -103,23 +103,28 @@ $(document)
         // }
 
         function _checkAds() {
-            setTimeout(function () {
-                var isBlocked = !$('.adsbygoogle')[0].children.length;
-                
+          let isBlocked = false;
+
+          fetch('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+            .then(() => { isBlocked = false; })
+            .catch(() => {
+                isBlocked = true;
+
+                eModal.confirm('Please help us to maintain this project by disabling your Advertising blocker on our page. :(', 'Advertising blocker not allowed')
+                    .then(() => location.reload());
+
+                $("h4, code, strong, td").text(function (_, ctx) {
+                    return ctx.replace(/\b/g, " AdBlock ");
+                });
+            })
+            .finally(() => {
                 if (window.ga) {
                     window.ga('send', 'event', 'adBlock', isBlocked ? 'blocked' : 'allowed');
                 }
-                if (isBlocked) {
-                    eModal.confirm('Please help us to maintain this project by disabling your Advertising blocker in our page. :(', 'Advertising blocker not allowed')
-                        .then(function () { 
-                            location.reload();
-                        });
+                console.log(`AdBlock Enabled: ${isBlocked}`)
+            });
 
-                    $("h4, code, strong, td").text(function (_, ctx) {
-                        return ctx.replace(/\b/g, " AdBlock ");
-                    });
-                }
-            }, 5000);
+        
         }
         //#endregion
     });
