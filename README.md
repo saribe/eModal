@@ -4,6 +4,10 @@ eModal is a modern Bootstrap modal helper for developers who want dialogs withou
 
 Version 2 is a clean reboot: Bootstrap 5.3.8, TypeScript, native promises, no jQuery, no Bower, and a React adapter. The original idea survives: make alerts, confirms, prompts, Ajax views, iframes, and custom dialogs quick to create.
 
+## Demo
+
+See the live template page at [emodal.vercel.app](https://emodal.vercel.app/).
+
 ## Install
 
 ```bash
