@@ -17,29 +17,6 @@ import eModal from 'emodal';
 await eModal.alert('Build the room, light the path, ship the fight.', 'Mission update');
 ```
 
-## CDN
-
-Load Bootstrap first, then eModal.
-
-```html
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-  rel="stylesheet"
->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emodal@2.0.0/dist/eModal.min.js"></script>
-
-<script>
-  eModal.alert('Loaded from the CDN.', 'eModal v2');
-</script>
-```
-
-The package also exposes the same browser build through `unpkg`:
-
-```html
-<script src="https://unpkg.com/emodal@2.0.0/dist/eModal.min.js"></script>
-```
-
 ## API
 
 ### Alert
@@ -166,7 +143,6 @@ v2 intentionally breaks with the old implementation.
 - Bootstrap 4 `data-dismiss` attributes are replaced by Bootstrap 5 `data-bs-dismiss`.
 - Native promises replace jQuery Deferred.
 - `addLabel` label presets are removed. Use explicit button text.
-- The old browser file is now `dist/eModal.min.js`.
 - ESM/CJS package entry points are `dist/index.js` and `dist/index.cjs`.
 - The React adapter is available from `emodal/react`.
 
@@ -190,8 +166,6 @@ The demo app lives in `apps/demo` and deploys to Vercel using `vercel.json`.
 npm run build
 npm publish --workspace packages/emodal --access public
 ```
-
-After NPM is live, CDNJS can publish the browser build from `dist/eModal.min.js`.
 
 ## License
 
