@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Code2, ExternalLink, Frame, MessageSquare, MousePointerClick, ShieldQuestion, Sparkles, Terminal } from 'lucide-react';
 import eModal, { size } from 'emodal';
 import { useEModal } from 'emodal/react';
 import './styles.css';
+
+const ADSENSE_CLIENT = 'ca-pub-2338199678296542';
+const ADSENSE_SLOT = '6984347162';
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
 
 const examples = [
   {
@@ -32,6 +41,85 @@ const examples = [
     code: `eModal.iframe({ url: 'https://getbootstrap.com', title: 'Bootstrap docs', size: eModal.size.xl });`
   }
 ];
+
+function scheduleIdle(callback: () => void) {
+  if ('requestIdleCallback' in window) {
+    return window.requestIdleCallback(callback, { timeout: 1800 });
+  }
+
+  return window.setTimeout(callback, 500);
+}
+
+function cancelIdle(handle: number) {
+  if ('cancelIdleCallback' in window) {
+    window.cancelIdleCallback(handle);
+    return;
+  }
+
+  window.clearTimeout(handle);
+}
+
+function AdSenseBanner() {
+  const containerRef = useRef<HTMLElement | null>(null);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsReady(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsReady(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '360px 0px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isReady) return;
+
+    const handle = scheduleIdle(() => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch {
+        // Ad blockers can interrupt AdSense initialization; the demo should keep running.
+      }
+    });
+
+    return () => cancelIdle(handle);
+  }, [isReady]);
+
+  return (
+    <section className="ad-band" aria-label="Advertisement" ref={containerRef}>
+      <div className="ad-shell">
+        <span>Advertisement</span>
+        {isReady ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client={ADSENSE_CLIENT}
+            data-ad-slot={ADSENSE_SLOT}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        ) : (
+          <div className="ad-placeholder" aria-hidden="true" />
+        )}
+      </div>
+    </section>
+  );
+}
 
 function App() {
   const modal = useEModal();
@@ -136,6 +224,8 @@ function App() {
           </div>
         </div>
       </section>
+
+      <AdSenseBanner />
 
       <section className="demo-band" id="examples">
         <div className="section-heading">

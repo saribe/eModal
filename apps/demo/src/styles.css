@@ -39,6 +39,7 @@ a {
 
 .topbar,
 .hero-grid,
+.ad-band,
 .demo-band,
 .install-band {
   width: min(1180px, 100%);
@@ -203,6 +204,34 @@ pre {
   justify-content: flex-end;
   border-top: 1px solid var(--line);
   border-bottom: 0;
+}
+
+.ad-band {
+  padding: 34px clamp(20px, 4vw, 40px) 0;
+}
+
+.ad-shell {
+  min-height: 132px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  border-block: 1px solid var(--line);
+}
+
+.ad-shell > span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.ad-placeholder {
+  min-height: 90px;
+}
+
+.adsbygoogle {
+  min-height: 90px;
 }
 
 .demo-band,
