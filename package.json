@@ -1,45 +1,23 @@
 {
-    "author": "Samuel Ribeiro Pinto",
-    "bugs": {
-        "url": "https://github.com/saribe/eModal/issues"
-    },
-    "contributors": [
-        "Samuel Ribeiro"
-    ],
-    "dependencies": {
-        "bootstrap": "^4.3.1",
-        "popper.js": "^1.16.1",
-        "jquery": "^3.5.0"
-    },
-    "description": "Easy Modal for bootstrap, is a simple way to create modal dialogs using javaScript.",
-    "devDependencies": {
-        "chai": "^4.2.0",
-        "jsdom": "^16.2.2",
-        "mocha": "^7.1.1"
-    },
-    "directories": {
-        "test": "test"
-    },
-    "homepage": "https://github.com/saribe/eModal#readme",
-    "keywords": [
-        "bootstrap",
-        "modal",
-        "dialog",
-        "iFrame",
-        "ajax",
-        "confirm",
-        "javaScript",
-        "easy"
-    ],
-    "license": "MIT",
-    "main": "dist/eModal.js",
-    "name": "emodal",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/saribe/eModal.git"
-    },
-    "scripts": {
-        "test": "mocha test/index.spec.js"
-    },
-    "version": "1.2.69"
+  "name": "emodal-workspace",
+  "private": true,
+  "version": "2.0.0",
+  "description": "eModal v2 workspace: Bootstrap 5 modal helpers, framework adapters, and demo.",
+  "author": "Samuel Ribeiro Pinto",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "dev": "npm --workspace apps/demo run dev",
+    "test": "npm --workspace packages/emodal run test",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "demo:build": "npm --workspace apps/demo run build",
+    "preview": "npm --workspace apps/demo run preview"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }

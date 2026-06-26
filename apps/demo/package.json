@@ -1,0 +1,23 @@
+{
+  "name": "@emodal/demo",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "bootstrap": "^5.3.8",
+    "emodal": "file:../../packages/emodal",
+    "lucide-react": "^1.21.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "vite": "^8.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

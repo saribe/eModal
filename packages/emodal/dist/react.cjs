@@ -1,0 +1,2 @@
+Object.defineProperty(exports,Symbol.toStringTag,{value:`Module`});const e=require("./index.cjs");let t=require("react");function n(n={}){return n.defaults&&e.setEModalOptions(n.defaults),(0,t.useMemo)(()=>({alert:e.alert,confirm:e.confirm,prompt:e.prompt,ajax:e.ajax,iframe:e.iframe,modal:e.modal,close:e.close}),[])}exports.useEModal=n;
+//# sourceMappingURL=react.cjs.map

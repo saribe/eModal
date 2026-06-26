@@ -1,5 +1,10 @@
 /altura.ico
-/node_modules
+node_modules
+/dist
+/apps/demo/dist
+/coverage
+/.vercel
+*.tsbuildinfo
 /bower_components/
 /bin/
 /lib/

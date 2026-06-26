@@ -1,0 +1,62 @@
+{
+  "name": "emodal",
+  "version": "2.0.0",
+  "description": "Modern Bootstrap 5 modal helpers with a clean core API and React adapter.",
+  "author": "Samuel Ribeiro Pinto",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/eModal.min.js",
+  "jsdelivr": "./dist/eModal.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "bootstrap": "^5.3.8",
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "bootstrap": "^5.3.8",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.7",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.9"
+  },
+  "scripts": {
+    "build": "vite build && vite build -c vite.umd.config.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "bootstrap",
+    "modal",
+    "dialog",
+    "confirm",
+    "prompt",
+    "react",
+    "typescript"
+  ]
+}
